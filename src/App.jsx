@@ -1,10 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+// import { Route, Routes } from "react-router-dom";
 
-import ChoseLogin from "./Components/pages/ChoseLogin";
-import LoginApprove from "./Components/pages/LoginApprove";
-import LoginEmployee from "./Components/pages/LoginEmployee";
-import SingUp from "./Components/pages/SingUp";
+// import ChoseLogin from "./Components/pages/ChoseLogin";
+// import LoginApprove from "./Components/pages/LoginApprove";
+// import LoginEmployee from "./Components/pages/LoginEmployee";
+// import SingUp from "./Components/pages/SingUp";
 import ScreenApprove from "./Components/pages/ScreenApprove";
+import Header from "./Components/Header";
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
         </div>
       </section> */}
 
-      <section>
-        <ScreenApprove />
+      <section id="section-screen">
+        <Header id="header">
+          <h1 className="">Section</h1>
+        </Header>
+        <ScreenApprove />{" "}
       </section>
     </>
   );
