@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+
+import ChoseLogin from "./Components/pages/ChoseLogin";
+import LoginApprove from "./Components/pages/LoginApprove";
+import LoginEmployee from "./Components/pages/LoginEmployee";
+import SingUp from "./Components/pages/SingUp";
+import ScreenApprove from "./Components/pages/ScreenApprove";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <section id="login">
+        <div className="content-login">
+          <Routes>
+            <Route index element={<ChoseLogin />} />
+            <Route path="/loginApprove" element={<LoginApprove />} />
+            <Route path="/loginEmployee" element={<LoginEmployee />} />
+            <Route path="/singUp" element={<SingUp />} />
+          </Routes>
+        </div>
+      </section> */}
+
+      <section>
+        <ScreenApprove />
+      </section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
