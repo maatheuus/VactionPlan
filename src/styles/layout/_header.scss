@@ -1,8 +1,6 @@
 .header {
   width: 100%;
   height: 7rem;
-
-  border: 1px solid black;
 }
 
 .content-header {
@@ -27,6 +25,7 @@
   &__button {
     margin-top: 2rem;
     margin-right: 1rem;
+
     &--back {
       display: block;
       margin: 0 auto;

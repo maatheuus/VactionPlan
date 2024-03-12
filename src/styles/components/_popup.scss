@@ -1,0 +1,26 @@
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: #ffffffa8;
+  color: white;
+
+  &__content {
+    position: absolute;
+    background-color: #000;
+
+    width: 50rem;
+    height: 50rem;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/*
+    <div className="popup">
+      <div className="popup__content">POPUP</div>
+    </div>
+*/

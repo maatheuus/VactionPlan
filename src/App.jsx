@@ -10,6 +10,7 @@ import Header from "./Components/Header";
 function App() {
   return (
     <>
+      <Header />
       {/* <section id="login">
         <div className="content-login">
           <Routes>
@@ -20,13 +21,7 @@ function App() {
           </Routes>
         </div>
       </section> */}
-
-      <section id="section-screen">
-        <Header id="header">
-          <h1 className="">Section</h1>
-        </Header>
-        <ScreenApprove />{" "}
-      </section>
+      <ScreenApprove />{" "}
     </>
   );
 }

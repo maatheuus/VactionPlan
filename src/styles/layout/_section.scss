@@ -1,3 +1,40 @@
 #section-screen {
-  background-color: #202020;
+  height: 100vh;
+  width: 100%;
 }
+.screen {
+  height: 100%;
+  border: 1px solid #ccc;
+  background-color: #000;
+
+  //   display: flex;
+
+  &__button-selected {
+    padding: 1.5rem;
+
+    display: flex;
+    align-items: center;
+  }
+}
+/*
+    <section id="section-screen">
+      <div className="screen">
+        <div className="screen__button-selected">
+          <span className="ball read"></span>
+          <span className="ball "></span>
+          <span className="ball "></span>
+          All
+        </div>
+
+        <div className="content-cards">
+          <Card
+            title="Vacation"
+            userName="maatBakari"
+            location="Nigéria"
+            dateStart="23/04/2024"
+            dateEnd="23/05/2024"
+          />
+        </div>
+      </div>
+    </section>
+*/
