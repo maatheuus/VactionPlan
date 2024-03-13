@@ -1,12 +1,11 @@
 import Card from "../Card";
 import Popup from "../Popup";
-// import Button from "../Button";
 
 function ScreenApprove() {
   return (
-    <section id="section-screen">
-      <div className="screen">
-        <div className="screen__button-selected">
+    <section id="approve">
+      <div className="screen-approve">
+        <div className="screen-approve__button">
           <span className="ball red"></span>
           <span className="ball green"></span>
           <span className="ball orange"></span>

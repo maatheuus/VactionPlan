@@ -3,13 +3,14 @@ import { FaArrowLeft } from "react-icons/fa";
 
 import Button from "../Button";
 import Input from "../Input";
-import image from "../../assets/images/buzzel-logo-img.png";
+import image from "../../assets/images/buzzel-logo.png";
+import Login from "../Login";
 
 function LoginApprove() {
   const back = useNavigate();
 
   return (
-    <>
+    <Login>
       <Button onClick={() => back(-1)}>
         <FaArrowLeft className="arrow-left" />
       </Button>
@@ -36,7 +37,7 @@ function LoginApprove() {
           </Button>
         </div>
       </form>
-    </>
+    </Login>
   );
 }
 

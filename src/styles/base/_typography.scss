@@ -107,12 +107,11 @@ a {
   }
 }
 
-.screen {
-  &__button-selected {
-    font-size: 2.5rem;
+.screen-approve {
+  &__button {
+    font-size: 2rem;
     font-family: "Oxygen", sans-serif;
-    font-weight: 500;
-    color: #fff;
+    font-weight: 700;
   }
 }
 
@@ -121,7 +120,6 @@ a {
     font-size: 2rem;
     font-family: "Maven Pro", sans-serif;
     font-weight: 700;
-    color: #14213d;
 
     text-align: center;
   }
@@ -152,39 +150,126 @@ a {
     }
   }
 
-  &__information {
-    &-status {
+  &__information-bottom {
+    &--status,
+    &--view {
       font-size: 1.6rem;
       font-family: "Maven Pro", sans-serif;
       font-weight: 800;
     }
+    &--text {
+      margin-left: 0.6rem;
+    }
   }
 }
 
-/*
-    <div className="card">
-      <div className="card__information">
-        <h1 className="card__title">{title}</h1>
-        <p className="card__username">{userName}</p>
+.popup {
+  &__title {
+    font-size: 2.5rem;
+    font-family: "Maven Pro", sans-serif;
+    font-weight: 700;
 
-        <p className="card__location">
-          Location:{" "}
-          <span className="card__location--description">{location}</span>
-        </p>
-        <div className="card__date">
-          <p className="card__date-start">
-            start:
-            <span className="card__date-start--description">{dateStart}</span>
-          </p>
-          <p className="card__date-end">
-            end:
-            <span className="card__date-end--description">{dateEnd}</span>
-          </p>
-        </div>
-        <div className="card__information-status">
-          <span className="ball read"></span>
-          <span>status</span>
+    text-align: center;
+  }
+
+  &__name,
+  &__location,
+  &__date,
+  &__observation {
+    &--text {
+      font-size: 2rem;
+      font-family: "Oxygen", sans-serif;
+      font-weight: 900;
+
+      line-height: 3.5rem;
+
+      padding: 0.4rem;
+    }
+
+    &--span {
+      font-weight: 400;
+    }
+  }
+
+  &__date {
+    &--start,
+    &--end {
+      font-weight: 500;
+
+      margin-right: 0.8rem;
+      display: block;
+    }
+  }
+
+  &__observation {
+    hyphens: auto;
+  }
+
+  .button-popup {
+    font-family: "Maven Pro", sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+.screen-employee {
+  &__title {
+    font-family: "Lazelar", system-ui;
+    font-size: 2rem;
+
+    text-align: center;
+    margin: 2rem;
+  }
+  &__inputs {
+    font-family: "Lazelar", system-ui;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    & input,
+    textarea {
+      color: #0000008f;
+    }
+  }
+
+  &__button > &__button--send {
+    font-family: "Lazelar", system-ui;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+  }
+}
+
+.request {
+  &__title {
+    font-family: "Lazelar", system-ui;
+    font-size: 2rem;
+
+    text-align: center;
+    margin: 2rem;
+  }
+
+  &__button > &__button--new {
+    font-family: "Lazelar", system-ui;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+  }
+}
+/*
+    <section className="request">
+      <div className="request__content">
+        <h1 className="request__title">Solicitações</h1>
+        <div className="request__cards">
+          <Card
+            title="30 dias"
+            dateStart="23/04/2024"
+            dateEnd="23/05/2024"
+            view={false}
+          />
         </div>
       </div>
-    </div>
+      <div className="request__button">
+        <Button className="request__button--new">Nova solicitação</Button>
+      </div>
+    </section>
 */

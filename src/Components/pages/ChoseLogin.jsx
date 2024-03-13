@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 
+import Login from "../Login";
 import Button from "../Button";
-import image from "../../assets/images/buzzel-logo-img.png";
+import image from "../../assets/images/buzzel-logo.png";
 
 function ChoseLogin() {
   return (
-    <>
+    <Login>
       <div className="logo-login">
         <img src={image} alt="logo of the page" />
       </div>
@@ -14,16 +15,20 @@ function ChoseLogin() {
           Chose one to Sing in
         </h1>
         <div className="chose-login__button login__button">
-          <Button className="chose-login__button--aprove" id="button">
-            <Link to="/loginApprove">Approve</Link>
-          </Button>
+          <Link to="/loginApprove">
+            <Button className="chose-login__button--aprove" id="button">
+              Approve
+            </Button>
+          </Link>
 
-          <Button className="chose-login__button--employee" id="button">
-            <Link to="/loginEmployee">Employee</Link>
-          </Button>
+          <Link to="/loginEmployee">
+            <Button className="chose-login__button--employee" id="button">
+              Employee
+            </Button>
+          </Link>
         </div>
       </div>
-    </>
+    </Login>
   );
 }
 

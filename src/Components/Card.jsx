@@ -1,4 +1,6 @@
-function Card({ title, userName, location, dateStart, dateEnd }) {
+import { FaEye } from "react-icons/fa";
+
+function Card({ title, userName, location, dateStart, dateEnd, view = true }) {
   return (
     <div className="card">
       <div className="card__information">
@@ -18,10 +20,19 @@ function Card({ title, userName, location, dateStart, dateEnd }) {
             <span className="card__date-end--description">{dateEnd}</span>
           </p>
         </div>
-        <div className="card__information-status">
-          <span className="ball red"></span>
-          <span>status</span>
-        </div>
+
+        {view && (
+          <div className="card__information-bottom">
+            <div className="card__information-bottom--view">
+              <FaEye className="card__information-bottom--icon" />
+              <span className="card__information-bottom--text">view</span>
+            </div>
+            <div className="card__information-bottom--status">
+              <span className="ball red"></span>
+              <span>status</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

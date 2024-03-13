@@ -3,12 +3,13 @@ import { FaArrowLeft } from "react-icons/fa";
 
 import Button from "../Button";
 import Input from "../Input";
+import Login from "../Login";
 
 function SingUp() {
   const back = useNavigate();
 
   return (
-    <>
+    <Login>
       <Button onClick={() => back(-1)}>
         <FaArrowLeft className="arrow-left" />
       </Button>
@@ -44,7 +45,7 @@ function SingUp() {
           </Button>
         </div>
       </form>
-    </>
+    </Login>
   );
 }
 

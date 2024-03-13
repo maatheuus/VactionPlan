@@ -3,15 +3,16 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  background-color: #ffffffa8;
-  color: white;
+  background-color: #9c9c9ca8;
+  display: none;
 
   &__content {
     position: absolute;
-    background-color: #000;
+    border-radius: 1rem;
+    padding: 1rem;
 
-    width: 50rem;
-    height: 50rem;
+    background-color: #fff;
+    max-width: 50rem;
 
     top: 50%;
     left: 50%;
@@ -19,8 +20,55 @@
   }
 }
 
-/*
-    <div className="popup">
-      <div className="popup__content">POPUP</div>
-    </div>
-*/
+.popup {
+  &__location {
+    display: inline-block;
+    text-align: right;
+  }
+
+  &__content-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+
+    margin-top: 2rem;
+
+    .button-popup {
+      width: 10rem;
+      height: 5rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+
+      &:not(:last-of-type) {
+        margin-right: 3rem;
+      }
+    }
+
+    &--aprove {
+      background: rgb(0, 149, 0);
+      order: 0;
+
+      &:hover {
+        background: rgb(4, 180, 4);
+      }
+    }
+    &--deny {
+      background: #a81a1a;
+
+      &:hover {
+        background: #d62323;
+      }
+    }
+  }
+
+  &__content-button {
+    order: 1;
+
+    &--close {
+      background: #2f1f1f;
+    }
+  }
+}

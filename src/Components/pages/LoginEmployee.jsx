@@ -1,15 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 import Button from "../Button";
 import Input from "../Input";
-import image from "../../assets/images/buzzel-logo-img.png";
+import image from "../../assets/images/buzzel-logo.png";
+import Login from "../Login";
 
 function LoginEmployee() {
   const back = useNavigate();
 
   return (
-    <>
+    <Login>
+      <Outlet />
+
       <Button onClick={() => back(-1)}>
         <FaArrowLeft className="arrow-left" />
       </Button>
@@ -31,15 +34,20 @@ function LoginEmployee() {
           />
         </div>
         <div className="form-login__button">
-          <Button className="form-submit" id="button">
-            Login
-          </Button>
-          <Button className="form-submit" id="button">
-            <Link to="/singUp">Sing Up</Link>
-          </Button>
+          <Link to="./screen">
+            <Button className="form-submit" id="button">
+              Login
+            </Button>
+          </Link>
+          ;
+          <Link to="/singUp">
+            <Button className="form-submit" id="button">
+              Sing Up
+            </Button>
+          </Link>
         </div>
       </form>
-    </>
+    </Login>
   );
 }
 

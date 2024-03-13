@@ -1,12 +1,3 @@
-.card-button {
-  background: transparent;
-  border: none;
-  //   display: none;
-  //   border-radius: 1rem 2.5rem 1rem 2.5rem;
-  //   cursor: pointer;
-  //   width: 15rem;
-}
-
 .content-cards {
   display: flex;
   flex-wrap: wrap;
@@ -14,49 +5,25 @@
 }
 
 .card {
-  background-color: #fff;
+  background-color: #8383832a;
   width: 22rem;
   padding: 1.5rem;
   margin-left: 2rem;
 
   border-radius: 1rem 2.5rem 1rem 2.5rem;
 
-  &__information {
-    &-status {
+  &__information-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+
+    &--view {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+
+      width: auto;
+      cursor: pointer;
     }
   }
 }
-/*
-    <div className="card">
-      <div className="card__information">
-        <h1 className="card__title">{title}</h1>
-        <p className="card__username">{userName}</p>
-        <p className="card__department">
-          Department:
-          <span className="card__department--description">{department}</span>
-        </p>
-        <p className="card__location">
-          Location:{" "}
-          <span className="card__location--description">{location}</span>
-        </p>
-        <div className="card__date">
-          <p className="card__date-text">Date:</p>
-          <p className="card__date-start">
-            start:
-            <span className="card__date-start--description">{dateStart}</span>
-          </p>
-          <p className="card__date-end">
-            end:
-            <span className="card__date-end--description">{dateEnd}</span>
-          </p>
-        </div>
-        <div className="card__information-status">
-          <span className="ball read"></span>
-          <span>status</span>
-        </div>
-      </div>
-    </div>
-*/
