@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   background-color: #9c9c9ca8;
-  display: none;
+  display: block;
 
   &__content {
     position: absolute;
@@ -71,4 +71,8 @@
       background: #2f1f1f;
     }
   }
+}
+
+.hidden {
+  display: none;
 }

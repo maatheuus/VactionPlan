@@ -1,4 +1,4 @@
-#button {
+.btn-primary {
   & {
     &:not(:last-of-type) {
       margin-bottom: 3rem;
@@ -26,4 +26,12 @@
   &:active {
     transform: translateY(-1px);
   }
+}
+
+.button-all {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }

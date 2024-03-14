@@ -4,7 +4,7 @@ import Login from "../Login";
 import Button from "../Button";
 import image from "../../assets/images/buzzel-logo.png";
 
-function ChoseLogin() {
+function HomePage() {
   return (
     <Login>
       <div className="logo-login">
@@ -16,13 +16,13 @@ function ChoseLogin() {
         </h1>
         <div className="chose-login__button login__button">
           <Link to="/loginApprove">
-            <Button className="chose-login__button--aprove" id="button">
+            <Button className="chose-login__button--aprove btn-primary">
               Approve
             </Button>
           </Link>
 
           <Link to="/loginEmployee">
-            <Button className="chose-login__button--employee" id="button">
+            <Button className="chose-login__button--employee btn-primary">
               Employee
             </Button>
           </Link>
@@ -32,4 +32,4 @@ function ChoseLogin() {
   );
 }
 
-export default ChoseLogin;
+export default HomePage;

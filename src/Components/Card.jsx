@@ -1,6 +1,15 @@
 import { FaEye } from "react-icons/fa";
+import Button from "./Button";
 
-function Card({ title, userName, location, dateStart, dateEnd, view = true }) {
+function Card({
+  title,
+  userName,
+  location,
+  dateStart,
+  dateEnd,
+  view = true,
+  onClick,
+}) {
   return (
     <div className="card">
       <div className="card__information">
@@ -24,8 +33,10 @@ function Card({ title, userName, location, dateStart, dateEnd, view = true }) {
         {view && (
           <div className="card__information-bottom">
             <div className="card__information-bottom--view">
-              <FaEye className="card__information-bottom--icon" />
-              <span className="card__information-bottom--text">view</span>
+              <Button className="button-all" onClick={onClick}>
+                <FaEye className="card__information-bottom--icon" />
+                <span className="card__information-bottom--text">view</span>
+              </Button>
             </div>
             <div className="card__information-bottom--status">
               <span className="ball red"></span>

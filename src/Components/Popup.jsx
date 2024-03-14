@@ -1,8 +1,8 @@
 import Button from "./Button";
 
-function Popup() {
+function Popup({ isHidden = true, onClick }) {
   return (
-    <div className="popup">
+    <div className={`popup ${isHidden} `}>
       <div className="popup__content">
         <h2 className="popup__title">Vacation</h2>
         <div className="popup__content-information">
@@ -38,7 +38,10 @@ function Popup() {
         </div>
         <div className="popup__content-buttons button-popup">
           <div className="popup__content-button ">
-            <Button className="popup__content-button--close button-popup">
+            <Button
+              onClick={onClick}
+              className="popup__content-button--close button-popup"
+            >
               Close
             </Button>
           </div>
