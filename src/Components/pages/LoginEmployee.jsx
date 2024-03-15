@@ -1,33 +1,29 @@
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import supabase from "../../supabase";
-
 import { FaArrowLeft } from "react-icons/fa";
+
+import { AuthContext } from "../context/authUser-context";
 import Button from "../Button";
-import image from "../../assets/images/buzzel-logo.png";
 import Login from "../Login";
+import image from "../../assets/images/buzzel-logo.png";
 
 function LoginEmployee() {
+  const { isAuthenticated, login } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
   const email = "exemplo@gmail.com";
   const senha = "exemplo@gmail.com";
 
-  async function loginUser(email, password) {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error?.status === 400) return;
-
-    navigate("/employee");
-  }
-
   const onSubmit = (data) => {
-    loginUser(data.email, data.password);
+    login(data.email, data.password, "employee");
   };
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/requests", { replace: true });
+  }, [isAuthenticated, navigate]);
 
   return (
     <Login>

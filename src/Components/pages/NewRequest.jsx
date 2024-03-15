@@ -3,11 +3,12 @@ import { useRef } from "react";
 
 import Input from "../Input";
 import Button from "../Button";
-import Header from "../Header";
-import ScreenRequest from "./ScreenRequest";
-import Card from "../Card";
 
-function ScreenEmployee() {
+const dataUser = [];
+
+function NewRequest() {
+  const navigate = useNavigate();
+
   const nameRef = useRef();
   const locationRef = useRef();
   const startRef = useRef();
@@ -19,25 +20,41 @@ function ScreenEmployee() {
       userName: nameRef.current.value,
       location: locationRef.current.value,
       date: {
-        start: startRef.current.value,
-        end: endRef.current.value,
+        start: new Date(startRef.current.value),
+        end: new Date(endRef.current.value),
       },
       observation: observationRef.current.value,
     };
 
-    const date = new Date(userData.date.start);
-    const day = date.getDate();
-    const month = date.getDate() + 1;
-    const year = date.getFullYear();
+    const getDate =
+      -userData.date.end.getDate() - -userData.date.start.getDate();
+    const getMonth =
+      userData.date.end.getMonth() + 1 - (userData.date.start.getMonth() + 1);
+    console.log(getDate, getMonth);
 
-    userData.date.end = new Date(day, month + 1, year);
+    // se o dia for maior que 30 ou o mes for maior que 1, erro
+    if ((getDate < 0 && getMonth >= 1) || getMonth > 1)
+      console.log("precisa ser menor menor ou igual a 30 dias");
+    // se o dia for numero negativo ou o mes for numero negativo, erro
+    else if (
+      (getDate > 0 && getMonth === 0) ||
+      (getDate >= 0 && getMonth < 0) ||
+      (getDate < 0 && getMonth < 0)
+    )
+      console.log("precisa ser maior que a data selecionada");
+    // se o ano for diferente do atual, erro
+    else if (
+      userData.date.start.getFullYear() !== userData.date.end.getFullYear()
+    )
+      console.log("precisa ser no mesmo ano");
+    else navigate(-1);
 
-    console.log(userData.date);
+    dataUser.push(userData);
+    console.log(dataUser);
   }
 
   return (
     <>
-      <Header />
       <section id="employee">
         <div className="screen-employee">
           <h1 className="screen-employee__title">Solicitação de férias</h1>
@@ -74,4 +91,4 @@ function ScreenEmployee() {
   );
 }
 
-export default ScreenEmployee;
+export default NewRequest;

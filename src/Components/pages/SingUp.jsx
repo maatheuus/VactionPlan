@@ -1,30 +1,26 @@
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa";
-import validator from "validator";
-import supabase from "../../supabase";
 
+import validator from "validator";
+import { AuthContext } from "../context/authUser-context";
 import Button from "../Button";
 import Login from "../Login";
 
 function SingUp() {
+  const { isAuthenticated, singUp } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/requests", { replace: true });
+  }, [isAuthenticated, navigate]);
+
   const { register, handleSubmit, watch } = useForm();
   const whatPassword = watch("password");
 
-  async function registerUser(emailUser, passwordUser) {
-    const { error } = await supabase.auth.signUp({
-      email: emailUser,
-      password: passwordUser,
-    });
-
-    if (error?.status === 400) return;
-
-    navigate("/employee");
-  }
-
   const onSubmit = (data) => {
-    registerUser(data.email, data.password);
+    singUp(data.email, data.password);
   };
 
   return (

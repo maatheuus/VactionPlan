@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { ModalContext } from "../context/modal-context";
+
 import Card from "../Card";
 import Header from "../Header";
 import Popup from "../Popup";
+import Button from "../Button";
 
 function ScreenApprove() {
-  const [isHidden, setIsHidden] = useState(true);
+  const { clickView, hiddenModal, isHidden } = useContext(ModalContext);
   const hidden = "hidden";
-
-  function handleOpenModal() {
-    setIsHidden(!isHidden);
-  }
 
   return (
     <>
@@ -30,7 +29,7 @@ function ScreenApprove() {
               location="Nigéria"
               dateStart="23/04/2024"
               dateEnd="23/05/2024"
-              onClick={handleOpenModal}
+              onClick={() => clickView("approve")}
             />
             <Card
               title="Vacation"
@@ -38,10 +37,22 @@ function ScreenApprove() {
               location="Nigéria"
               dateStart="23/04/2024"
               dateEnd="23/05/2024"
-              onClick={handleOpenModal}
+              onClick={() => clickView("approve")}
             />
           </div>
-          <Popup isHidden={isHidden ? hidden : ""} onClick={handleOpenModal} />
+          <Popup
+            isHidden={isHidden ? hidden : ""}
+            onClick={() => hiddenModal("hidden")}
+          >
+            <div className="buttons">
+              <Button className="popup__content-buttons--aprove button-popup">
+                Aprove
+              </Button>
+              <Button className="popup__content-buttons--deny button-popup">
+                Deny
+              </Button>
+            </div>
+          </Popup>
         </div>
       </section>
     </>
