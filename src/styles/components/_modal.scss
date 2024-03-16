@@ -1,8 +1,9 @@
-.popup {
+.modal {
   width: 100%;
   height: 100vh;
   position: fixed;
   top: 0;
+  left: 0;
   background-color: #9c9c9ca8;
   display: block;
 
@@ -20,7 +21,7 @@
   }
 }
 
-.popup {
+.modal {
   &__location {
     display: inline-block;
     text-align: right;
@@ -34,7 +35,7 @@
 
     margin-top: 2rem;
 
-    .button-popup {
+    .button-modal {
       width: 10rem;
       height: 5rem;
       cursor: pointer;

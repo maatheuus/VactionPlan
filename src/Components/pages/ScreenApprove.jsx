@@ -3,12 +3,10 @@ import { ModalContext } from "../context/modal-context";
 
 import Card from "../Card";
 import Header from "../Header";
-import Popup from "../Popup";
-import Button from "../Button";
+import { FAKE_USERS } from "../../FAKE_USERS";
 
 function ScreenApprove() {
-  const { clickView, hiddenModal, isHidden } = useContext(ModalContext);
-  const hidden = "hidden";
+  const { clickView } = useContext(ModalContext);
 
   return (
     <>
@@ -23,36 +21,21 @@ function ScreenApprove() {
           </div>
 
           <div className="content-cards">
-            <Card
-              title="Vacation"
-              userName="@maatBakari"
-              location="Nigéria"
-              dateStart="23/04/2024"
-              dateEnd="23/05/2024"
-              onClick={() => clickView("approve")}
-            />
-            <Card
-              title="Vacation"
-              userName="@maatBakari"
-              location="Nigéria"
-              dateStart="23/04/2024"
-              dateEnd="23/05/2024"
-              onClick={() => clickView("approve")}
-            />
+            {FAKE_USERS.map((value) => {
+              return (
+                <Card
+                  key={value.id}
+                  title="Vacation"
+                  userName={value.userName}
+                  location={value.location}
+                  dateStart={value.startDate}
+                  dateEnd={value.endDate}
+                  onClick={() => clickView("approve", value.id)}
+                  id={value.id}
+                />
+              );
+            })}
           </div>
-          <Popup
-            isHidden={isHidden ? hidden : ""}
-            onClick={() => hiddenModal("hidden")}
-          >
-            <div className="buttons">
-              <Button className="popup__content-buttons--aprove button-popup">
-                Aprove
-              </Button>
-              <Button className="popup__content-buttons--deny button-popup">
-                Deny
-              </Button>
-            </div>
-          </Popup>
         </div>
       </section>
     </>

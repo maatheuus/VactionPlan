@@ -3,8 +3,7 @@ import { useRef } from "react";
 
 import Input from "../Input";
 import Button from "../Button";
-
-const dataUser = [];
+import { FAKE_USERS } from "../../FAKE_USERS";
 
 function NewRequest() {
   const navigate = useNavigate();
@@ -15,23 +14,21 @@ function NewRequest() {
   const endRef = useRef();
   const observationRef = useRef();
 
-  function handleTeste() {
+  function handleValueUser() {
     const userData = {
+      id: 8,
       userName: nameRef.current.value,
       location: locationRef.current.value,
-      date: {
-        start: new Date(startRef.current.value),
-        end: new Date(endRef.current.value),
-      },
+      startDate: startRef.current.value,
+      endDate: endRef.current.value,
       observation: observationRef.current.value,
     };
 
-    const getDate =
-      -userData.date.end.getDate() - -userData.date.start.getDate();
-    const getMonth =
-      userData.date.end.getMonth() + 1 - (userData.date.start.getMonth() + 1);
-    console.log(getDate, getMonth);
+    // const getDate = -userData.endDate.getDate() - -userData.startDate.getDate();
+    // const getMonth =
+    //   userData.endDate.getMonth() + 1 - (userData.startDate.getMonth() + 1);
 
+    /*
     // se o dia for maior que 30 ou o mes for maior que 1, erro
     if ((getDate < 0 && getMonth >= 1) || getMonth > 1)
       console.log("precisa ser menor menor ou igual a 30 dias");
@@ -44,13 +41,13 @@ function NewRequest() {
       console.log("precisa ser maior que a data selecionada");
     // se o ano for diferente do atual, erro
     else if (
-      userData.date.start.getFullYear() !== userData.date.end.getFullYear()
+      userData.startDate.getFullYear() !== userData.endDate.getFullYear()
     )
       console.log("precisa ser no mesmo ano");
-    else navigate(-1);
+    else navigate(-1);*/
 
-    dataUser.push(userData);
-    console.log(dataUser);
+    navigate(-1);
+    return FAKE_USERS.push(userData);
   }
 
   return (
@@ -77,7 +74,7 @@ function NewRequest() {
 
               <div className="screen-employee__button">
                 <Button
-                  onClick={handleTeste}
+                  onClick={handleValueUser}
                   className="screen-employee__button--send"
                 >
                   Enviar solicitação

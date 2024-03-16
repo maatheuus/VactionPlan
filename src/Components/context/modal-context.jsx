@@ -2,21 +2,25 @@ import { useReducer, createContext } from "react";
 
 function modalDispatch(state, action) {
   if (action.type === "VIEW" && action.page === "request") {
-    console.log("request");
     return {
+      ...state,
       isHidden: !state.isHidden,
+      view: action.viewSelected,
+      page: action.page,
     };
   }
   if (action.type === "VIEW" && action.page === "approve") {
-    console.log("approve");
     return {
+      ...state,
       isHidden: !state.isHidden,
+      view: action.viewSelected,
+      page: action.page,
     };
   }
 
   if (action.type === "HIDDEN_MODAL" && action.page === "hidden") {
-    console.log("hidden");
     return {
+      ...state,
       isHidden: !state.isHidden,
     };
   }
@@ -24,7 +28,8 @@ function modalDispatch(state, action) {
 }
 
 export const ModalContext = createContext({
-  curView: "",
+  viewSelected: null,
+  page: null,
   isHidden: Boolean,
   clickView: () => {},
   hiddenModal: () => {},
@@ -33,13 +38,15 @@ export const ModalContext = createContext({
 export default function ModalProvider({ children }) {
   const [state, dispatch] = useReducer(modalDispatch, {
     isHidden: true,
-    curView: "",
+    view: null,
+    page: null,
   });
 
-  function handleClickView(e) {
+  function handleClickView(e, id = undefined) {
     dispatch({
       type: "VIEW",
       page: e,
+      viewSelected: id,
     });
   }
 
@@ -52,6 +59,8 @@ export default function ModalProvider({ children }) {
 
   const ctxValue = {
     isHidden: state.isHidden,
+    page: state.page,
+    viewSelected: state.view,
     clickView: handleClickView,
     hiddenModal: handleHiddenModal,
   };

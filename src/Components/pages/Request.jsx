@@ -1,17 +1,35 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { ModalContext } from "../context/modal-context";
 
 import Header from "../Header";
 import Card from "../Card";
 import Button from "../Button";
-import Popup from "../Popup";
+import { FAKE_USERS } from "../../FAKE_USERS";
+import supabase from "../../supabase";
 
 function Request() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(FAKE_USERS);
 
-  const { clickView, hiddenModal, isHidden } = useContext(ModalContext);
-  const hidden = "hidden";
+  // async function handleData() {
+  //   // const { data, error } = await supabase.from("VactionUsers").select("*");
+
+  //   // console.log(data, error);
+
+  //   const { error, data } = await supabase
+  //     .from("VactionUsers")
+  //     .insert({ id: 1, name: "Denmark" });
+
+  //   console.log(data);
+  // }
+  // handleData();
+
+  function handleUpdateUser(result) {
+    setUser(result);
+  }
+
+  const { clickView } = useContext(ModalContext);
 
   function handleNewRequest() {
     navigate("./newRequest");
@@ -26,18 +44,22 @@ function Request() {
         <div className="request__content">
           <h1 className="request__title">Solicitações</h1>
           <div className="request__cards">
-            <Card
-              title="30 dias"
-              dateStart="2024/04/25"
-              dateEnd="2024/05/23"
-              onClick={() => clickView("request")}
-            />
-            <Card
-              title="30 dias"
-              dateStart="2024/04/25"
-              dateEnd="2024/05/23"
-              onClick={() => clickView("request")}
-            />
+            {user.map((value) => {
+              return (
+                <Card
+                  key={value.id}
+                  title="Vacation"
+                  curUser={user}
+                  userName={value.userName}
+                  location={value.location}
+                  dateStart={value.startDate}
+                  dateEnd={value.endDate}
+                  updateUsers={handleUpdateUser}
+                  onClick={() => clickView("request", value.id)}
+                  id={value.id}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="request__button">
@@ -45,19 +67,6 @@ function Request() {
             Nova solicitação
           </Button>
         </div>
-        <Popup
-          isHidden={isHidden ? hidden : ""}
-          onClick={() => hiddenModal("hidden")}
-        >
-          <div className="buttons">
-            <Button className="popup__content-buttons--aprove button-popup">
-              Update
-            </Button>
-            <Button className="popup__content-buttons--deny button-popup">
-              Delete
-            </Button>
-          </div>
-        </Popup>
       </section>
     </>
   );
