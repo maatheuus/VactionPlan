@@ -20,7 +20,7 @@ function SingUp() {
   const whatPassword = watch("password");
 
   const onSubmit = (data) => {
-    singUp(data.email, data.password);
+    singUp(data.email, data.password, data.name);
   };
 
   return (

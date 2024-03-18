@@ -14,9 +14,6 @@ function LoginEmployee() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
-  const email = "exemplo@gmail.com";
-  const senha = "exemplo@gmail.com";
-
   const onSubmit = (data) => {
     login(data.email, data.password, "employee");
   };
@@ -38,17 +35,12 @@ function LoginEmployee() {
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <label className="form-login__input--name">Your Email</label>
-          <input
-            type="email"
-            {...register("email", { required: true })}
-            value={email}
-          />
+          <input type="email" {...register("email", { required: true })} />
 
           <label className="form-login__input--password">Your Password</label>
           <input
             type="password"
             {...register("password", { required: true })}
-            value={senha}
           />
         </div>
 

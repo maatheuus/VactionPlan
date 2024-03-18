@@ -1,26 +1,40 @@
-import { useState, useRef } from "react";
-// import { ModalContext } from "../context/click-modal-context";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { ModalContext } from "../Components/context/modal-context";
+import { deleteRequest, updateRequest } from "../apiTable";
 
 import Button from "./Button";
 
-function Modal({ isHidden = true, onClick, curModal, children }) {
-  const [newData, setNewData] = useState("");
+function Modal({ isHidden = true, onClick, curModal }) {
+  const { page, hiddenModal } = useContext(ModalContext);
 
-  const nameInput = useRef();
-  const locationInput = useRef();
-  const startInput = useRef();
-  const endInput = useRef();
-  const observationInput = useRef();
+  const { userName, location, startDate, endDate, observation, id } = curModal;
 
-  function handleChange() {
-    const userData = {
-      userName: nameInput.current.value,
-      location: locationInput.current.value,
-      dateStart: startInput.current.value,
-      dateEnd: endInput.current.value,
-      observation: observationInput.current.value,
-    };
-    setNewData(userData);
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      userName,
+      location,
+      startDate,
+      endDate,
+      observation,
+      id,
+    },
+  });
+
+  const onSubmit = (data) => {
+    hiddenModal("hidden");
+    return updateRequest(data, data.id);
+  };
+  function handleDeleteRequest(id) {
+    hiddenModal("hidden");
+    return deleteRequest(id);
+  }
+
+  function handleApproveRequests() {
+    console.log("approve requests");
+  }
+  function handleDenyRequests() {
+    console.log("deny requests");
   }
 
   return (
@@ -32,7 +46,12 @@ function Modal({ isHidden = true, onClick, curModal, children }) {
             <p className="modal__name--text">
               UserName:{" "}
               <span className="modal__name--span input">
-                <input onChange={handleChange} type="text" ref={nameInput} />
+                <input
+                  type="text"
+                  {...register("userName", {
+                    value: userName,
+                  })}
+                />
               </span>
             </p>
           </div>
@@ -41,9 +60,10 @@ function Modal({ isHidden = true, onClick, curModal, children }) {
               Location:{" "}
               <span className="modal__location--span input">
                 <input
-                  onChange={handleChange}
                   type="text"
-                  ref={locationInput}
+                  {...register("location", {
+                    value: location,
+                  })}
                 />
               </span>
             </p>
@@ -54,11 +74,21 @@ function Modal({ isHidden = true, onClick, curModal, children }) {
               Date requested:{" "}
               <span className="modal__date--start input">
                 start:{" "}
-                <input onChange={handleChange} type="date" ref={startInput} />
+                <input
+                  type="text"
+                  {...register("startDate", {
+                    value: startDate,
+                  })}
+                />
               </span>
               <span className="modal__date--end input">
                 end:{" "}
-                <input onChange={handleChange} type="date" ref={endInput} />
+                <input
+                  type="text"
+                  {...register("endDate", {
+                    value: endDate,
+                  })}
+                />
               </span>
             </p>
           </div>
@@ -67,9 +97,10 @@ function Modal({ isHidden = true, onClick, curModal, children }) {
               Observation:{" "}
               <span className="modal__observation--span input">
                 <input
-                  onChange={handleChange}
                   type="text"
-                  ref={observationInput}
+                  {...register("observation", {
+                    value: observation,
+                  })}
                 />
               </span>
             </p>
@@ -84,8 +115,39 @@ function Modal({ isHidden = true, onClick, curModal, children }) {
               Close
             </Button>
           </div>
-
-          {children}
+          {page === "approve" && (
+            <div className="buttons">
+              <Button
+                className="modal__content-buttons--aprove button-modal"
+                onClick={handleApproveRequests}
+              >
+                Approve
+              </Button>
+              <Button
+                className="modal__content-buttons--deny button-modal"
+                onClick={handleDenyRequests}
+              >
+                Deny
+              </Button>
+            </div>
+          )}
+          {page === "request" && (
+            <div className="buttons">
+              <Button
+                className="modal__content-buttons--aprove button-modal"
+                type="submit"
+                onClick={() => handleSubmit(onSubmit)()}
+              >
+                Update
+              </Button>
+              <Button
+                className="modal__content-buttons--deny button-modal"
+                onClick={() => handleDeleteRequest(curModal.id)}
+              >
+                Delete
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

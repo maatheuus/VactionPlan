@@ -1,28 +1,17 @@
-import { useContext, useEffect, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import { ModalContext } from "../context/modal-context";
-import { RequestContext } from "../context/users-datas-context";
 
 import Header from "../Header";
-import Card from "../Card";
 import Button from "../Button";
+import ReadRequests from "../ReadRequests";
+
 function Request() {
-  const { readRequest } = useContext(RequestContext);
-
   const navigate = useNavigate();
-  const [userRequest, setUserRequest] = useState([]);
-
-  const { clickView } = useContext(ModalContext);
 
   function handleNewRequest() {
     navigate("./newRequest");
   }
 
-  useEffect(() => {
-    readRequest().then((data) => setUserRequest(data));
-  }, [readRequest]);
-
-  const emptyRequests = userRequest.length === 0;
+  const emptyRequests = false;
 
   return (
     <>
@@ -36,16 +25,7 @@ function Request() {
             {emptyRequests ? (
               <p>No requests yet</p>
             ) : (
-              userRequest.map((value) => {
-                return (
-                  <Card
-                    key={value.id}
-                    title="Vacation"
-                    curRequest={value}
-                    onClick={() => clickView("request", value.id)}
-                  />
-                );
-              })
+              <ReadRequests currentPage="request" />
             )}
           </div>
         </div>

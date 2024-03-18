@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import ModalProvider from "./Components/context/modal-context";
 import AuthProvider from "./Components/context/authUser-context";
-import RequestProvider from "./Components/context/users-datas-context";
 
 import HomePage from "./Components/pages/HomePage";
 import LoginApprove from "./Components/pages/LoginApprove";
@@ -16,18 +15,16 @@ function App() {
     <ModalProvider>
       <BrowserRouter>
         <AuthProvider>
-          <RequestProvider>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/loginApprove" element={<LoginApprove />} />
-              <Route path="/loginEmployee" element={<LoginEmployee />} />
-              <Route path="/singUp" element={<SingUp />} />
-              <Route path="/approve" element={<ScreenApprove />} />
-              <Route path="/requests" element={<Request />}>
-                <Route path="newRequest" element={<NewRequest />} />
-              </Route>
-            </Routes>
-          </RequestProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/loginApprove" element={<LoginApprove />} />
+            <Route path="/loginEmployee" element={<LoginEmployee />} />
+            <Route path="/singUp" element={<SingUp />} />
+            <Route path="/approve" element={<ScreenApprove />} />
+            <Route path="/requests" element={<Request />}>
+              <Route path="newRequest" element={<NewRequest />} />
+            </Route>
+          </Routes>
         </AuthProvider>
       </BrowserRouter>
     </ModalProvider>

@@ -1,84 +1,122 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useContext } from "react";
+import { useForm } from "react-hook-form";
+import { newRequest } from "../../apiTable";
+import { Toaster } from "react-hot-toast";
+import { handleErrorsMessages } from "../../toastApi";
 
-import Input from "../Input";
 import Button from "../Button";
-import { RequestContext } from "../context/users-datas-context";
 
 function NewRequest() {
   const navigate = useNavigate();
-  const { newRequest } = useContext(RequestContext);
 
-  const nameRef = useRef();
-  const locationRef = useRef();
-  const startRef = useRef();
-  const endRef = useRef();
-  const observationRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
-  function handleNewRequest() {
-    const userData = {
-      userName: nameRef.current.value,
-      location: locationRef.current.value,
-      dateStart: startRef.current.value,
-      dateEnd: endRef.current.value,
-      observation: observationRef.current.value,
-    };
-
-    const getDate =
-      new Date(userData.dateEnd).getDate() -
-      new Date(userData.dateStart).getDate();
+  const onSubmit = (data) => {
+    // subtracting the months
     const getMonth =
-      new Date(userData.dateEnd).getMonth() -
-      new Date(userData.dateStart).getMonth();
-    console.log(getDate, getMonth);
+      new Date(getValues("endDate")).getMonth() -
+      new Date(getValues("startDate")).getMonth();
 
-    // se o dia for maior que 30 ou o mes for maior que 1, erro
+    // subtracting the days
+    const getDate =
+      new Date(getValues("endDate")).getDate() -
+      new Date(getValues("startDate")).getDate();
+
     if ((-getDate < 0 && getMonth >= 1) || getMonth > 1)
-      console.log("precisa ser menor menor ou igual a 30 dias");
-    // se o dia for numero negativo ou o mes for numero negativo, erro
+      handleErrorsMessages(
+        "The date need to be lass then 30 days or equal 30 days"
+      );
+    // if the day is a negative number or the month , error
     else if (
       (-getDate > 0 && getMonth === 0) ||
       (-getDate >= 0 && getMonth < 0) ||
       (-getDate < 0 && getMonth < 0)
     )
-      console.log("precisa ser maior que a data selecionada");
-    // se o ano for diferente do atual, erro
+      handleErrorsMessages("The date needs greater than the selected date");
+    // if the year was different, error
     else if (
-      new Date(userData.dateStart).getFullYear() !==
-      new Date(userData.dateEnd).getFullYear()
+      new Date(getValues("startDate")).getFullYear() !==
+      new Date(getValues("endDate")).getFullYear()
     )
-      console.log("precisa ser no mesmo ano");
+      handleErrorsMessages("The date must be in the same year");
     else {
-      newRequest(userData);
-      navigate(-1);
+      newRequest(data);
+      navigate("/requests");
     }
-  }
+  };
 
   return (
     <>
       <section id="employee">
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="screen-employee">
           <h1 className="screen-employee__title">Solicitação de férias</h1>
 
           <div className="screen-employee__inputs input">
             <div className="screen-employee__inputs--col1">
-              <Input label="User name" innerRef={nameRef} />
-              <Input label="Location" type="text" innerRef={locationRef} />
-
-              <Input
-                label="Observações"
-                type="textarea"
-                innerRef={observationRef}
+              <label htmlFor="">User name</label>
+              <input
+                type="text"
+                {...register("userName", {
+                  required: {
+                    value: true,
+                    message: "User name needs to be provided",
+                  },
+                })}
               />
+              <p className="error-inputs">{errors?.userName?.message}</p>
+
+              <label htmlFor="">Location</label>
+              <input
+                type="text"
+                {...register("location", {
+                  required: {
+                    value: true,
+                    message: "Location needs to be provided",
+                  },
+                })}
+              />
+              <p className="error-inputs">{errors?.location?.message}</p>
+
+              <label htmlFor="">Observation</label>
+              <textarea type="text" {...register("observation")} />
             </div>
 
             <div className="screen-employee__inputs--col2">
-              <Input label="Data Inicio" type="date" innerRef={startRef} />
-              <Input label="Data fim" type="date" innerRef={endRef} />
+              <label>Date start</label>
+              <input
+                type="date"
+                {...register("startDate", {
+                  valueAsDate: true,
+                  required: {
+                    value: true,
+                    message: "Date needs to be provided",
+                  },
+                })}
+              />
+              <p className="error-inputs">{errors?.startDate?.message}</p>
+
+              <label htmlFor="">Date end</label>
+              <input
+                type="date"
+                {...register("endDate", {
+                  valueAsDate: true,
+                  required: {
+                    value: true,
+                    message: "Date needs to be provided",
+                  },
+                })}
+              />
+              <p className="error-inputs">{errors?.endDate?.message}</p>
 
               <div className="screen-employee__button">
                 <Button
-                  onClick={handleNewRequest}
+                  onClick={() => handleSubmit(onSubmit)()}
                   className="screen-employee__button--send"
                 >
                   Enviar solicitação

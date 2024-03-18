@@ -35,7 +35,6 @@ function Header() {
           >
             <FaArrowLeft className="arrow" />
           </Button>
-          <p className="content-header__name">@maatBakari</p>
         </div>
       </div>
     </header>

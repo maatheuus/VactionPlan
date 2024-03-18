@@ -2,24 +2,26 @@ import { useReducer, createContext } from "react";
 import supabase from "../../supabase";
 
 function authDispatch(state, action) {
-  if (action.type === "LOGIN" && action.user === "approve") {
+  if (action.type === "LOGIN" && action.whoWasLogin === "approve") {
     return {
       ...state,
-      user: action.user,
+      whoWasLogin: action.whoWasLogin,
       isAuthenticated: true,
     };
   }
-  if (action.type === "LOGIN" && action.user === "employee") {
+  if (action.type === "LOGIN" && action.whoWasLogin === "employee") {
     return {
       ...state,
-      user: action.user,
+      whoWasLogin: action.whoWasLogin,
       isAuthenticated: true,
+      user: action.user,
     };
   }
   if (action.type === "SING_UP") {
     return {
       ...state,
       isAuthenticated: true,
+      user: action.user,
     };
   }
   if (action.type === "LOGOUT") {
@@ -33,41 +35,56 @@ function authDispatch(state, action) {
 
 export const AuthContext = createContext({
   isAuthenticated: false,
+  user: undefined,
   login: () => {},
   singUp: () => {},
   logout: () => {},
 });
 export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authDispatch, {
-    user: null,
+    whoWasLogin: null,
     isAuthenticated: false,
+    user: undefined,
   });
 
-  async function handleLoginUser(email, password, user) {
+  async function handleLoginUser(email, password, whoWasLogin) {
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    if (error?.status === 400) return;
+    if (error?.status === 400) console.log(error);
 
     dispatch({
       type: "LOGIN",
-      user: user,
+      whoWasLogin: whoWasLogin,
     });
   }
 
-  async function handleSingUp(email, password) {
-    const { error } = await supabase.auth.signUp({
+  async function handleSingUp(email, password, user) {
+    const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          user_name: user,
+        },
+      },
     });
 
-    if (error?.status === 400) return;
+    const { data: insertData, erro: insertError } = await supabase
+      .from("Profiles")
+      .insert([{ fullName: user, userEmail: email }])
+      .select();
 
     dispatch({
       type: "SING_UP",
+      user: data.user.user_metadata.user_name,
     });
+
+    if (error?.status === 400 || insertError?.status === 400) return;
+
+    return insertData;
   }
   function handleLogout() {
     dispatch({
@@ -76,6 +93,7 @@ export default function AuthProvider({ children }) {
   }
 
   const ctxValue = {
+    whoWasLogin: state.whoWasLogin,
     user: state.user,
     page: state.page,
     isAuthenticated: state.isAuthenticated,
