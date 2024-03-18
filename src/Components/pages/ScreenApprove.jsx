@@ -1,12 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ModalContext } from "../context/modal-context";
+import { RequestContext } from "../context/users-datas-context";
 
 import Card from "../Card";
 import Header from "../Header";
-import { FAKE_USERS } from "../../FAKE_USERS";
 
 function ScreenApprove() {
   const { clickView } = useContext(ModalContext);
+  const { readRequest } = useContext(RequestContext);
+  const [userRequest, setUserRequest] = useState([]);
+
+  // const emptyRequests = userRequest.length === 0;
+
+  useEffect(() => {
+    readRequest().then((data) => setUserRequest(data));
+  }, [readRequest]);
 
   return (
     <>
@@ -21,17 +29,13 @@ function ScreenApprove() {
           </div>
 
           <div className="content-cards">
-            {FAKE_USERS.map((value) => {
+            {userRequest.map((value) => {
               return (
                 <Card
                   key={value.id}
                   title="Vacation"
-                  userName={value.userName}
-                  location={value.location}
-                  dateStart={value.startDate}
-                  dateEnd={value.endDate}
+                  curRequest={value}
                   onClick={() => clickView("approve", value.id)}
-                  id={value.id}
                 />
               );
             })}

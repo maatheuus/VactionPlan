@@ -1,20 +1,26 @@
-// import { useRef, useContext } from "react";
+import { useState, useRef } from "react";
 // import { ModalContext } from "../context/click-modal-context";
 
 import Button from "./Button";
 
-function Modal({
-  isHidden = true,
-  onClick,
-  userName,
-  location,
-  dateStart,
-  dateEnd,
-  observation,
-  children,
-}) {
+function Modal({ isHidden = true, onClick, curModal, children }) {
+  const [newData, setNewData] = useState("");
+
+  const nameInput = useRef();
+  const locationInput = useRef();
+  const startInput = useRef();
+  const endInput = useRef();
+  const observationInput = useRef();
+
   function handleChange() {
-    console.log("");
+    const userData = {
+      userName: nameInput.current.value,
+      location: locationInput.current.value,
+      dateStart: startInput.current.value,
+      dateEnd: endInput.current.value,
+      observation: observationInput.current.value,
+    };
+    setNewData(userData);
   }
 
   return (
@@ -26,7 +32,7 @@ function Modal({
             <p className="modal__name--text">
               UserName:{" "}
               <span className="modal__name--span input">
-                <input onChange={handleChange} type="text" value={userName} />
+                <input onChange={handleChange} type="text" ref={nameInput} />
               </span>
             </p>
           </div>
@@ -34,7 +40,11 @@ function Modal({
             <p className="modal__location--text">
               Location:{" "}
               <span className="modal__location--span input">
-                <input onChange={handleChange} type="text" value={location} />
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  ref={locationInput}
+                />
               </span>
             </p>
           </div>
@@ -44,11 +54,11 @@ function Modal({
               Date requested:{" "}
               <span className="modal__date--start input">
                 start:{" "}
-                <input onChange={handleChange} type="date" value={dateStart} />
+                <input onChange={handleChange} type="date" ref={startInput} />
               </span>
               <span className="modal__date--end input">
                 end:{" "}
-                <input onChange={handleChange} type="date" value={dateEnd} />
+                <input onChange={handleChange} type="date" ref={endInput} />
               </span>
             </p>
           </div>
@@ -59,7 +69,7 @@ function Modal({
                 <input
                   onChange={handleChange}
                   type="text"
-                  value={observation}
+                  ref={observationInput}
                 />
               </span>
             </p>

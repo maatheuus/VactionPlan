@@ -1,37 +1,29 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { FaEye } from "react-icons/fa";
 
 import Button from "./Button";
 import Modal from "./Modal";
 import { ModalContext } from "./context/modal-context";
-import { FAKE_USERS } from "../FAKE_USERS";
+import { RequestContext } from "./context/users-datas-context";
 
-function Card({
-  title,
-  userName,
-  location,
-  dateStart,
-  dateEnd,
-  curUser,
-  view = true,
-  onClick,
-  id,
-  updateUsers,
-}) {
+function Card({ title, curRequest, view = true, onClick }) {
   const { hiddenModal, isHidden, viewSelected, page } =
     useContext(ModalContext);
+  const { deleteRequest, updateRequest } = useContext(RequestContext);
+
+  const viewApprove = viewSelected === curRequest.id && page === "approve";
+  const viewRequest = viewSelected === curRequest.id && page === "request";
   const hidden = "hidden";
 
-  const viewApprove = viewSelected === id && page === "approve";
-  const viewRequest = viewSelected === id && page === "request";
+  function handleDeleteRequest(id) {
+    return deleteRequest(id);
+  }
+  const userData = useRef();
+  function handleUpdateRequestData(id) {
+    console.log(id);
+    console.log(userData.current.inputValue());
 
-  function handleDeleteUser() {
-    const newData = [...FAKE_USERS];
-
-    const findUser = newData.findIndex((user) => user.id === curUser.id);
-
-    newData.splice(findUser, 1);
-    return updateUsers(newData);
+    // return updateRequest(id);
   }
 
   return (
@@ -40,20 +32,28 @@ function Card({
         <h1 className="card__title">{title}</h1>
         <p className="card__username">
           Name:
-          <span className="card__username--description">{userName}</span>
+          <span className="card__username--description">
+            {curRequest.userName}
+          </span>
         </p>
         <p className="card__location">
           Location:{" "}
-          <span className="card__location--description">{location}</span>
+          <span className="card__location--description">
+            {curRequest.location}
+          </span>
         </p>
         <div className="card__date">
           <p className="card__date-start">
             start:
-            <span className="card__date-start--description">{dateStart}</span>
+            <span className="card__date-start--description">
+              {curRequest.dateStart}
+            </span>
           </p>
           <p className="card__date-end">
             end:
-            <span className="card__date-end--description">{dateEnd}</span>
+            <span className="card__date-end--description">
+              {curRequest.dateEnd}
+            </span>
           </p>
         </div>
 
@@ -74,14 +74,11 @@ function Card({
       </div>
       {viewApprove && (
         <Modal
+          key={curRequest.id}
           isHidden={isHidden ? hidden : ""}
+          curModal={curRequest}
+          ref={userData}
           onClick={() => hiddenModal("hidden")}
-          userName={userName}
-          location={location}
-          key={id}
-          dateStart={dateStart}
-          dateEnd={dateEnd}
-          observation="lorent directly selected item  from"
         >
           <div className="buttons">
             <Button className="modal__content-buttons--aprove button-modal">
@@ -95,22 +92,21 @@ function Card({
       )}
       {viewRequest && (
         <Modal
+          key={curRequest.id}
           isHidden={isHidden ? hidden : ""}
+          curModal={curRequest}
           onClick={() => hiddenModal("hidden")}
-          userName={userName}
-          location={location}
-          key={id}
-          dateStart={dateStart}
-          dateEnd={dateEnd}
-          observation="lorent directly selected item  from"
         >
           <div className="buttons">
-            <Button className="modal__content-buttons--aprove button-modal">
+            <Button
+              className="modal__content-buttons--aprove button-modal"
+              onClick={() => handleUpdateRequestData(curRequest.id)}
+            >
               Update
             </Button>
             <Button
               className="modal__content-buttons--deny button-modal"
-              onClick={handleDeleteUser}
+              onClick={() => handleDeleteRequest(curRequest.id)}
             >
               Delete
             </Button>

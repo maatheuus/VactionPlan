@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 
 import Input from "../Input";
 import Button from "../Button";
-import { FAKE_USERS } from "../../FAKE_USERS";
+import { RequestContext } from "../context/users-datas-context";
 
 function NewRequest() {
   const navigate = useNavigate();
+  const { newRequest } = useContext(RequestContext);
 
   const nameRef = useRef();
   const locationRef = useRef();
@@ -14,40 +15,43 @@ function NewRequest() {
   const endRef = useRef();
   const observationRef = useRef();
 
-  function handleValueUser() {
+  function handleNewRequest() {
     const userData = {
-      id: 8,
       userName: nameRef.current.value,
       location: locationRef.current.value,
-      startDate: startRef.current.value,
-      endDate: endRef.current.value,
+      dateStart: startRef.current.value,
+      dateEnd: endRef.current.value,
       observation: observationRef.current.value,
     };
 
-    // const getDate = -userData.endDate.getDate() - -userData.startDate.getDate();
-    // const getMonth =
-    //   userData.endDate.getMonth() + 1 - (userData.startDate.getMonth() + 1);
+    const getDate =
+      new Date(userData.dateEnd).getDate() -
+      new Date(userData.dateStart).getDate();
+    const getMonth =
+      new Date(userData.dateEnd).getMonth() -
+      new Date(userData.dateStart).getMonth();
+    console.log(getDate, getMonth);
 
-    /*
     // se o dia for maior que 30 ou o mes for maior que 1, erro
-    if ((getDate < 0 && getMonth >= 1) || getMonth > 1)
+    if ((-getDate < 0 && getMonth >= 1) || getMonth > 1)
       console.log("precisa ser menor menor ou igual a 30 dias");
     // se o dia for numero negativo ou o mes for numero negativo, erro
     else if (
-      (getDate > 0 && getMonth === 0) ||
-      (getDate >= 0 && getMonth < 0) ||
-      (getDate < 0 && getMonth < 0)
+      (-getDate > 0 && getMonth === 0) ||
+      (-getDate >= 0 && getMonth < 0) ||
+      (-getDate < 0 && getMonth < 0)
     )
       console.log("precisa ser maior que a data selecionada");
     // se o ano for diferente do atual, erro
     else if (
-      userData.startDate.getFullYear() !== userData.endDate.getFullYear()
+      new Date(userData.dateStart).getFullYear() !==
+      new Date(userData.dateEnd).getFullYear()
     )
       console.log("precisa ser no mesmo ano");
-    else navigate(-1);*/
-
-    navigate(-1);
-    return FAKE_USERS.push(userData);
+    else {
+      newRequest(userData);
+      navigate(-1);
+    }
   }
 
   return (
@@ -74,7 +78,7 @@ function NewRequest() {
 
               <div className="screen-employee__button">
                 <Button
-                  onClick={handleValueUser}
+                  onClick={handleNewRequest}
                   className="screen-employee__button--send"
                 >
                   Enviar solicitação
