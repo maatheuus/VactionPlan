@@ -21,9 +21,8 @@ function App() {
             <Route path="/loginEmployee" element={<LoginEmployee />} />
             <Route path="/singUp" element={<SingUp />} />
             <Route path="/approve" element={<ScreenApprove />} />
-            <Route path="/requests" element={<Request />}>
-              <Route path="newRequest" element={<NewRequest />} />
-            </Route>
+            <Route path="/requests" element={<Request />} />
+            <Route path="/newRequest" element={<NewRequest />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

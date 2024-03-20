@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { FaEye } from "react-icons/fa";
 
 import Button from "./Button";
-import Modal from "./Modal";
+import ModalApprove from "./ModalApprove";
+import ModalRequest from "./ModalRequest";
 import { ModalContext } from "./context/modal-context";
 
 function Card({ title, curRequest, onClick }) {
@@ -52,14 +53,14 @@ function Card({ title, curRequest, onClick }) {
             </Button>
           </div>
           <div className="card__information-bottom--status">
-            <span className="ball red"></span>
-            <span>status</span>
+            <span className={`status ${curRequest.statusRequest}`}></span>
+            <span>{curRequest.statusRequest}</span>
           </div>
         </div>
       </div>
 
       {viewApprove && (
-        <Modal
+        <ModalApprove
           key={curRequest.id}
           isHidden={isHidden ? hidden : ""}
           curModal={curRequest}
@@ -67,7 +68,7 @@ function Card({ title, curRequest, onClick }) {
         />
       )}
       {viewRequest && (
-        <Modal
+        <ModalRequest
           key={curRequest.id}
           isHidden={isHidden ? hidden : ""}
           curModal={curRequest}

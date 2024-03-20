@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { ModalContext } from "../Components/context/modal-context";
+import { ModalContext } from "./context/modal-context";
 import { deleteRequest, updateRequest } from "../apiTable";
 
 import Button from "./Button";
 
-function Modal({ isHidden = true, onClick, curModal }) {
-  const { page, hiddenModal } = useContext(ModalContext);
+function ModalRequest({ isHidden = true, onClick, curModal }) {
+  const { hiddenModal } = useContext(ModalContext);
 
   const { userName, location, startDate, endDate, observation, id } = curModal;
 
@@ -28,13 +28,6 @@ function Modal({ isHidden = true, onClick, curModal }) {
   function handleDeleteRequest(id) {
     hiddenModal("hidden");
     return deleteRequest(id);
-  }
-
-  function handleApproveRequests() {
-    console.log("approve requests");
-  }
-  function handleDenyRequests() {
-    console.log("deny requests");
   }
 
   return (
@@ -115,43 +108,26 @@ function Modal({ isHidden = true, onClick, curModal }) {
               Close
             </Button>
           </div>
-          {page === "approve" && (
-            <div className="buttons">
-              <Button
-                className="modal__content-buttons--aprove button-modal"
-                onClick={handleApproveRequests}
-              >
-                Approve
-              </Button>
-              <Button
-                className="modal__content-buttons--deny button-modal"
-                onClick={handleDenyRequests}
-              >
-                Deny
-              </Button>
-            </div>
-          )}
-          {page === "request" && (
-            <div className="buttons">
-              <Button
-                className="modal__content-buttons--aprove button-modal"
-                type="submit"
-                onClick={() => handleSubmit(onSubmit)()}
-              >
-                Update
-              </Button>
-              <Button
-                className="modal__content-buttons--deny button-modal"
-                onClick={() => handleDeleteRequest(curModal.id)}
-              >
-                Delete
-              </Button>
-            </div>
-          )}
+
+          <div className="buttons">
+            <Button
+              className="modal__content-buttons--aprove button-modal"
+              type="submit"
+              onClick={() => handleSubmit(onSubmit)()}
+            >
+              Update
+            </Button>
+            <Button
+              className="modal__content-buttons--deny button-modal"
+              onClick={() => handleDeleteRequest(curModal.id)}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Modal;
+export default ModalRequest;

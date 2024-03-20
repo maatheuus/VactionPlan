@@ -1,40 +1,22 @@
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
-import { ModalContext } from "../Components/context/modal-context";
-import { deleteRequest, updateRequest } from "../apiTable";
-
+import { updateRequest } from "../apiTable";
+import { ModalContext } from "./context/modal-context";
 import Button from "./Button";
 
-function Modal({ isHidden = true, onClick, curModal }) {
-  const { page, hiddenModal } = useContext(ModalContext);
+function ModalApprove({ isHidden = true, onClick, curModal }) {
+  const { hiddenModal, viewSelected } = useContext(ModalContext);
 
   const { userName, location, startDate, endDate, observation, id } = curModal;
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      userName,
-      location,
-      startDate,
-      endDate,
-      observation,
-      id,
-    },
-  });
-
-  const onSubmit = (data) => {
-    hiddenModal("hidden");
-    return updateRequest(data, data.id);
-  };
-  function handleDeleteRequest(id) {
-    hiddenModal("hidden");
-    return deleteRequest(id);
-  }
-
   function handleApproveRequests() {
-    console.log("approve requests");
+    hiddenModal("hidden");
+    if (!viewSelected === id) return;
+    updateRequest({ statusRequest: "approve" }, id);
   }
   function handleDenyRequests() {
-    console.log("deny requests");
+    hiddenModal("hidden");
+    if (!viewSelected === id) return;
+    updateRequest({ statusRequest: "denied" }, id);
   }
 
   return (
@@ -44,64 +26,28 @@ function Modal({ isHidden = true, onClick, curModal }) {
         <div className="modal__content-information">
           <div className="modal__name">
             <p className="modal__name--text">
-              UserName:{" "}
-              <span className="modal__name--span input">
-                <input
-                  type="text"
-                  {...register("userName", {
-                    value: userName,
-                  })}
-                />
-              </span>
+              Name: <span className="modal__name--span ">{userName}</span>
             </p>
           </div>
           <div className="modal__location">
             <p className="modal__location--text">
               Location:{" "}
-              <span className="modal__location--span input">
-                <input
-                  type="text"
-                  {...register("location", {
-                    value: location,
-                  })}
-                />
-              </span>
+              <span className="modal__location--span ">{location}</span>
             </p>
           </div>
 
           <div className="modal__date">
             <p className="modal__date--text">
               Date requested:{" "}
-              <span className="modal__date--start input">
-                start:{" "}
-                <input
-                  type="text"
-                  {...register("startDate", {
-                    value: startDate,
-                  })}
-                />
-              </span>
-              <span className="modal__date--end input">
-                end:{" "}
-                <input
-                  type="text"
-                  {...register("endDate", {
-                    value: endDate,
-                  })}
-                />
-              </span>
+              <span className="modal__date--start ">start: {startDate}</span>
+              <span className="modal__date--end ">end: {endDate}</span>
             </p>
           </div>
           <div className="modal__observation">
             <p className="modal__observation--text">
               Observation:{" "}
-              <span className="modal__observation--span input">
-                <input
-                  type="text"
-                  {...register("observation", {
-                    value: observation,
-                  })}
-                />
+              <span className="modal__observation--span">
+                {observation === null ? "Any observation" : observation}
               </span>
             </p>
           </div>
@@ -115,43 +61,25 @@ function Modal({ isHidden = true, onClick, curModal }) {
               Close
             </Button>
           </div>
-          {page === "approve" && (
-            <div className="buttons">
-              <Button
-                className="modal__content-buttons--aprove button-modal"
-                onClick={handleApproveRequests}
-              >
-                Approve
-              </Button>
-              <Button
-                className="modal__content-buttons--deny button-modal"
-                onClick={handleDenyRequests}
-              >
-                Deny
-              </Button>
-            </div>
-          )}
-          {page === "request" && (
-            <div className="buttons">
-              <Button
-                className="modal__content-buttons--aprove button-modal"
-                type="submit"
-                onClick={() => handleSubmit(onSubmit)()}
-              >
-                Update
-              </Button>
-              <Button
-                className="modal__content-buttons--deny button-modal"
-                onClick={() => handleDeleteRequest(curModal.id)}
-              >
-                Delete
-              </Button>
-            </div>
-          )}
+
+          <div className="buttons">
+            <Button
+              className="modal__content-buttons--aprove button-modal"
+              onClick={handleApproveRequests}
+            >
+              Approve
+            </Button>
+            <Button
+              className="modal__content-buttons--deny button-modal"
+              onClick={handleDenyRequests}
+            >
+              Deny
+            </Button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default Modal;
+export default ModalApprove;

@@ -24,7 +24,8 @@ export async function updateRequest(requestUpdate, id) {
   const { error } = await supabase
     .from("Requests")
     .update(requestUpdate)
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
   if (error) console.log(error);
 }
@@ -40,3 +41,18 @@ export async function deleteRequest(requestDelete) {
     throw new Error("Could not delete request");
   }
 }
+
+export function realTimeData(eventRealTime, payloadRealTimeDataFunc) {
+  const requestsListener = supabase
+    .channel("Requests")
+    .on(
+      "postgres_changes",
+      { event: `${eventRealTime}`, schema: "public", table: "Requests" },
+      payloadRealTimeDataFunc
+    )
+    .subscribe();
+
+  // return requestsListener;
+  return () => requestsListener.unsubscribe();
+}
+//

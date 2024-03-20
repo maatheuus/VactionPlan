@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-
+import { FaArrowLeft } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
+
 import Button from "../Button";
 import image from "../../assets/images/buzzel-logo.png";
 import Login from "../Login";
@@ -14,17 +14,19 @@ function LoginApprove() {
 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-
+  const email = process.env.EMAIL_SECRET_APPROVE;
+  const password = process.env.PASSWORD_SECRET_APPROVE;
   const onSubmit = (data) => {
-    login(data.email, data.password, "approve");
+    console.log(data);
+    if (data.email !== email && data.password !== password) {
+      console.log("email errado");
+    }
+    // login(data.email, data.password, "approve");
   };
 
   useEffect(() => {
     if (isAuthenticated) navigate("/approve", { replace: true });
   }, [isAuthenticated, navigate]);
-
-  // const email = "boss@gmail.com";
-  // const senha = "boss@gmail.com";
 
   return (
     <Login>

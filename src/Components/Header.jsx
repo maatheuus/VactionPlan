@@ -1,6 +1,6 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { useContext } from "react";
 import { AuthContext } from "./context/authUser-context";
 
 import image from "../assets/images/buzzel-logo.png";
@@ -8,9 +8,9 @@ import ListNav from "./ListNav";
 import Button from "./Button";
 
 function Header() {
+  const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
 
-  const navigate = useNavigate();
   function handleLogout() {
     logout();
     navigate("/");

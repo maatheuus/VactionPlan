@@ -72,19 +72,12 @@ export default function AuthProvider({ children }) {
       },
     });
 
-    const { data: insertData, erro: insertError } = await supabase
-      .from("Profiles")
-      .insert([{ fullName: user, userEmail: email }])
-      .select();
-
     dispatch({
       type: "SING_UP",
       user: data.user.user_metadata.user_name,
     });
 
-    if (error?.status === 400 || insertError?.status === 400) return;
-
-    return insertData;
+    if (error?.status === 400) return;
   }
   function handleLogout() {
     dispatch({

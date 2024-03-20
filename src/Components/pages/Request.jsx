@@ -8,10 +8,8 @@ function Request() {
   const navigate = useNavigate();
 
   function handleNewRequest() {
-    navigate("./newRequest");
+    navigate("/newRequest");
   }
-
-  const emptyRequests = false;
 
   return (
     <>
@@ -22,11 +20,7 @@ function Request() {
         <div className="request__content">
           <h1 className="request__title">Solicitações</h1>
           <div className="request__cards">
-            {emptyRequests ? (
-              <p>No requests yet</p>
-            ) : (
-              <ReadRequests currentPage="request" />
-            )}
+            <ReadRequests currentPage="request" />
           </div>
         </div>
         <div className="request__button">
