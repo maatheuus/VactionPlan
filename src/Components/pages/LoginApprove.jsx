@@ -14,8 +14,8 @@ function LoginApprove() {
 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const email = process.env.EMAIL_SECRET_APPROVE;
-  const password = process.env.PASSWORD_SECRET_APPROVE;
+  // const email = process.env.EMAIL_SECRET_APPROVE;
+  // const password = process.env.PASSWORD_SECRET_APPROVE;
   const onSubmit = (data) => {
     console.log(data);
     if (data.email !== email && data.password !== password) {
