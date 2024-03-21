@@ -1,0 +1,49 @@
+0000000000000000000000000000000000000000 b98967ffdf02c7a86a6c1cf3f42f3f92221abb57 MATHEUS <matts14smkd@gmail.com> 1710172953 -0300	commit (initial): primeiro estado do projeto
+b98967ffdf02c7a86a6c1cf3f42f3f92221abb57 39f59a0ce7e509bea4ad6728b5c3124cddaf48ec MATHEUS <matts14smkd@gmail.com> 1710174148 -0300	commit: Delete App.css
+39f59a0ce7e509bea4ad6728b5c3124cddaf48ec a979e6f2c4e14985281972f7e04b05d95802e221 MATHEUS <matts14smkd@gmail.com> 1710190118 -0300	commit: adicionando pastas das paginas e seus arquivos
+a979e6f2c4e14985281972f7e04b05d95802e221 ecb7f6bfa352562648131246082a6d6bddd18bce MATHEUS <matts14smkd@gmail.com> 1710190293 -0300	commit: adicionando pastas
+ecb7f6bfa352562648131246082a6d6bddd18bce ecb7f6bfa352562648131246082a6d6bddd18bce MATHEUS <matts14smkd@gmail.com> 1710190313 -0300	checkout: moving from master to master
+ecb7f6bfa352562648131246082a6d6bddd18bce b6dcb23731f15d1abb90c47b1551ac4efb5039c0 MATHEUS <matts14smkd@gmail.com> 1710193583 -0300	commit: adicionando o componente header a aplicação
+b6dcb23731f15d1abb90c47b1551ac4efb5039c0 0f28e1278f3984fe27d35557f3690e5d67fa330b MATHEUS <matts14smkd@gmail.com> 1710193730 -0300	commit: adicionando pasta layout e seus arquivos para estilização
+0f28e1278f3984fe27d35557f3690e5d67fa330b b9ade8c405482f5337f1f79a9ded1a224f8af9e5 MATHEUS <matts14smkd@gmail.com> 1710194065 -0300	commit: update app
+b9ade8c405482f5337f1f79a9ded1a224f8af9e5 12b6838c772a19ca5ce8c662b92a2559902fe510 MATHEUS <matts14smkd@gmail.com> 1710268921 -0300	commit: adicionando o arquivo de section para estilização
+12b6838c772a19ca5ce8c662b92a2559902fe510 17f6e53e7dd9d760e4122465c6806d162f3b7b53 MATHEUS <matts14smkd@gmail.com> 1710271919 -0300	commit: adicionando componente de card
+17f6e53e7dd9d760e4122465c6806d162f3b7b53 68f6d529d6423daaf5e2aee07fe347f94a50d0df MATHEUS <matts14smkd@gmail.com> 1710277627 -0300	commit: adicionando componente de popup
+68f6d529d6423daaf5e2aee07fe347f94a50d0df fcb8b2a2efc3efbe5d20eded01719ab39e366ac3 MATHEUS <matts14smkd@gmail.com> 1710281600 -0300	commit: adicionando estilo para a tela do gerente
+fcb8b2a2efc3efbe5d20eded01719ab39e366ac3 1ce03b3d4d525a63e825bd597fc1d9c7d4bc4000 MATHEUS <matts14smkd@gmail.com> 1710356294 -0300	commit: add tela do funcionario
+1ce03b3d4d525a63e825bd597fc1d9c7d4bc4000 ef33fb14f205d2832f9134a8eccc65402d8ff273 MATHEUS <matts14smkd@gmail.com> 1710362458 -0300	commit: add componente para estilização
+ef33fb14f205d2832f9134a8eccc65402d8ff273 8ebf683ec285f8abe44e22d5117350337de2cca7 MATHEUS <matts14smkd@gmail.com> 1710362576 -0300	commit: add componente de solicitação de férias
+8ebf683ec285f8abe44e22d5117350337de2cca7 813748c32bfbd036ea279079e4a01335d962b29f MATHEUS <matts14smkd@gmail.com> 1710364738 -0300	commit: add componente button para estilização
+813748c32bfbd036ea279079e4a01335d962b29f 7a73c807d5733d6ee8814af716abe10a5aea4d03 MATHEUS <matts14smkd@gmail.com> 1710368507 -0300	commit: finalizando estilização das páginas
+7a73c807d5733d6ee8814af716abe10a5aea4d03 4a4abaa02670dce3fabeb6a8a63d2203c788f121 MATHEUS <matts14smkd@gmail.com> 1710454485 -0300	commit: adicionando lógica ao site
+4a4abaa02670dce3fabeb6a8a63d2203c788f121 67bb43ff35243d31c8ab8bc084d9fabdead21ffc MATHEUS <matts14smkd@gmail.com> 1710541756 -0300	commit: adicionando autenticação do usuário
+67bb43ff35243d31c8ab8bc084d9fabdead21ffc f4e4f732aba0b52bebffd1532951fcd499d23a34 MATHEUS <matts14smkd@gmail.com> 1710612957 -0300	commit: adicionando usuarios falsos para testes
+f4e4f732aba0b52bebffd1532951fcd499d23a34 ede82a11d35ab26cab3efc0755bf4ba9a43d2535 MATHEUS <matts14smkd@gmail.com> 1710627313 -0300	commit: lidando com a inserção de dados
+ede82a11d35ab26cab3efc0755bf4ba9a43d2535 0d3edc6ccb8022947a632d34a6c83d9019d2b0ab MATHEUS <matts14smkd@gmail.com> 1710702688 -0300	commit: add pastas de services
+0d3edc6ccb8022947a632d34a6c83d9019d2b0ab 3c35d705184d32faa1223eef58e3701a1307b2c9 MATHEUS <matts14smkd@gmail.com> 1710705835 -0300	commit: adicionando context para ler dados do usuario
+3c35d705184d32faa1223eef58e3701a1307b2c9 d76083bb371435c8581bfe357ae85e78fe258af0 MATHEUS <matts14smkd@gmail.com> 1710714126 -0300	commit: deletando FAKE_USERS arquivo
+d76083bb371435c8581bfe357ae85e78fe258af0 79886cdaa323014f0798d891a5dcf12092fc4b17 MATHEUS <matts14smkd@gmail.com> 1710722801 -0300	commit: lidando com a passagem de valores
+79886cdaa323014f0798d891a5dcf12092fc4b17 5cc48fde4f979bc304596f72a210d3cb7faf6ff6 MATHEUS <matts14smkd@gmail.com> 1710778192 -0300	commit: adicionando arquivo para api supabase
+5cc48fde4f979bc304596f72a210d3cb7faf6ff6 50a07dfcabcc5dc8111722a68e174b4bed6a17d1 MATHEUS <matts14smkd@gmail.com> 1710778514 -0300	commit: delete data context
+50a07dfcabcc5dc8111722a68e174b4bed6a17d1 0b3a593f10bfc7dcc1a3be0d3dc4de7c7a1eba5d MATHEUS <matts14smkd@gmail.com> 1710782427 -0300	commit: add hot-toast para erros
+0b3a593f10bfc7dcc1a3be0d3dc4de7c7a1eba5d 47af0e6385d6a41706b88de53c8d102a07640e7c MATHEUS <matts14smkd@gmail.com> 1710798588 -0300	commit: adicioando arquivo para ler as requisições
+47af0e6385d6a41706b88de53c8d102a07640e7c d576b877bc1efe85e082de02023228ba0ff4ef96 MATHEUS <matts14smkd@gmail.com> 1710805212 -0300	commit: atualizando aplicação
+d576b877bc1efe85e082de02023228ba0ff4ef96 0bd8ac5d501069803980b87d2937e3a0445319b9 MATHEUS <matts14smkd@gmail.com> 1710845216 -0300	commit: add modal apenas para o approve
+0bd8ac5d501069803980b87d2937e3a0445319b9 922584b30be38308716dff541ce59e6a9981587d MATHEUS <matts14smkd@gmail.com> 1710973714 -0300	commit: adicionando arquivo env
+922584b30be38308716dff541ce59e6a9981587d 6005692d6d0f9771b80c8e5844e903ace608b0ab MATHEUS <matts14smkd@gmail.com> 1710973867 -0300	commit: parando de analisar o .env
+6005692d6d0f9771b80c8e5844e903ace608b0ab 5d67e2ec2d186361e61f3178c95f6de88f01f652 MATHEUS <matts14smkd@gmail.com> 1710973892 -0300	commit: lidando com a renderização da interface
+5d67e2ec2d186361e61f3178c95f6de88f01f652 529068309d535bbca0c6fdadaf3cfcecb879b8ae MATHEUS <matts14smkd@gmail.com> 1711042157 -0300	commit: add arquivo .env
+529068309d535bbca0c6fdadaf3cfcecb879b8ae ca18de0bcee9095871a67e8523c7ed44b9827873 MATHEUS <matts14smkd@gmail.com> 1711042183 -0300	commit: parando de analisar o .env
+ca18de0bcee9095871a67e8523c7ed44b9827873 51a5b7b8ccf942d9d279eebcdeacca1174ef14ca MATHEUS <matts14smkd@gmail.com> 1711042319 -0300	commit: Update .gitignore
+51a5b7b8ccf942d9d279eebcdeacca1174ef14ca 48fff0a1be5e550e9c3f5e5b888857a0e0c08fbe MATHEUS <matts14smkd@gmail.com> 1711056806 -0300	commit: adicionando arquivo de spinner
+48fff0a1be5e550e9c3f5e5b888857a0e0c08fbe 0c0441f69f2ef32c9d2d5219c1b7dbf40c9fcf26 MATHEUS <matts14smkd@gmail.com> 1711060573 -0300	commit: lidando com erros de login
+0c0441f69f2ef32c9d2d5219c1b7dbf40c9fcf26 a095070ef275acff38d270b017577e7a71394a63 MATHEUS <matts14smkd@gmail.com> 1711060630 -0300	commit: removendo o styled-components
+a095070ef275acff38d270b017577e7a71394a63 c2b483322cfc3aca10c256749a1db47bb3f96f38 MATHEUS <matts14smkd@gmail.com> 1711060661 -0300	commit: removendo o styles-components
+c2b483322cfc3aca10c256749a1db47bb3f96f38 fc91f19f7bc3005f24c632170f306cde3eca3111 MATHEUS <matts14smkd@gmail.com> 1711060678 -0300	commit: removendo o styles-components
+fc91f19f7bc3005f24c632170f306cde3eca3111 3e7238fc3eab3589a1079efa7a68c6d0169880d2 MATHEUS <matts14smkd@gmail.com> 1711060686 -0300	commit: removendo o styles-components
+3e7238fc3eab3589a1079efa7a68c6d0169880d2 5e9e0ef296a2b444addaaf538f5eafeee40176d0 MATHEUS <matts14smkd@gmail.com> 1711060691 -0300	commit: removendo o styles-components
+5e9e0ef296a2b444addaaf538f5eafeee40176d0 0f11755b0e79d70827d9c5a93522fd1e970dff13 MATHEUS <matts14smkd@gmail.com> 1711060697 -0300	commit: removendo o styles-components
+0f11755b0e79d70827d9c5a93522fd1e970dff13 5447c6b4a26c6d5b87c0b78805e1f7d7e6a9b615 MATHEUS <matts14smkd@gmail.com> 1711060701 -0300	commit: removendo o styles-components
+5447c6b4a26c6d5b87c0b78805e1f7d7e6a9b615 f1a1c0042ef8e8109657dc5ca2c81acf095edc55 MATHEUS <matts14smkd@gmail.com> 1711060705 -0300	commit: removendo o styles-components
+f1a1c0042ef8e8109657dc5ca2c81acf095edc55 cd2045e59eb2a6bdf1056704a37570127c3a4832 MATHEUS <matts14smkd@gmail.com> 1711060709 -0300	commit: removendo o styles-components
+cd2045e59eb2a6bdf1056704a37570127c3a4832 35d15527a12cf1041b2f40c8bbef6c7a73f388ff MATHEUS <matts14smkd@gmail.com> 1711060713 -0300	commit: removendo o styles-components
