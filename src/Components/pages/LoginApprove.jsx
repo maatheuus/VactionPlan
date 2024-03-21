@@ -2,28 +2,29 @@ import { useContext, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { FaArrowLeft } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
+import { FaArrowLeft } from "react-icons/fa";
 
+import Login from "../Login";
 import Button from "../Button";
 import image from "../../assets/images/buzzel-logo.png";
-import Login from "../Login";
 
 function LoginApprove() {
   const { isAuthenticated, login } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
-  // const email = process.env.EMAIL_SECRET_APPROVE;
-  // const password = process.env.PASSWORD_SECRET_APPROVE;
-  const onSubmit = (data) => {
-    console.log(data);
-    if (data.email !== email && data.password !== password) {
-      console.log("email errado");
-    }
-    // login(data.email, data.password, "approve");
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
+  const emailApprove = "boss@example.com";
+  const passwordApprove = "boss1234";
+
+  const onSubmit = (data) => {
+    login(data.email, data.password, "approve");
+  };
   useEffect(() => {
     if (isAuthenticated) navigate("/approve", { replace: true });
   }, [isAuthenticated, navigate]);
@@ -41,13 +42,37 @@ function LoginApprove() {
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <label className="form-login__input--name">Your email</label>
-          <input type="email" {...register("email", { required: true })} />
+          <input
+            type="email"
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Please enter your email address",
+              },
+              validate: (email) => {
+                if (email !== emailApprove)
+                  return "Provided email are incorrect";
+              },
+            })}
+          />
+
+          <p className="error-inputs">{errors?.email?.message}</p>
 
           <label className="form-login__input--password">Your password</label>
           <input
             type="password"
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Please enter your password",
+              },
+              validate: (password) => {
+                if (password !== passwordApprove)
+                  return "Provided password are incorrect";
+              },
+            })}
           />
+          <p className="error-inputs">{errors?.password?.message}</p>
         </div>
         <div className="form-login__button">
           <Button

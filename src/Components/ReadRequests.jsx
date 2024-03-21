@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { ModalContext } from "./context/modal-context";
 import { readRequest, realTimeData } from "../apiTable";
+import { FaSpinner } from "react-icons/fa";
 import Card from "./Card";
 
 export default function ReadRequests({ currentPage }) {
@@ -60,17 +61,22 @@ export default function ReadRequests({ currentPage }) {
 
   return (
     <div className="content-cards">
-      {userRequest.map((value) => {
-        if (value.userName === undefined) return;
-        return (
-          <Card
-            key={value.id}
-            title="Vacation"
-            curRequest={value}
-            onClick={() => clickView(currentPage, value.id)}
-          />
-        );
-      })}
+      {/* <FaSpinner className="spinner" /> */}
+      {userRequest.length > 0 ? (
+        userRequest.map((value) => {
+          if (value.userName === undefined) return;
+          return (
+            <Card
+              key={value.id}
+              title="Vacation"
+              curRequest={value}
+              onClick={() => clickView(currentPage, value.id)}
+            />
+          );
+        })
+      ) : (
+        <p className="no-requests">No request yet...</p>
+      )}
     </div>
   );
 }

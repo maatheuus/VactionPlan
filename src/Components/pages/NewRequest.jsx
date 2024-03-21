@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { newRequest } from "../../apiTable";
-import { Toaster } from "react-hot-toast";
 import { handleErrorsMessages } from "../../toastApi";
 
 import Button from "../Button";
@@ -53,7 +52,6 @@ function NewRequest() {
   return (
     <>
       <section id="employee">
-        <Toaster position="top-center" reverseOrder={false} />
         <div className="screen-employee">
           <h1 className="screen-employee__title">Solicitação de férias</h1>
 

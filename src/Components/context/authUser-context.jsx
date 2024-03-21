@@ -1,5 +1,7 @@
 import { useReducer, createContext } from "react";
+
 import supabase from "../../supabase";
+import { handleErrorsMessages, handleSuccessMessages } from "../../toastApi";
 
 function authDispatch(state, action) {
   if (action.type === "LOGIN" && action.whoWasLogin === "approve") {
@@ -48,17 +50,23 @@ export default function AuthProvider({ children }) {
   });
 
   async function handleLoginUser(email, password, whoWasLogin) {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error, data } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
-    if (error?.status === 400) console.log(error);
+    if (error) {
+      handleErrorsMessages(error.message);
+      throw new Error(error.message);
+    }
+    handleSuccessMessages("Successfully logged in");
 
     dispatch({
       type: "LOGIN",
       whoWasLogin: whoWasLogin,
     });
+
+    return data;
   }
 
   async function handleSingUp(email, password, user) {
@@ -72,12 +80,18 @@ export default function AuthProvider({ children }) {
       },
     });
 
+    if (error) {
+      handleErrorsMessages(error.message);
+      throw new Error(error.message);
+    }
+    handleSuccessMessages("Successfully registered");
+
     dispatch({
       type: "SING_UP",
       user: data.user.user_metadata.user_name,
     });
 
-    if (error?.status === 400) return;
+    return data;
   }
   function handleLogout() {
     dispatch({

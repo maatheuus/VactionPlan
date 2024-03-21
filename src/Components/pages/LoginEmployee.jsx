@@ -12,7 +12,11 @@ function LoginEmployee() {
   const { isAuthenticated, login } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     login(data.email, data.password, "employee");
@@ -35,13 +39,28 @@ function LoginEmployee() {
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <label className="form-login__input--name">Your Email</label>
-          <input type="email" {...register("email", { required: true })} />
+          <input
+            type="email"
+            {...register("email", {
+              required: {
+                value: true,
+                message: "Please enter your email address",
+              },
+            })}
+          />
+          <p className="error-inputs">{errors?.email?.message}</p>
 
           <label className="form-login__input--password">Your Password</label>
           <input
             type="password"
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Please enter your password",
+              },
+            })}
           />
+          <p className="error-inputs">{errors?.password?.message}</p>
         </div>
 
         <div className="form-login__button ">

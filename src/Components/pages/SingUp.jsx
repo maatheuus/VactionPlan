@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa";
 
-import validator from "validator";
 import { AuthContext } from "../context/authUser-context";
 import Button from "../Button";
 import Login from "../Login";
@@ -16,11 +15,16 @@ function SingUp() {
     if (isAuthenticated) navigate("/requests", { replace: true });
   }, [isAuthenticated, navigate]);
 
-  const { register, handleSubmit, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const whatPassword = watch("password");
 
   const onSubmit = (data) => {
-    singUp(data.email, data.password, data.name);
+    singUp(data.email, data.password);
   };
 
   return (
@@ -32,23 +36,37 @@ function SingUp() {
 
       <form className="form-login__singUp login">
         <div className="form-login__input">
-          <label className="form-login__input--name">Name</label>
-          <input type="text" {...register("name", { required: true })} />
-
-          <label className="form-login__input--name">Email</label>
+          <label className="form-login__input--name">Email address</label>
           <input
             type="email"
             {...register("email", {
-              required: true,
-              validate: (value) => validator.isEmail(value),
+              required: {
+                value: true,
+                message: "Please enter a valid email address",
+              },
+              validate: (email) => {
+                if (!email.includes("@") || !email.includes(".com"))
+                  return "Missing @ or .com in the email address";
+              },
             })}
           />
+          <p className="error-inputs">{errors?.email?.message}</p>
 
           <label className="form-login__input--password">Password</label>
           <input
             type="password"
-            {...register("password", { required: true, minLength: 6 })}
+            {...register("password", {
+              required: {
+                value: true,
+                message: "Please enter a valid password",
+              },
+              minLength: {
+                value: 6,
+                message: "Please enter a password with at least 6 characters",
+              },
+            })}
           />
+          <p className="error-inputs">{errors?.password?.message}</p>
 
           <label className="form-login__input--password">
             Confirm Password
@@ -57,12 +75,13 @@ function SingUp() {
             type="password"
             {...register("confirm_password", {
               required: true,
-              validate: (value) => {
-                if (value === whatPassword) return;
-                else throw new Error("Invalid password");
+              validate: (password) => {
+                if (password !== whatPassword)
+                  return "The password does not match";
               },
             })}
           />
+          <p className="error-inputs">{errors?.confirm_password?.message}</p>
         </div>
         <div className="form-login__button">
           <Button
