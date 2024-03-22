@@ -12,7 +12,7 @@ function Card({ title, curRequest, onClick }) {
 
   const viewApprove = viewSelected === curRequest.id && page === "approve";
   const viewRequest = viewSelected === curRequest.id && page === "request";
-  const hidden = "hidden";
+  const modalIsHidden = "hidden";
 
   return (
     <div className="card">
@@ -62,7 +62,7 @@ function Card({ title, curRequest, onClick }) {
       {viewApprove && (
         <ModalApprove
           key={curRequest.id}
-          isHidden={isHidden ? hidden : ""}
+          isHidden={isHidden ? modalIsHidden : ""}
           curModal={curRequest}
           onClick={() => hiddenModal("hidden")}
         />
@@ -70,7 +70,7 @@ function Card({ title, curRequest, onClick }) {
       {viewRequest && (
         <ModalRequest
           key={curRequest.id}
-          isHidden={isHidden ? hidden : ""}
+          isHidden={isHidden ? modalIsHidden : ""}
           curModal={curRequest}
           onClick={() => hiddenModal("hidden")}
         />

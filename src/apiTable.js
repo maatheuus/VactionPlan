@@ -1,7 +1,18 @@
 import supabase from "./supabase";
 
-export async function readRequest() {
-  const { data, error } = await supabase.from("Requests").select();
+export async function readRequest(eqFilter = false, filterRequests) {
+  const { data, error } = await supabase.from("Requests").select("*");
+
+  if (eqFilter) {
+    const { data, error } = await supabase
+      .from("Requests")
+      .select("*")
+      .eq("statusRequest", `${filterRequests}`);
+
+    if (error) console.log("could not read request");
+
+    return data;
+  }
 
   if (error) console.log("could not read request");
 
