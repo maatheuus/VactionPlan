@@ -264,3 +264,11 @@ a {
   text-align: center;
   width: 100%;
 }
+
+.content-header__button {
+  & span {
+    color: white;
+    font-family: "Lazelar", system-ui;
+    font-weight: 700;
+  }
+}

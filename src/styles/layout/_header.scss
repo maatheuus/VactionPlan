@@ -22,25 +22,50 @@
     }
   }
 
+  .buttons-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__button {
-    margin-top: 2rem;
     margin-right: 1rem;
 
-    &--back {
-      display: block;
-      margin: 0 auto;
+    &--back,
+    &--pdf {
+      display: flex;
+      align-items: center;
 
-      background-color: black;
       border: none;
-      width: 5rem;
-      border-radius: 3rem;
-      margin-bottom: 1rem;
-
+      padding: 0.6rem;
+      border-radius: 0.8rem;
       cursor: pointer;
+    }
+
+    &--back {
+      background-color: black;
 
       & .arrow {
-        fill: rgb(255, 255, 255);
+        margin: 0 0.4rem;
+        fill: white;
+
+        width: 1.5rem;
+        height: 1.5rem;
       }
+    }
+
+    &--pdf {
+      background-color: rgb(255, 0, 0);
+    }
+    & .pdf {
+      margin: 0 0.4rem;
+      fill: white;
+
+      width: 2rem;
+      height: 2rem;
+    }
+    & span {
+      color: white;
     }
   }
 }
