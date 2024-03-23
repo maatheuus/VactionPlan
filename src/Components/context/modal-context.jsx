@@ -24,6 +24,12 @@ function modalDispatch(state, action) {
       isHidden: !state.isHidden,
     };
   }
+  if (action.type === "HIDDEN_MENU" && action.page === "hidden") {
+    return {
+      ...state,
+      menuIsHidden: !state.menuIsHidden,
+    };
+  }
   return state;
 }
 
@@ -33,11 +39,13 @@ export const ModalContext = createContext({
   isHidden: Boolean,
   clickView: () => {},
   hiddenModal: () => {},
+  hiddenMenu: () => {},
 });
 
 export default function ModalProvider({ children }) {
   const [state, dispatch] = useReducer(modalDispatch, {
     isHidden: true,
+    menuIsHidden: true,
     view: null,
     page: null,
   });
@@ -56,13 +64,21 @@ export default function ModalProvider({ children }) {
       page: e,
     });
   }
+  function handleHiddenMenu(e) {
+    dispatch({
+      type: "HIDDEN_MENU",
+      page: e,
+    });
+  }
 
   const ctxValue = {
     isHidden: state.isHidden,
+    menuIsHidden: state.menuIsHidden,
     page: state.page,
     viewSelected: state.view,
     clickView: handleClickView,
     hiddenModal: handleHiddenModal,
+    hiddenMenu: handleHiddenMenu,
   };
 
   return (

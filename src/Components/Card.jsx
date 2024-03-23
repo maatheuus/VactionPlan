@@ -17,7 +17,7 @@ function Card({ title, curRequest, onClick }) {
   return (
     <div className="card">
       <div className="card__information">
-        <h1 className="card__title">{title}</h1>
+        <h1 className="card__title maven-pro">{title}</h1>
         <p className="card__username">
           Name:
           <span className="card__username--description">
@@ -45,7 +45,7 @@ function Card({ title, curRequest, onClick }) {
           </p>
         </div>
 
-        <div className="card__information-bottom">
+        <div className="card__information-bottom  maven-pro">
           <div className="card__information-bottom--view">
             <Button className="button-all" onClick={onClick}>
               <FaEye className="card__information-bottom--icon" />

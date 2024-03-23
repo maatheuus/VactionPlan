@@ -4,9 +4,12 @@ import { newRequest } from "../../apiTable";
 import { handleErrorsMessages } from "../../toastApi";
 
 import Button from "../Button";
+import { useEffect, useState } from "react";
 
 function NewRequest() {
   const navigate = useNavigate();
+  const [submitIsTrue, setSubmitIsTrue] = useState(false);
+  const [requestToSend, setRequestToSend] = useState();
 
   const {
     register,
@@ -44,78 +47,105 @@ function NewRequest() {
     )
       handleErrorsMessages("The date must be in the same year");
     else {
-      newRequest(data);
-      navigate("/requests");
+      setSubmitIsTrue(true);
+      setRequestToSend(data);
     }
   };
+
+  useEffect(() => {
+    if (submitIsTrue) {
+      navigate("/requests");
+      newRequest(requestToSend);
+    }
+  }, [submitIsTrue, requestToSend, navigate]);
 
   return (
     <>
       <section id="employee">
         <div className="screen-employee">
-          <h1 className="screen-employee__title">Solicitação de férias</h1>
+          <h1 className="screen-employee__title lalezar-regular">
+            Solicitação de férias
+          </h1>
 
           <div className="screen-employee__inputs input">
             <div className="screen-employee__inputs--col1">
-              <label htmlFor="">User name</label>
-              <input
-                type="text"
-                {...register("userName", {
-                  required: {
-                    value: true,
-                    message: "User name needs to be provided",
-                  },
-                })}
-              />
-              <p className="error-inputs">{errors?.userName?.message}</p>
+              <div className="form-group lalezar-regular">
+                <label htmlFor="name-newRequest">User name</label>
+                <input
+                  id="name-newRequest"
+                  type="text"
+                  {...register("userName", {
+                    required: {
+                      value: true,
+                      message: "User name needs to be provided",
+                    },
+                  })}
+                />
+                <p className="error-inputs">{errors?.userName?.message}</p>
+              </div>
 
-              <label htmlFor="">Location</label>
-              <input
-                type="text"
-                {...register("location", {
-                  required: {
-                    value: true,
-                    message: "Location needs to be provided",
-                  },
-                })}
-              />
-              <p className="error-inputs">{errors?.location?.message}</p>
+              <div className="form-group lalezar-regular">
+                <label htmlFor="location-newRequest">Location</label>
+                <input
+                  id="location-newRequest"
+                  type="text"
+                  {...register("location", {
+                    required: {
+                      value: true,
+                      message: "Location needs to be provided",
+                    },
+                  })}
+                />
+                <p className="error-inputs">{errors?.location?.message}</p>
+              </div>
 
-              <label htmlFor="">Observation</label>
-              <textarea type="text" {...register("observation")} />
+              <div className="form-group lalezar-regular">
+                <label htmlFor="observation-newRequest">Observation</label>
+                <textarea
+                  id="observation-newRequest"
+                  type="text"
+                  {...register("observation")}
+                />
+              </div>
             </div>
 
             <div className="screen-employee__inputs--col2">
-              <label>Date start</label>
-              <input
-                type="date"
-                {...register("startDate", {
-                  valueAsDate: true,
-                  required: {
-                    value: true,
-                    message: "Date needs to be provided",
-                  },
-                })}
-              />
-              <p className="error-inputs">{errors?.startDate?.message}</p>
+              <div className="form-group lalezar-regular">
+                <label htmlFor="dateStart-newRequest">Date start</label>
+                <input
+                  id="dateStart-newRequest"
+                  type="date"
+                  {...register("startDate", {
+                    valueAsDate: true,
+                    required: {
+                      value: true,
+                      message: "Date needs to be provided",
+                    },
+                  })}
+                />
+                <p className="error-inputs">{errors?.startDate?.message}</p>
+              </div>
 
-              <label htmlFor="">Date end</label>
-              <input
-                type="date"
-                {...register("endDate", {
-                  valueAsDate: true,
-                  required: {
-                    value: true,
-                    message: "Date needs to be provided",
-                  },
-                })}
-              />
-              <p className="error-inputs">{errors?.endDate?.message}</p>
+              <div className="form-group lalezar-regular">
+                <label htmlFor="dateEnd-newRequest">Date end</label>
+                <input
+                  id="dateEnd-newRequest"
+                  type="date"
+                  {...register("endDate", {
+                    valueAsDate: true,
+                    required: {
+                      value: true,
+                      message: "Date needs to be provided",
+                    },
+                  })}
+                />
+                <p className="error-inputs">{errors?.endDate?.message}</p>
+              </div>
 
               <div className="screen-employee__button">
                 <Button
                   onClick={() => handleSubmit(onSubmit)()}
-                  className="screen-employee__button--send"
+                  className="screen-employee__button--send lalezar-regular"
                 >
                   Enviar solicitação
                 </Button>

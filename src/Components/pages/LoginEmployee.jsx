@@ -18,13 +18,13 @@ function LoginEmployee() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    login(data.email, data.password, "employee");
-  };
-
   useEffect(() => {
     if (isAuthenticated) navigate("/requests", { replace: true });
   }, [isAuthenticated, navigate]);
+
+  const onSubmit = (data) => {
+    login(data.email, data.password, "employee");
+  };
 
   return (
     <Login>
@@ -38,29 +38,45 @@ function LoginEmployee() {
       <form className="form-login login">
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
-          <label className="form-login__input--name">Your Email</label>
-          <input
-            type="email"
-            {...register("email", {
-              required: {
-                value: true,
-                message: "Please enter your email address",
-              },
-            })}
-          />
-          <p className="error-inputs">{errors?.email?.message}</p>
+          <div className="form-group">
+            <label
+              htmlFor="email-employee"
+              className="form-login__input--name lalezar-regular"
+            >
+              Your Email
+            </label>
+            <input
+              id="email-employee"
+              type="email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Please enter your email address",
+                },
+              })}
+            />
+            <p className="error-inputs">{errors?.email?.message}</p>
+          </div>
 
-          <label className="form-login__input--password">Your Password</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: {
-                value: true,
-                message: "Please enter your password",
-              },
-            })}
-          />
-          <p className="error-inputs">{errors?.password?.message}</p>
+          <div className="form-group">
+            <label
+              htmlFor="password-employee"
+              className="form-login__input--password lalezar-regular"
+            >
+              Your Password
+            </label>
+            <input
+              id="password-employee"
+              type="password"
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "Please enter your password",
+                },
+              })}
+            />
+            <p className="error-inputs">{errors?.password?.message}</p>
+          </div>
         </div>
 
         <div className="form-login__button ">

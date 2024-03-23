@@ -10,10 +10,10 @@ function HomePage() {
       <div className="logo-login">
         <img src={image} alt="logo of the page" />
       </div>
+      <h1 className="chose-login__title lalezar-regular">
+        Chose one to Sing in
+      </h1>
       <div className="chose-login login">
-        <h1 className="chose-login__title login__title">
-          Chose one to Sing in
-        </h1>
         <div className="chose-login__button login__button">
           <Link to="/loginApprove">
             <Button className="chose-login__button--aprove btn-primary">

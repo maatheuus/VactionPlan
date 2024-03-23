@@ -1,9 +1,10 @@
-@forward "./pages/home.scss";
-@forward "./pages/loginApprove.scss";
+@forward "./pages/home";
 
-@forward "./base/typography.scss";
+@forward "./base/typography";
 
-@forward "./abstract/mixins.scss";
+@forward "./abstract/mixins";
+@forward "./abstract/variables";
+@forward "./abstract/keyframes";
 
 @forward "./components/login.scss";
 @forward "./components/button.scss";
@@ -11,6 +12,8 @@
 @forward "./components/card.scss";
 @forward "./components/input.scss";
 @forward "./components/modal.scss";
+@forward "./components/form-group";
+@forward "./components/menu";
 
 @forward "./layout/header.scss";
 @forward "./layout/section.scss";

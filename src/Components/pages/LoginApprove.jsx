@@ -22,12 +22,13 @@ function LoginApprove() {
   const emailApprove = "boss@example.com";
   const passwordApprove = "boss1234";
 
-  const onSubmit = (data) => {
-    login(data.email, data.password, "approve");
-  };
   useEffect(() => {
     if (isAuthenticated) navigate("/approve", { replace: true });
   }, [isAuthenticated, navigate]);
+
+  const onSubmit = (data) => {
+    login(data.email, data.password, "approve");
+  };
 
   return (
     <Login>
@@ -41,38 +42,53 @@ function LoginApprove() {
       <form className="form-login login">
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
-          <label className="form-login__input--name">Your email</label>
-          <input
-            type="email"
-            {...register("email", {
-              required: {
-                value: true,
-                message: "Please enter your email address",
-              },
-              validate: (email) => {
-                if (email !== emailApprove)
-                  return "Provided email are incorrect";
-              },
-            })}
-          />
+          <div className="form-group">
+            <label
+              htmlFor="name-approve"
+              className="form-login__input--name lalezar-regular"
+            >
+              Your email
+            </label>
+            <input
+              id="name-approve"
+              type="email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "Please enter your email address",
+                },
+                validate: (email) => {
+                  if (email !== emailApprove)
+                    return "Provided email are incorrect";
+                },
+              })}
+            />
+            <p className="error-inputs">{errors?.email?.message}</p>
+          </div>
 
-          <p className="error-inputs">{errors?.email?.message}</p>
-
-          <label className="form-login__input--password">Your password</label>
-          <input
-            type="password"
-            {...register("password", {
-              required: {
-                value: true,
-                message: "Please enter your password",
-              },
-              validate: (password) => {
-                if (password !== passwordApprove)
-                  return "Provided password are incorrect";
-              },
-            })}
-          />
-          <p className="error-inputs">{errors?.password?.message}</p>
+          <div className="form-group">
+            <label
+              htmlFor="password-approve"
+              className="form-login__input--password lalezar-regular"
+            >
+              Your password
+            </label>
+            <input
+              id="password-approve"
+              type="password"
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "Please enter your password",
+                },
+                validate: (password) => {
+                  if (password !== passwordApprove)
+                    return "Provided password are incorrect";
+                },
+              })}
+            />
+            <p className="error-inputs">{errors?.password?.message}</p>
+          </div>
         </div>
         <div className="form-login__button">
           <Button

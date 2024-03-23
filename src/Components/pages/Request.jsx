@@ -18,13 +18,16 @@ function Request() {
       <section className="request">
         <Outlet />
         <div className="request__content">
-          <h1 className="request__title">Solicitações</h1>
+          <h1 className="request__title lalezar-regular ">Solicitações</h1>
           <div className="request__cards">
             <ReadRequests currentPage="request" />
           </div>
         </div>
         <div className="request__button">
-          <Button className="request__button--new" onClick={handleNewRequest}>
+          <Button
+            className="request__button--new lalezar-regular "
+            onClick={handleNewRequest}
+          >
             Nova solicitação
           </Button>
         </div>

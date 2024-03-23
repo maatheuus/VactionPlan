@@ -1,7 +1,8 @@
+import { useContext } from "react";
+import { FilterContext } from "../context/filterRequests-context";
+
 import ReadRequests from "../ReadRequests";
 import Header from "../Header";
-import { FilterContext } from "../context/filterRequests-context";
-import { useContext } from "react";
 
 function ScreenApprove() {
   const { showCardStatus } = useContext(FilterContext);
@@ -10,7 +11,7 @@ function ScreenApprove() {
       <Header />
       <section id="approve">
         <div className="screen-approve">
-          <div className="screen-approve__button">
+          <div className="screen-approve__button oxygen-regular">
             <span className="status denied"></span>
             <span className="status approve"></span>
             <span className="status pendent"></span>

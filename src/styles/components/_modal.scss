@@ -1,10 +1,16 @@
+@use "../abstract/mixins.scss" as res;
+@use "../abstract/keyframes.scss";
+
 .modal {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #9c9c9ca8;
+  background-color: #060606a8;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   display: block;
 
   &__content {
@@ -63,6 +69,10 @@
         background: #d62323;
       }
     }
+
+    @include res.screen(phone) {
+      justify-content: center;
+    }
   }
 
   &__content-button {
@@ -75,7 +85,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .error-inputs {
@@ -105,15 +115,3 @@
   background-color: rgb(255, 166, 0);
   animation: flashing 2s infinite;
 }
-
-// @keyframes flashing {
-//   0% {
-//     opacity: 1;
-//   }
-//   50% {
-//     opacity: 0.5;
-//   }
-//   100% {
-//     opacity: 1;
-//   }
-// }

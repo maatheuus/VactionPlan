@@ -1,16 +1,16 @@
 .content-cards {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .card {
-  background-color: #8383832a;
+  background-color: #5252522a;
   width: 22rem;
   padding: 1.5rem;
-  margin-left: 2rem;
 
-  border-radius: 1rem 2.5rem 1rem 2.5rem;
+  border-radius: 1.5rem 0 1.5rem 0;
 
   &__information-bottom {
     display: flex;
@@ -18,7 +18,8 @@
     justify-content: space-around;
     margin-top: 1rem;
 
-    &--view {
+    &--view,
+    &--status {
       display: flex;
       align-items: center;
 

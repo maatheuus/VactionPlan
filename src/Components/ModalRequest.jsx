@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ModalContext } from "./context/modal-context";
 import { deleteRequest, updateRequest } from "../apiTable";
@@ -6,8 +6,13 @@ import { deleteRequest, updateRequest } from "../apiTable";
 import Button from "./Button";
 
 function ModalRequest({ isHidden = true, onClick, curModal }) {
-  const { hiddenModal } = useContext(ModalContext);
+  const [updateRequests, setUpdateRequest] = useState();
+  const [updateIsTrue, setUpdateIsTrue] = useState(false);
 
+  const [deleteCurRequest, setDeleteCurRequest] = useState();
+  const [deleteIsTrue, setDeleteIsTrue] = useState(false);
+
+  const { hiddenModal } = useContext(ModalContext);
   const { userName, location, startDate, endDate, observation, id } = curModal;
 
   const { register, handleSubmit } = useForm({
@@ -23,12 +28,24 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
 
   const onSubmit = (data) => {
     hiddenModal("hidden");
-    return updateRequest(data, data.id);
+    setUpdateRequest(data, data.id);
+    setUpdateIsTrue(true);
   };
   function handleDeleteRequest(id) {
     hiddenModal("hidden");
-    return deleteRequest(id);
+    setDeleteIsTrue(true);
+    setDeleteCurRequest(id);
   }
+
+  // Verify if the update is true, then update the request data
+  useEffect(() => {
+    if (updateIsTrue) updateRequest(updateRequests, updateRequests.id);
+  }, [updateRequests, updateIsTrue]);
+
+  // Verify if the cur request has delete, then update the requests
+  useEffect(() => {
+    if (deleteIsTrue) deleteRequest(deleteCurRequest);
+  }, [deleteIsTrue, deleteCurRequest]);
 
   return (
     <div className={`modal ${isHidden}`}>
@@ -36,7 +53,7 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
         <h2 className="modal__title">Vacation</h2>
         <div className="modal__content-information">
           <div className="modal__name">
-            <p className="modal__name--text">
+            <p className="modal__name--text maven-pro">
               UserName:{" "}
               <span className="modal__name--span input">
                 <input
@@ -49,7 +66,7 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
             </p>
           </div>
           <div className="modal__location">
-            <p className="modal__location--text">
+            <p className="modal__location--text maven-pro">
               Location:{" "}
               <span className="modal__location--span input">
                 <input
@@ -63,7 +80,7 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
           </div>
 
           <div className="modal__date">
-            <p className="modal__date--text">
+            <p className="modal__date--text maven-pro">
               Date requested:{" "}
               <span className="modal__date--start input">
                 start:{" "}
@@ -86,7 +103,7 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
             </p>
           </div>
           <div className="modal__observation">
-            <p className="modal__observation--text">
+            <p className="modal__observation--text maven-pro">
               Observation:{" "}
               <span className="modal__observation--span input">
                 <input
@@ -99,7 +116,7 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
             </p>
           </div>
         </div>
-        <div className="modal__content-buttons button-modal">
+        <div className="modal__content-buttons button-modal maven-pro">
           <div className="modal__content-button ">
             <Button
               onClick={onClick}
