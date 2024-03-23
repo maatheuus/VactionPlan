@@ -5,7 +5,7 @@ import { AuthContext } from "./context/authUser-context";
 import { FaFilePdf } from "react-icons/fa";
 import { FilterContext } from "./context/filterRequests-context";
 
-import generatePdf from "../generatePdf";
+import generatePdfUsers from "../generatePdf";
 import image from "../assets/images/buzzel-logo.png";
 import ListButtons from "./ListButtons";
 import Button from "./Button";
@@ -13,6 +13,8 @@ import Menu from "./Menu";
 
 function Header() {
   const [isLogout, setIsLogout] = useState(false);
+  const [makePdf, setMakePdf] = useState(false);
+
   const navigate = useNavigate();
   const { logout, whoWasLogin } = useContext(AuthContext);
   const { requests } = useContext(FilterContext);
@@ -20,6 +22,14 @@ function Header() {
   function handleLogout() {
     setIsLogout(true);
   }
+
+  function handleMakeThePdf() {
+    setMakePdf(true);
+  }
+
+  useEffect(() => {
+    if (makePdf) generatePdfUsers(requests);
+  }, [makePdf, requests]);
 
   useEffect(() => {
     if (isLogout) {
@@ -49,7 +59,7 @@ function Header() {
             <div className="content-header__button">
               <Button
                 className="content-header__button--pdf"
-                onClick={() => generatePdf(requests)}
+                onClick={handleMakeThePdf}
               >
                 <FaFilePdf className="pdf" />
                 <span>Make the pdf</span>

@@ -7,12 +7,13 @@ import { FaArrowLeft, FaBars, FaFilePdf } from "react-icons/fa";
 
 import ListButtons from "./ListButtons";
 import Button from "./Button";
-import generatePdf from "../generatePdf";
+import generatePdfUsers from "../generatePdf";
 
 function Menu() {
   const navigate = useNavigate();
 
   const [isLogout, setIsLogout] = useState(false);
+  const [makePdf, setMakePdf] = useState(false);
   const { logout, whoWasLogin } = useContext(AuthContext);
 
   const { requests } = useContext(FilterContext);
@@ -21,6 +22,13 @@ function Menu() {
   function handleLogout() {
     setIsLogout(true);
   }
+  function handleMakeThePdf() {
+    setMakePdf(true);
+  }
+
+  useEffect(() => {
+    if (makePdf) generatePdfUsers(requests);
+  }, [makePdf, requests]);
 
   useEffect(() => {
     if (isLogout) {
@@ -49,7 +57,7 @@ function Menu() {
                 <div className="content-header__button">
                   <Button
                     className="content-header__button--pdf"
-                    onClick={() => generatePdf(requests)}
+                    onClick={handleMakeThePdf}
                   >
                     <FaFilePdf className="pdf" />
                     <span>Make the pdf</span>
