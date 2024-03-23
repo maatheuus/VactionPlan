@@ -1,5 +1,5 @@
 import * as pdfFonts from "pdfmake/build/vfs_fonts.js";
-import pdfMake from "pdfmake/build/pdfmake";
+import pdfMake from "pdfmake";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const generatePdf = function (users) {
