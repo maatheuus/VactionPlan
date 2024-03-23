@@ -25,17 +25,26 @@ function filterRequests(state, action) {
       card: action.curCard,
     };
   }
+  if (action.type === "ALL_REQUESTS") {
+    return {
+      ...state,
+      allRequests: action.requests,
+    };
+  }
   return state;
 }
 
 export const FilterContext = createContext({
   showCardStatus: "",
+  requests: "",
   displayedCardStatus: () => {},
+  allUserRequests: () => {},
 });
 
 function FilterProvider({ children }) {
   const [state, dispatch] = useReducer(filterRequests, {
     card: "",
+    allRequests: "",
   });
 
   function handleDisplayedCard(card) {
@@ -45,8 +54,17 @@ function FilterProvider({ children }) {
     });
   }
 
+  function handleAllRequests(allRequests) {
+    dispatch({
+      type: "ALL_REQUESTS",
+      requests: allRequests,
+    });
+  }
+
   const ctxValue = {
     showCardStatus: state.card,
+    requests: state.allRequests,
+    allUserRequests: handleAllRequests,
     displayedCardStatus: handleDisplayedCard,
   };
   return (

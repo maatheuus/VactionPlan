@@ -1,7 +1,10 @@
 import ReadRequests from "../ReadRequests";
 import Header from "../Header";
+import { FilterContext } from "../context/filterRequests-context";
+import { useContext } from "react";
 
 function ScreenApprove() {
+  const { showCardStatus } = useContext(FilterContext);
   return (
     <>
       <Header />
@@ -11,7 +14,7 @@ function ScreenApprove() {
             <span className="status denied"></span>
             <span className="status approve"></span>
             <span className="status pendent"></span>
-            All
+            {showCardStatus}
           </div>
           <ReadRequests currentPage="approve" />
         </div>

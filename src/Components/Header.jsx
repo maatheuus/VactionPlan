@@ -8,10 +8,12 @@ import image from "../assets/images/buzzel-logo.png";
 import ListNav from "./ListNav";
 import Button from "./Button";
 import generatePdf from "../generatePdf";
+import { FilterContext } from "./context/filterRequests-context";
 
 function Header() {
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
+  const { requests } = useContext(FilterContext);
 
   function handleLogout() {
     logout();
@@ -34,7 +36,7 @@ function Header() {
           <div className="content-header__button">
             <Button
               className="content-header__button--pdf"
-              onClick={generatePdf}
+              onClick={() => generatePdf(requests)}
             >
               <FaFilePdf className="pdf" />
               <span>Make the pdf</span>

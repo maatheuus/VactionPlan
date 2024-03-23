@@ -5,10 +5,9 @@ import { FaSpinner } from "react-icons/fa";
 import { FilterContext } from "./context/filterRequests-context";
 
 import Card from "./Card";
-
 export default function ReadRequests({ currentPage }) {
   const { clickView } = useContext(ModalContext);
-  const { showCardStatus } = useContext(FilterContext);
+  const { showCardStatus, allUserRequests } = useContext(FilterContext);
 
   const [userRequest, setUserRequest] = useState([]);
   const [removeSpinner, setRemoveSpinner] = useState(false);
@@ -17,26 +16,26 @@ export default function ReadRequests({ currentPage }) {
   useEffect(() => {
     readRequest().then((data) => {
       setRemoveSpinner(true);
+      allUserRequests(data);
       setUserRequest(data);
     });
+
     if (showCardStatus === "all") return;
 
     if (showCardStatus === "approve") {
       readRequest(true, "approve").then((data) => {
         setUserRequest(data);
-        setRemoveSpinner(true);
       });
     }
     if (showCardStatus === "denied") {
       readRequest(true, "denied").then((data) => {
         setUserRequest(data);
-        setRemoveSpinner(true);
       });
     }
     if (showCardStatus === "pending") {
+      setRemoveSpinner(true);
       readRequest(true, "pendent").then((data) => {
         setUserRequest(data);
-        setRemoveSpinner(true);
       });
     }
   }, [showCardStatus]);
@@ -44,7 +43,6 @@ export default function ReadRequests({ currentPage }) {
   // RE-RENDER UI when user deleted a request
   useEffect(() => {
     realTimeData("DELETE", (payload) => {
-      setRemoveSpinner(true);
       const { old: dataDeleted } = payload;
 
       const deleteRequest = userRequest.map((userDeletedItem) => {
@@ -60,7 +58,6 @@ export default function ReadRequests({ currentPage }) {
   // RE-RENDER UI when user make a new request
   useEffect(() => {
     realTimeData("INSERT", (payload) => {
-      setRemoveSpinner(true);
       const { new: newData } = payload;
 
       const checkValue = userRequest.findIndex(
