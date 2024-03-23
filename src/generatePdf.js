@@ -1,7 +1,7 @@
 import pdfMake from "pdfmake/build/pdfmake.js";
 import pdfFonts from "pdfmake/build/vfs_fonts.js";
 
-function generatePdf(users) {
+export const generatePdf = function (users) {
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
   const reportTitle = [
@@ -115,6 +115,4 @@ function generatePdf(users) {
   };
 
   pdfMake.createPdf(docDefinitions).download();
-}
-
-export default generatePdf;
+};

@@ -5,6 +5,7 @@ import { FaSpinner } from "react-icons/fa";
 import { FilterContext } from "./context/filterRequests-context";
 
 import Card from "./Card";
+
 export default function ReadRequests({ currentPage }) {
   const { clickView } = useContext(ModalContext);
   const { showCardStatus, allUserRequests } = useContext(FilterContext);

@@ -6,6 +6,7 @@ import Button from "./Button";
 function ModalApprove({ isHidden = true, onClick, curModal }) {
   const [approveRequest, setApproveRequest] = useState(false);
   const [denyRequest, setDenyRequest] = useState(false);
+
   const { hiddenModal, viewSelected } = useContext(ModalContext);
 
   const { userName, location, startDate, endDate, observation, id } = curModal;
