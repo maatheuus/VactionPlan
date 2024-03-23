@@ -7,7 +7,7 @@ import { FaArrowLeft, FaBars, FaFilePdf } from "react-icons/fa";
 
 import ListButtons from "./ListButtons";
 import Button from "./Button";
-import { generatePdf } from "../generatePdf";
+import generatePdf from "../generatePdf";
 
 function Menu() {
   const navigate = useNavigate();
