@@ -27,4 +27,4 @@ dist-ssr
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /.tmp
-/pdfmake
+.tmp
