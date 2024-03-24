@@ -63,3 +63,11 @@ The stacks I used in this project were:
 - React.Js - Framework
 - Supabase - For Authentication and stored data
 - Sass - Stylesheet
+
+# 📌 Version
+
+I used the Git for version control. To see the latest version, check out here https://github.com/maatheuus/VactionPlan/commits/master/
+
+# 📄 License
+
+This project is licensed under the MIT License.
