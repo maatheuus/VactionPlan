@@ -43,7 +43,7 @@ function Header() {
       <Menu />
       <div className="content-header">
         <div className="content-header__logo">
-          <img src={image} alt="logo header" />
+          <img src={image} alt="logo header" width="100px" height="200px" />
         </div>
         <div className="content-header__content-buttons">
           <nav className="nav">
