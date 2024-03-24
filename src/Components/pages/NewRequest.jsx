@@ -64,7 +64,7 @@ function NewRequest() {
       <section id="employee">
         <div className="screen-employee">
           <h1 className="screen-employee__title lalezar-regular">
-            Solicitação de férias
+            Requests for vacations
           </h1>
 
           <div className="screen-employee__inputs input">
@@ -147,7 +147,7 @@ function NewRequest() {
                   onClick={() => handleSubmit(onSubmit)()}
                   className="screen-employee__button--send lalezar-regular"
                 >
-                  Enviar solicitação
+                  Send request
                 </Button>
               </div>
             </div>
