@@ -18,7 +18,7 @@ function App() {
         <AuthProvider>
           <FilterProvider>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" index element={<HomePage />} />
               <Route path="/loginApprove" element={<LoginApprove />} />
               <Route path="/loginEmployee" element={<LoginEmployee />} />
               <Route path="/singUp" element={<SingUp />} />
