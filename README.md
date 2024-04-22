@@ -40,7 +40,7 @@ You can choose to enter as an approver or employee.
 
 To enter as an approver, you must provide the email and password already defined as default for the account, as there is only one approver, follow the email and password already defined:
 
-- email: boss@gmail.com
+- email: boss@example.com
 - password: boss1234
 
 Manager, you will be able to deny or approve your employees' vacations by clicking on the view button on the card and clicking on the buttons that will appear in the current modal:
