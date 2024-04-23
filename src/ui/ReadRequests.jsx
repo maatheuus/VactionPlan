@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { ModalContext } from "./context/modal-context";
+import { ModalContext } from "../context/modal-context";
 import { readRequest, realTimeData } from "../apiTable";
 import { FaSpinner } from "react-icons/fa";
-import { FilterContext } from "./context/filterRequests-context";
+import { FilterContext } from "../context/filterRequests-context";
 
 import Card from "./Card";
 

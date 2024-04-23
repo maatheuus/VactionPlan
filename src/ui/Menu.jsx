@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "./context/modal-context";
-import { AuthContext } from "./context/authUser-context";
-import { FilterContext } from "./context/filterRequests-context";
+import { ModalContext } from "../context/modal-context";
+import { AuthContext } from "../context/authUser-context";
+import { FilterContext } from "../context/filterRequests-context";
 import { FaArrowLeft, FaBars, FaFilePdf } from "react-icons/fa";
 
 import ListButtons from "./ListButtons";

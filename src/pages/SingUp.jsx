@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
 
-import Button from "../Button";
-import Login from "../Login";
+import Button from "../ui/Button";
+import Login from "../ui/Login";
 
 function SingUp() {
   const { isAuthenticated, singUp } = useContext(AuthContext);

@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
-import { AuthContext } from "./context/authUser-context";
-import { FaFilePdf } from "react-icons/fa";
-import { FilterContext } from "./context/filterRequests-context";
+import { FaArrowLeft, FaFilePdf } from "react-icons/fa";
+import { AuthContext } from "../context/authUser-context";
+import { FilterContext } from "../context/filterRequests-context";
 
 import generatePdfUsers from "../generatePdf";
-import image from "../assets/images/buzzel-logo.png";
 import ListButtons from "./ListButtons";
 import Button from "./Button";
 import Menu from "./Menu";
@@ -43,7 +41,7 @@ function Header() {
       <Menu />
       <div className="content-header">
         <div className="content-header__logo">
-          <img src={image} alt="logo header" width="100px" height="200px" />
+          {/* <img src={image} alt="logo header" width="100px" height="200px" /> */}
         </div>
         <div className="content-header__content-buttons">
           <nav className="nav">

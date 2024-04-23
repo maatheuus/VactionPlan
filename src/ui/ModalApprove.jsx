@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { updateRequest } from "../apiTable";
-import { ModalContext } from "./context/modal-context";
+import { ModalContext } from "../context/modal-context";
 import Button from "./Button";
 
 function ModalApprove({ isHidden = true, onClick, curModal }) {

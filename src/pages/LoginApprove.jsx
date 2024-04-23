@@ -1,14 +1,13 @@
 import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { FaArrowLeft } from "react-icons/fa";
 
+import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
-import Button from "../Button";
-import Login from "../Login";
-import image from "../../assets/images/buzzel-logo.png";
+import Login from "../ui/Login";
+import Button from "../ui/Button";
 
-function LoginEmployee() {
+function LoginApprove() {
   const { isAuthenticated, login } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -18,40 +17,53 @@ function LoginEmployee() {
     formState: { errors },
   } = useForm();
 
+  const emailApprove = "boss@example.com";
+  const passwordApprove = "boss1234";
+
   useEffect(() => {
-    if (isAuthenticated) navigate("/requests", { replace: true });
+    if (isAuthenticated) navigate("/approve", { replace: true });
   }, [isAuthenticated, navigate]);
 
   const onSubmit = (data) => {
-    login(data.email, data.password, "employee");
+    login(data.email, data.password, "approve");
   };
 
   return (
     <Login>
       <Button onClick={() => navigate(-1)}>
-        <FaArrowLeft className="arrow-left" />
+        <FaArrowCircleLeft className="arrow-left" />
       </Button>
-      <div className="logo-login">
-        <img src={image} alt="logo of the page" />
-      </div>
 
+      <div className="logo-login">
+        <FaRegUserCircle
+          style={{
+            width: "6rem",
+            height: "6rem",
+          }}
+        />
+      </div>
       <form className="form-login login">
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <div className="form-group">
             <label
-              htmlFor="email-employee"
+              htmlFor="name-approve"
               className="form-login__input--name lalezar-regular"
             >
-              Your Email
+              Your email
             </label>
+
             <input
-              id="email-employee"
+              id="name-approve"
               type="email"
               {...register("email", {
                 required: {
                   value: true,
                   message: "Please enter your email address",
+                },
+                validate: (email) => {
+                  if (email !== emailApprove)
+                    return "Provided email are incorrect";
                 },
               })}
             />
@@ -60,40 +72,39 @@ function LoginEmployee() {
 
           <div className="form-group">
             <label
-              htmlFor="password-employee"
+              htmlFor="password-approve"
               className="form-login__input--password lalezar-regular"
             >
-              Your Password
+              Your password
             </label>
             <input
-              id="password-employee"
+              id="password-approve"
               type="password"
               {...register("password", {
                 required: {
                   value: true,
                   message: "Please enter your password",
                 },
+                validate: (password) => {
+                  if (password !== passwordApprove)
+                    return "Provided password are incorrect";
+                },
               })}
             />
             <p className="error-inputs">{errors?.password?.message}</p>
           </div>
         </div>
-
-        <div className="form-login__button ">
+        <div className="form-login__button">
           <Button
-            className="form-submit btn-primary"
             onClick={() => handleSubmit(onSubmit)()}
+            className="form-submit btn-primary"
           >
             Login
           </Button>
-          ;
-          <Link to="/singUp">
-            <Button className="form-submit btn-primary">Sing Up</Button>
-          </Link>
         </div>
       </form>
     </Login>
   );
 }
 
-export default LoginEmployee;
+export default LoginApprove;

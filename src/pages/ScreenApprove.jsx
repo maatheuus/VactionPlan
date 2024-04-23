@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { FilterContext } from "../context/filterRequests-context";
 
-import ReadRequests from "../ReadRequests";
-import Header from "../Header";
+import ReadRequests from "../ui/ReadRequests";
+import Header from "../ui/Header";
 
 function ScreenApprove() {
   const { showCardStatus } = useContext(FilterContext);

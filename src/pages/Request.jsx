@@ -1,8 +1,8 @@
 import { useNavigate, Outlet } from "react-router-dom";
 
-import Header from "../Header";
-import Button from "../Button";
-import ReadRequests from "../ReadRequests";
+import Header from "../ui/Header";
+import Button from "../ui/Button";
+import ReadRequests from "../ui/ReadRequests";
 
 function Request() {
   const navigate = useNavigate();

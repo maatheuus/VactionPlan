@@ -1,36 +1,68 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import ModalProvider from "./Components/context/modal-context";
-import AuthProvider from "./Components/context/authUser-context";
-import FilterProvider from "./Components/context/filterRequests-context";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import HomePage from "./Components/pages/HomePage";
-import LoginApprove from "./Components/pages/LoginApprove";
-import LoginEmployee from "./Components/pages/LoginEmployee";
-import SingUp from "./Components/pages/SingUp";
-import ScreenApprove from "./Components/pages/ScreenApprove";
-import Request from "./Components/pages/Request";
-import NewRequest from "./Components/pages/NewRequest";
+import AuthProvider from "./context/authUser-context";
+// import ModalProvider from "./context/modal-context";
+// import FilterProvider from "./context/filterRequests-context";
+
+import HomePage from "./pages/HomePage";
+import LoginApprove from "./pages/LoginApprove";
+import LoginEmployee from "./pages/LoginEmployee";
+// import SingUp from "./pages/SingUp";
+import ScreenApprove from "./pages/ScreenApprove";
+import Request from "./pages/Request";
+import NewRequest from "./pages/NewRequest";
+import PageNotFound from "./pages/PageNotFound";
+import AppLayout from "./pages/AppLayout";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <PageNotFound />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "loginApprove", element: <LoginApprove /> },
+      { path: "loginEmployee", element: <LoginEmployee /> },
+      // { path: "singUp", element: <SingUp /> },
+      { path: "approve", element: <ScreenApprove /> },
+      {
+        path: "requests",
+        element: <Request />,
+        children: [{ path: "newRequest", element: <NewRequest /> }],
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <BrowserRouter>
-      <ModalProvider>
-        <AuthProvider>
-          <FilterProvider>
-            <Routes>
-              <Route path="/" index element={<HomePage />} />
-              <Route path="/loginApprove" element={<LoginApprove />} />
-              <Route path="/loginEmployee" element={<LoginEmployee />} />
-              <Route path="/singUp" element={<SingUp />} />
-              <Route path="/approve" element={<ScreenApprove />} />
-              <Route path="/requests" element={<Request />} />
-              <Route path="/newRequest" element={<NewRequest />} />
-            </Routes>
-          </FilterProvider>
-        </AuthProvider>
-      </ModalProvider>
-    </BrowserRouter>
+    <>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </>
   );
 }
+// function App() {
+//   return (
+//     <BrowserRouter>
+//       <ModalProvider>
+//         <AuthProvider>
+//           <FilterProvider>
+//             <Routes>
+//               <Route path="/" index element={<HomePage />} />
+//               <Route path="/loginApprove" element={<LoginApprove />} />
+//               <Route path="/loginEmployee" element={<LoginEmployee />} />
+//               <Route path="/singUp" element={<SingUp />} />
+//               <Route path="/approve" element={<ScreenApprove />} />
+//               <Route path="/requests" element={<Request />} />
+//               <Route path="/newRequest" element={<NewRequest />} />
+//             </Routes>
+//           </FilterProvider>
+//         </AuthProvider>
+//       </ModalProvider>
+//     </BrowserRouter>
+//   );
+// }
 
 export default App;

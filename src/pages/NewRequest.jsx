@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { newRequest } from "../../apiTable";
-import { handleErrorsMessages } from "../../toastApi";
+import { newRequest } from "../apiTable";
+import { handleErrorsMessages } from "../toastApi";
 
-import Button from "../Button";
+import Button from "../ui/Button";
 import { useEffect, useState } from "react";
 
 function NewRequest() {

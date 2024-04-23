@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ModalContext } from "./context/modal-context";
+import { ModalContext } from "../context/modal-context";
 import { deleteRequest, updateRequest } from "../apiTable";
 
 import Button from "./Button";

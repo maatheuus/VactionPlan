@@ -1,7 +1,7 @@
 import { useReducer, createContext } from "react";
 
-import supabase from "../../supabase";
-import { handleErrorsMessages, handleSuccessMessages } from "../../toastApi";
+import supabase from "../supabase";
+import { handleErrorsMessages, handleSuccessMessages } from "../toastApi";
 
 function authDispatch(state, action) {
   if (action.type === "LOGIN" && action.whoWasLogin === "approve") {

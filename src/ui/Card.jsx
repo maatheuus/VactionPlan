@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import Button from "./Button";
 import ModalApprove from "./ModalApprove";
 import ModalRequest from "./ModalRequest";
-import { ModalContext } from "./context/modal-context";
+import { ModalContext } from "../context/modal-context";
 
 function Card({ title, curRequest, onClick }) {
   const { hiddenModal, isHidden, viewSelected, page } =
