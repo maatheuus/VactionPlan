@@ -33,11 +33,11 @@
 .buttons-settings {
   position: absolute;
   right: 6rem;
-  // bottom: -1.5rem;
   display: flex;
-  // justify-content: flex-end;
 
   & .buttons-header {
     display: inherit;
+    align-items: center;
+    gap: 0.6rem;
   }
 }

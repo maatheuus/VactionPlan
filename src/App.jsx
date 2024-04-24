@@ -1,4 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 import AuthProvider from "./context/authUser-context";
 import ModalProvider from "./context/modal-context";
@@ -13,9 +16,6 @@ import Request from "./pages/Request";
 import NewRequest from "./pages/NewRequest";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +48,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <ReactQueryDevtools /> */}
+      <ReactQueryDevtools />
       <AuthProvider>
         <ModalProvider>
           <RouterProvider router={router} />
@@ -78,26 +78,5 @@ function App() {
     </QueryClientProvider>
   );
 }
-// function App() {
-//   return (
-//     <BrowserRouter>
-//       <ModalProvider>
-//         <AuthProvider>
-//           <FilterProvider>
-//             <Routes>
-//               <Route path="/" index element={<HomePage />} />
-//               <Route path="/loginApprove" element={<LoginApprove />} />
-//               <Route path="/loginEmployee" element={<LoginEmployee />} />
-//               <Route path="/singUp" element={<SingUp />} />
-//               <Route path="/approve" element={<ScreenApprove />} />
-//               <Route path="/requests" element={<Request />} />
-//               <Route path="/newRequest" element={<NewRequest />} />
-//             </Routes>
-//           </FilterProvider>
-//         </AuthProvider>
-//       </ModalProvider>
-//     </BrowserRouter>
-//   );
-// }
 
 export default App;
