@@ -1,16 +1,18 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
 
 import { AuthContext } from "../context/authUser-context";
 import Button from "../ui/Button";
 import Login from "../ui/Login";
+import { useNavigateToPage } from "../hooks/useNavigateToPage";
+import { useMoveBack } from "../hooks/useMoveBack";
 
 function LoginEmployee() {
   const { isAuthenticated, login } = useContext(AuthContext);
+  const { setData, setToLocation } = useNavigateToPage();
+  const { setToBak } = useMoveBack();
 
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,18 +20,20 @@ function LoginEmployee() {
   } = useForm();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/requests", { replace: true });
-  }, [isAuthenticated, navigate]);
+    setData(isAuthenticated);
+    setToLocation("/requests", { replace: true });
+  }, [setData, setToLocation, isAuthenticated]);
 
   const onSubmit = (data) => {
-    login(data.email, data.password, "employee");
+    login(data.email, data.password);
   };
 
   return (
     <Login>
-      <Button onClick={() => navigate(-1)}>
+      <Button onClick={() => setToBak()}>
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
+
       <div className="logo-login">
         <FaRegUserCircle
           style={{
@@ -47,15 +51,16 @@ function LoginEmployee() {
               htmlFor="email-employee"
               className="form-login__input--name lalezar-regular"
             >
-              Your Email
+              Email
             </label>
             <input
               id="email-employee"
               type="email"
+              className={errors?.password?.message ? "error-input" : ""}
               {...register("email", {
                 required: {
                   value: true,
-                  message: "Please enter your email address",
+                  message: "Please, enter your email.",
                 },
               })}
             />
@@ -67,15 +72,16 @@ function LoginEmployee() {
               htmlFor="password-employee"
               className="form-login__input--password lalezar-regular"
             >
-              Your Password
+              Password
             </label>
             <input
               id="password-employee"
               type="password"
+              className={errors?.password?.message ? "error-input" : ""}
               {...register("password", {
                 required: {
                   value: true,
-                  message: "Please enter your password",
+                  message: "Please, enter your password.",
                 },
               })}
             />
@@ -90,7 +96,6 @@ function LoginEmployee() {
           >
             Login
           </Button>
-          ;
           {/* <Link to="/singUp">
             <Button className="form-submit btn-primary">Sing Up</Button>
           </Link> */}

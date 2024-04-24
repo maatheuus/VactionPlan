@@ -1,37 +1,28 @@
-import { useContext, useEffect, useState } from "react";
-import { updateRequest } from "../apiTable";
+import { useContext } from "react";
 import { ModalContext } from "../context/modal-context";
+import { useUpdateRequest } from "../hooks/useUpdateRequest";
+
+import { FaCalendarAlt, FaRegWindowClose } from "react-icons/fa";
+
 import Button from "./Button";
 
 function ModalApprove({ isHidden = true, onClick, curModal }) {
-  const [approveRequest, setApproveRequest] = useState(false);
-  const [denyRequest, setDenyRequest] = useState(false);
+  const { isUpdate, updateRequest } = useUpdateRequest();
 
-  const { hiddenModal, viewSelected } = useContext(ModalContext);
+  const { hiddenModal } = useContext(ModalContext);
 
   const { userName, location, startDate, endDate, observation, id } = curModal;
-
-  function handleApproveRequests() {
-    hiddenModal("hidden");
-    setApproveRequest(true);
-  }
-  function handleDenyRequests() {
-    hiddenModal("hidden");
-    setDenyRequest(true);
-  }
-  useEffect(() => {
-    if (!viewSelected === id && approveRequest) return;
-    updateRequest({ statusRequest: "approve" }, id);
-  }, [approveRequest, id, viewSelected]);
-
-  useEffect(() => {
-    if (!viewSelected === id && denyRequest) return;
-    updateRequest({ statusRequest: "denied" }, id);
-  }, [denyRequest, id, viewSelected]);
 
   return (
     <div className={`modal ${isHidden}`}>
       <div className="modal__content">
+        <Button
+          onClick={onClick}
+          className="modal__content-button--close button-modal"
+        >
+          <FaRegWindowClose />
+        </Button>
+
         <h2 className="modal__title maven-pro ">Vacation</h2>
         <div className="modal__content-information">
           <div className="modal__name">
@@ -48,11 +39,15 @@ function ModalApprove({ isHidden = true, onClick, curModal }) {
 
           <div className="modal__date">
             <p className="modal__date--text maven-pro">
-              Date requested:{" "}
-              <span className="modal__date--start ">start: {startDate}</span>
-              <span className="modal__date--end ">end: {endDate}</span>
+              <FaCalendarAlt />
+              start: {startDate}
+            </p>
+            <p className="modal__date--text maven-pro">
+              <FaCalendarAlt />
+              end: {endDate}
             </p>
           </div>
+
           <div className="modal__observation">
             <p className="modal__observation--text maven-pro">
               Observation:{" "}
@@ -63,27 +58,34 @@ function ModalApprove({ isHidden = true, onClick, curModal }) {
           </div>
         </div>
         <div className="modal__content-buttons button-modal  maven-pro">
-          <div className="modal__content-button ">
-            <Button
-              onClick={onClick}
-              className="modal__content-button--close button-modal"
-            >
-              Close
-            </Button>
-          </div>
-
           <div className="buttons">
             <Button
               className="modal__content-buttons--aprove button-modal"
-              onClick={handleApproveRequests}
+              onClick={() => {
+                hiddenModal("hidden");
+                updateRequest({
+                  newRequestData: {
+                    statusRequest: "approve",
+                  },
+                  id,
+                });
+              }}
             >
-              Approve
+              {isUpdate ? "Approving" : "Approve"}
             </Button>
             <Button
               className="modal__content-buttons--deny button-modal"
-              onClick={handleDenyRequests}
+              onClick={() => {
+                hiddenModal("hidden");
+                updateRequest({
+                  newRequestData: {
+                    statusRequest: "denied",
+                  },
+                  id,
+                });
+              }}
             >
-              Deny
+              {isUpdate ? "Denying" : "Deny"}
             </Button>
           </div>
         </div>

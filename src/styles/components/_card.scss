@@ -6,7 +6,7 @@
 }
 
 .card {
-  background-color: #5252522a;
+  border: 1px solid #0000002a;
   width: 22rem;
   padding: 1.5rem;
 
@@ -19,11 +19,14 @@
     margin-top: 1rem;
 
     &--view,
-    &--status {
+    &--status,
+    &--icon {
       display: flex;
       align-items: center;
-
-      width: auto;
+    }
+    &--icon {
+      width: 3rem;
+      height: 2rem;
       cursor: pointer;
     }
   }

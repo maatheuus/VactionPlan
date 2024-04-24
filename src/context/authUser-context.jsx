@@ -4,17 +4,15 @@ import supabase from "../supabase";
 import { handleErrorsMessages, handleSuccessMessages } from "../toastApi";
 
 function authDispatch(state, action) {
-  if (action.type === "LOGIN" && action.whoWasLogin === "approve") {
+  if (action.type === "LOGIN") {
     return {
       ...state,
-      whoWasLogin: action.whoWasLogin,
       isAuthenticated: true,
     };
   }
-  if (action.type === "LOGIN" && action.whoWasLogin === "employee") {
+  if (action.type === "LOGIN") {
     return {
       ...state,
-      whoWasLogin: action.whoWasLogin,
       isAuthenticated: true,
       user: action.user,
     };
@@ -44,12 +42,11 @@ export const AuthContext = createContext({
 });
 export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authDispatch, {
-    whoWasLogin: null,
     isAuthenticated: false,
     user: undefined,
   });
 
-  async function handleLoginUser(email, password, whoWasLogin) {
+  async function handleLoginUser(email, password) {
     const { error, data } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -63,7 +60,6 @@ export default function AuthProvider({ children }) {
 
     dispatch({
       type: "LOGIN",
-      whoWasLogin: whoWasLogin,
     });
 
     return data;
@@ -100,7 +96,6 @@ export default function AuthProvider({ children }) {
   }
 
   const ctxValue = {
-    whoWasLogin: state.whoWasLogin,
     user: state.user,
     page: state.page,
     isAuthenticated: state.isAuthenticated,

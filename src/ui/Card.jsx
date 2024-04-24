@@ -49,7 +49,6 @@ function Card({ title, curRequest, onClick }) {
           <div className="card__information-bottom--view">
             <Button className="button-all" onClick={onClick}>
               <FaEye className="card__information-bottom--icon" />
-              <span className="card__information-bottom--text">view</span>
             </Button>
           </div>
           <div className="card__information-bottom--status">

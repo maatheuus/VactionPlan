@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaFilePdf } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useRequests } from "../hooks/useRequests";
+import { FaArrowCircleLeft, FaFilePdf } from "react-icons/fa";
+
 import { AuthContext } from "../context/authUser-context";
-import { FilterContext } from "../context/filterRequests-context";
 
 import generatePdfUsers from "../generatePdf";
 import ListButtons from "./ListButtons";
@@ -11,56 +12,49 @@ import Menu from "./Menu";
 
 function Header() {
   const [isLogout, setIsLogout] = useState(false);
-  const [makePdf, setMakePdf] = useState(false);
+  const { requests } = useRequests();
 
   const navigate = useNavigate();
-  const { logout, whoWasLogin } = useContext(AuthContext);
-  const { requests } = useContext(FilterContext);
+  const { logout } = useContext(AuthContext);
+
+  const { pathname } = useLocation();
+  const url = pathname.replace("/", "");
 
   function handleLogout() {
     setIsLogout(true);
   }
-
-  function handleMakeThePdf() {
-    setMakePdf(true);
-  }
-
-  useEffect(() => {
-    if (makePdf) generatePdfUsers(requests);
-  }, [makePdf, requests]);
 
   useEffect(() => {
     if (isLogout) {
       logout();
       navigate("/");
     }
-  }, [navigate, isLogout, logout]);
+  }, [navigate, logout, isLogout]);
 
   return (
     <header className="header">
       <Menu />
       <div className="content-header">
-        <div className="content-header__logo">
-          {/* <img src={image} alt="logo header" width="100px" height="200px" /> */}
-        </div>
-        <div className="content-header__content-buttons">
-          <nav className="nav">
-            <ListButtons
-              classNameUl="nav__list"
-              classNameLi="nav__list-button"
-            />
-          </nav>
-        </div>
+        <div className="content-header__logo"></div>
+        {url === "approve" && (
+          <div className="content-header__content-buttons">
+            <nav className="nav">
+              <ListButtons
+                classNameUl="nav__list"
+                classNameLi="nav__list-button"
+              />
+            </nav>
+          </div>
+        )}
 
         <div className="buttons-header">
-          {whoWasLogin !== "employee" && (
+          {url === "approve" && (
             <div className="content-header__button">
               <Button
                 className="content-header__button--pdf"
-                onClick={handleMakeThePdf}
+                onClick={() => generatePdfUsers(requests)}
               >
                 <FaFilePdf className="pdf" />
-                <span>Make the pdf</span>
               </Button>
             </div>
           )}
@@ -69,7 +63,7 @@ function Header() {
               className="content-header__button--back"
               onClick={handleLogout}
             >
-              <FaArrowLeft className="arrow" />
+              <FaArrowCircleLeft className="arrow" />
               <span>Logout</span>
             </Button>
           </div>

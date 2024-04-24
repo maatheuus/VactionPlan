@@ -30,25 +30,42 @@
   flex-wrap: wrap;
   gap: 1rem;
 
+  & .background-image {
+    position: absolute;
+    top: 7.2rem;
+    z-index: -1;
+
+    & img {
+      width: 40rem;
+      height: 44rem;
+    }
+  }
+
   &__inputs {
     display: flex;
     flex-wrap: wrap;
-    gap: 5rem;
+    gap: 2.4rem;
 
     padding: 3rem;
+
+    &--col2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @include res.screen(phone) {
+      justify-content: center;
+    }
   }
 
   &__button > &__button--send {
-    width: 15rem;
-    height: 5rem;
-
-    padding: 0 1em;
-    margin-top: 4rem;
+    padding: 1.2rem 2em;
+    margin-top: 2rem;
 
     background-color: #000;
     border: none;
-    border-radius: 4.5rem;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1.2rem;
     cursor: pointer;
   }
 
@@ -74,17 +91,19 @@
   }
 
   &__button > &__button--new {
-    width: 15rem;
-    height: 5rem;
-
-    padding: 0 1em;
-    margin-top: 4rem;
+    display: block;
+    padding: 0.6rem;
+    margin-top: 3rem;
 
     background-color: var(--color-black-primary);
     border: none;
-    border-radius: 2rem 0;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
     cursor: pointer;
+
+    & svg {
+      width: 3rem;
+      height: 3rem;
+    }
   }
 }
 
@@ -92,6 +111,6 @@
   margin: 4.8rem auto;
   width: 6rem;
   height: 5rem;
-  fill: red;
+  fill: rgb(0, 0, 0);
   animation: rotate 1.5s infinite linear;
 }

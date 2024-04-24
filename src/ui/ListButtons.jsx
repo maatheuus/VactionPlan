@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import Button from "./Button";
 import { FilterContext } from "../context/filterRequests-context";
+import Button from "./Button";
 
 function ListButtons({ classNameUl, classNameLi }) {
   const { displayedCardStatus } = useContext(FilterContext);

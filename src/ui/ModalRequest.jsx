@@ -1,19 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import {
+  FaRegTrashAlt,
+  FaRegEdit,
+  FaRegWindowClose,
+  FaCalendarAlt,
+} from "react-icons/fa";
+
 import { ModalContext } from "../context/modal-context";
-import { deleteRequest, updateRequest } from "../apiTable";
 
 import Button from "./Button";
+import { useDeleteRequest } from "../hooks/useDeleteRequest";
+import { useUpdateRequest } from "../hooks/useUpdateRequest";
 
 function ModalRequest({ isHidden = true, onClick, curModal }) {
-  const [updateRequests, setUpdateRequest] = useState();
-  const [updateIsTrue, setUpdateIsTrue] = useState(false);
-
-  const [deleteCurRequest, setDeleteCurRequest] = useState();
-  const [deleteIsTrue, setDeleteIsTrue] = useState(false);
-
   const { hiddenModal } = useContext(ModalContext);
   const { userName, location, startDate, endDate, observation, id } = curModal;
+
+  const { isDeleting, deleteRequest } = useDeleteRequest();
+  const { isUpdate, updateRequest } = useUpdateRequest();
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -27,29 +32,23 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
   });
 
   const onSubmit = (data) => {
-    hiddenModal("hidden");
-    setUpdateRequest(data, data.id);
-    setUpdateIsTrue(true);
+    updateRequest({
+      newRequestData: data,
+      id: data.id,
+    });
+
+    if (!isUpdate) hiddenModal("hidden");
   };
-  function handleDeleteRequest(id) {
-    hiddenModal("hidden");
-    setDeleteIsTrue(true);
-    setDeleteCurRequest(id);
-  }
-
-  // Verify if the update is true, then update the request data
-  useEffect(() => {
-    if (updateIsTrue) updateRequest(updateRequests, updateRequests.id);
-  }, [updateRequests, updateIsTrue]);
-
-  // Verify if the cur request has delete, then update the requests
-  useEffect(() => {
-    if (deleteIsTrue) deleteRequest(deleteCurRequest);
-  }, [deleteIsTrue, deleteCurRequest]);
 
   return (
     <div className={`modal ${isHidden}`}>
       <div className="modal__content">
+        <Button
+          onClick={onClick}
+          className="modal__content-button--close button-modal"
+        >
+          <FaRegWindowClose />
+        </Button>
         <h2 className="modal__title">Vacation</h2>
         <div className="modal__content-information">
           <div className="modal__name">
@@ -81,27 +80,29 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
 
           <div className="modal__date">
             <p className="modal__date--text maven-pro">
-              Date requested:{" "}
-              <span className="modal__date--start input">
-                start:{" "}
-                <input
-                  type="text"
-                  {...register("startDate", {
-                    value: startDate,
-                  })}
-                />
-              </span>
-              <span className="modal__date--end input">
-                end:{" "}
-                <input
-                  type="text"
-                  {...register("endDate", {
-                    value: endDate,
-                  })}
-                />
-              </span>
+              <FaCalendarAlt /> start:
             </p>
+            <span className="modal__date--start input">
+              <input
+                type="date"
+                {...register("startDate", {
+                  value: startDate,
+                })}
+              />
+            </span>
+            <p className="modal__date--text maven-pro">
+              <FaCalendarAlt /> end:
+            </p>{" "}
+            <span className="modal__date--end input">
+              <input
+                type="date"
+                {...register("endDate", {
+                  value: endDate,
+                })}
+              />
+            </span>
           </div>
+
           <div className="modal__observation">
             <p className="modal__observation--text maven-pro">
               Observation:{" "}
@@ -117,28 +118,21 @@ function ModalRequest({ isHidden = true, onClick, curModal }) {
           </div>
         </div>
         <div className="modal__content-buttons button-modal maven-pro">
-          <div className="modal__content-button ">
-            <Button
-              onClick={onClick}
-              className="modal__content-button--close button-modal"
-            >
-              Close
-            </Button>
-          </div>
-
           <div className="buttons">
             <Button
               className="modal__content-buttons--aprove button-modal"
               type="submit"
+              disabled={isUpdate}
               onClick={() => handleSubmit(onSubmit)()}
             >
-              Update
+              <FaRegEdit />
             </Button>
             <Button
               className="modal__content-buttons--deny button-modal"
-              onClick={() => handleDeleteRequest(curModal.id)}
+              disabled={isDeleting}
+              onClick={() => deleteRequest(curModal.id)}
             >
-              Delete
+              <FaRegTrashAlt />
             </Button>
           </div>
         </div>

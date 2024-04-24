@@ -1,15 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { newRequest } from "../apiTable";
+import { useMoveBack } from "../hooks/useMoveBack";
+import { useCreateRequest } from "../hooks/useCreateRequest";
+
+import { FaArrowCircleLeft } from "react-icons/fa";
+
 import { handleErrorsMessages } from "../toastApi";
 
 import Button from "../ui/Button";
-import { useEffect, useState } from "react";
+
+import image from "../assets/images/relaxation-bro.png";
 
 function NewRequest() {
   const navigate = useNavigate();
-  const [submitIsTrue, setSubmitIsTrue] = useState(false);
-  const [requestToSend, setRequestToSend] = useState();
+  const { setToBak } = useMoveBack();
+  const { isCreating, createRequest } = useCreateRequest();
 
   const {
     register,
@@ -44,28 +49,31 @@ function NewRequest() {
     else if (
       new Date(getValues("startDate")).getFullYear() !==
       new Date(getValues("endDate")).getFullYear()
-    )
+    ) {
       handleErrorsMessages("The date must be in the same year");
-    else {
-      setSubmitIsTrue(true);
-      setRequestToSend(data);
+    }
+
+    createRequest(data);
+    if (!isCreating) {
+      navigate("/requests");
     }
   };
-
-  useEffect(() => {
-    if (submitIsTrue) {
-      navigate("/requests");
-      newRequest(requestToSend);
-    }
-  }, [submitIsTrue, requestToSend, navigate]);
 
   return (
     <>
       <section id="employee">
+        <Button onClick={() => setToBak(-1)}>
+          <FaArrowCircleLeft className="arrow-left" />
+        </Button>
+
         <div className="screen-employee">
           <h1 className="screen-employee__title lalezar-regular">
             Requests for vacations
           </h1>
+
+          <div className="background-image">
+            <img src={image} alt="" />
+          </div>
 
           <div className="screen-employee__inputs input">
             <div className="screen-employee__inputs--col1">
@@ -77,8 +85,10 @@ function NewRequest() {
                   {...register("userName", {
                     required: {
                       value: true,
-                      message: "User name needs to be provided",
+                      message: "Provide you name.",
                     },
+                    validate: (value) =>
+                      value.trim() === "" ? "Provide a valid name." : null,
                   })}
                 />
                 <p className="error-inputs">{errors?.userName?.message}</p>
@@ -92,8 +102,10 @@ function NewRequest() {
                   {...register("location", {
                     required: {
                       value: true,
-                      message: "Location needs to be provided",
+                      message: "Provide your location.",
                     },
+                    validate: (value) =>
+                      value.trim() === "" ? "Provide a valid location." : null,
                   })}
                 />
                 <p className="error-inputs">{errors?.location?.message}</p>
@@ -119,7 +131,7 @@ function NewRequest() {
                     valueAsDate: true,
                     required: {
                       value: true,
-                      message: "Date needs to be provided",
+                      message: "Provide the start date.",
                     },
                   })}
                 />
@@ -135,7 +147,7 @@ function NewRequest() {
                     valueAsDate: true,
                     required: {
                       value: true,
-                      message: "Date needs to be provided",
+                      message: "Provide the end date.",
                     },
                   })}
                 />
@@ -145,6 +157,7 @@ function NewRequest() {
               <div className="screen-employee__button">
                 <Button
                   onClick={() => handleSubmit(onSubmit)()}
+                  disabled={isCreating}
                   className="screen-employee__button--send lalezar-regular"
                 >
                   Send request

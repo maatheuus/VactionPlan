@@ -2,6 +2,9 @@
 @use "../abstract/keyframes.scss";
 
 .modal {
+  display: block;
+  z-index: 200;
+
   width: 100%;
   height: 100%;
 
@@ -9,14 +12,22 @@
   top: 0;
   left: 0;
   background-color: #060606a8;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(5px);
-  display: block;
+
+  &__date {
+    &--text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
 
   &__content {
     position: absolute;
     border-radius: 1rem;
-    padding: 1rem;
+    padding: 2.5rem 1.5rem;
+    z-index: 200;
 
     background-color: #fff;
     max-width: 50rem;
@@ -24,33 +35,54 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    &-information {
+      padding: 0rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    @include res.screen(phone) {
+      padding: 1.5rem;
+
+      width: 30rem;
+
+      & p {
+        text-align: left;
+      }
+    }
   }
 }
 
 .modal {
-  &__location {
-    display: inline-block;
-    text-align: right;
-  }
-
   &__content-buttons {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: center;
 
     margin-top: 2rem;
 
     .button-modal {
       width: 10rem;
-      height: 5rem;
-      cursor: pointer;
+      height: 4rem;
       border: none;
       border-radius: 5px;
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
 
+      cursor: pointer;
       &:not(:last-of-type) {
         margin-right: 3rem;
+      }
+    }
+
+    &--aprove,
+    &--deny {
+      & svg {
+        opacity: 0.6;
+      }
+      &:hover {
+        & svg {
+          opacity: 1;
+        }
       }
     }
 
@@ -66,7 +98,7 @@
       background: #a81a1a;
 
       &:hover {
-        background: #d62323;
+        background: #c32222;
       }
     }
 
@@ -76,22 +108,26 @@
   }
 
   &__content-button {
-    order: 1;
-
     &--close {
-      background: #2f1f1f;
+      position: absolute;
+      right: 2rem;
+      top: 1rem;
+
+      border: none;
+      background-color: transparent;
+
+      cursor: pointer;
+      & svg {
+        fill: black;
+        width: 3.5rem;
+        height: 3.5rem;
+      }
     }
   }
 }
 
 .hidden {
   display: none !important;
-}
-
-.error-inputs {
-  color: red;
-  font-size: 1.2rem;
-  margin: 0 0 1rem 0.5rem;
 }
 
 //ball blink

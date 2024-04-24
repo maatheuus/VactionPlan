@@ -126,7 +126,7 @@ const generatePdfUsers = function (users) {
     footer: footer,
   };
 
-  pdfMake.createPdf(docDefinitions).download();
+  pdfMake.createPdf(docDefinitions).open();
 };
 
 export default generatePdfUsers;

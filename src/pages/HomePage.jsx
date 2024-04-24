@@ -1,4 +1,3 @@
-import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { FaRegUser, FaRegUserCircle } from "react-icons/fa";
 
@@ -20,39 +19,38 @@ function HomePage() {
           }}
         />
       </div>
-      <h1 className="chose-login__title lalezar-regular">You are the</h1>
+      <h1 className="chose-login__title oxygen-regular">You are the</h1>
       <div className="chose-login login">
         <div className="chose-login__button login__button">
-          <Link to="/loginApprove">
-            <Button className="chose-login__button--aprove btn-primary">
-              <FaRegUser
-                style={{
-                  paddingRight: "1.5rem",
-                }}
-              />
-              Approve
-            </Button>
-          </Link>
+          <Button
+            to="/loginApprove"
+            className="chose-login__button--aprove btn-primary"
+          >
+            <FaRegUser
+              style={{
+                paddingRight: "1.5rem",
+              }}
+            />
+            Approve
+          </Button>
         </div>
 
         <div className="chose-login__button login__button">
-          <H2 className="chose-login__title lalezar-regular">or</H2>
-          <Link to="/loginEmployee">
-            <Button className="chose-login__button--employee btn-primary">
-              <FaRegUser
-                style={{
-                  paddingRight: "1.5rem",
-                }}
-              />
-              Employee
-            </Button>
-          </Link>
+          <H2 className="chose-login__title oxygen-regular">or</H2>
+
+          <Button
+            to="/loginEmployee"
+            className="chose-login__button--employee btn-primary"
+          >
+            <FaRegUser
+              style={{
+                paddingRight: "1.5rem",
+              }}
+            />
+            Employee
+          </Button>
         </div>
       </div>
-
-      <main>
-        <Outlet />
-      </main>
     </Login>
   );
 }

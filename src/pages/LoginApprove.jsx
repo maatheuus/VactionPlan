@@ -1,36 +1,40 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
 import Login from "../ui/Login";
 import Button from "../ui/Button";
+import { useNavigateToPage } from "../hooks/useNavigateToPage";
+import { useMoveBack } from "../hooks/useMoveBack";
 
 function LoginApprove() {
   const { isAuthenticated, login } = useContext(AuthContext);
 
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const { setData, setToLocation } = useNavigateToPage();
+  const { setToBak } = useMoveBack();
+
   const emailApprove = "boss@example.com";
   const passwordApprove = "boss1234";
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/approve", { replace: true });
-  }, [isAuthenticated, navigate]);
+    setData(isAuthenticated);
+    setToLocation("/approve", { replace: true });
+  }, [setData, setToLocation, isAuthenticated]);
 
   const onSubmit = (data) => {
-    login(data.email, data.password, "approve");
+    login(data.email, data.password);
   };
 
   return (
     <Login>
-      <Button onClick={() => navigate(-1)}>
+      <Button onClick={() => setToBak(-1)}>
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
 
@@ -42,7 +46,7 @@ function LoginApprove() {
           }}
         />
       </div>
-      <form className="form-login login">
+      <form className="form-login login" onSubmit={handleSubmit(onSubmit)}>
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <div className="form-group">
@@ -50,16 +54,17 @@ function LoginApprove() {
               htmlFor="name-approve"
               className="form-login__input--name lalezar-regular"
             >
-              Your email
+              Email
             </label>
 
             <input
               id="name-approve"
               type="email"
+              className={errors?.email?.message ? "error-input" : ""}
               {...register("email", {
                 required: {
                   value: true,
-                  message: "Please enter your email address",
+                  message: "Please, enter your email.",
                 },
                 validate: (email) => {
                   if (email !== emailApprove)
@@ -75,15 +80,16 @@ function LoginApprove() {
               htmlFor="password-approve"
               className="form-login__input--password lalezar-regular"
             >
-              Your password
+              Password
             </label>
             <input
               id="password-approve"
               type="password"
+              className={errors?.password?.message ? "error-input" : ""}
               {...register("password", {
                 required: {
                   value: true,
-                  message: "Please enter your password",
+                  message: "Please, enter your password.",
                 },
                 validate: (password) => {
                   if (password !== passwordApprove)
@@ -95,10 +101,7 @@ function LoginApprove() {
           </div>
         </div>
         <div className="form-login__button">
-          <Button
-            onClick={() => handleSubmit(onSubmit)()}
-            className="form-submit btn-primary"
-          >
+          <Button type="submit" className="form-submit btn-primary">
             Login
           </Button>
         </div>

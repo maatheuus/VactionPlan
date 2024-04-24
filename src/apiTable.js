@@ -1,27 +1,33 @@
 import supabase from "./supabase";
 
-export async function readRequest(eqFilter = false, filterRequests) {
-  const { data, error } = await supabase.from("Requests").select("*");
+export async function getRequests(eqFilter = false, filterRequests) {
+  const { data, error } = await supabase.from("requests").select("*");
 
-  if (eqFilter) {
-    const { data, error } = await supabase
-      .from("Requests")
-      .select("*")
-      .eq("statusRequest", `${filterRequests}`);
+  // if (eqFilter) {
+  //   const { data, error } = await supabase
+  //     .from("requests")
+  //     .select("*")
+  //     .eq("statusRequest", `${filterRequests}`);
 
-    if (error) console.log("could not read request");
+  //   if (error) {
+  //     console.log(error);
+  //     throw new Error("could not read request");
+  //   }
 
-    return data;
+  //   return data;
+  // }
+
+  if (error) {
+    console.log(error);
+    throw new Error("could not read request");
   }
-
-  if (error) console.log("could not read request");
 
   return data;
 }
 
 export async function newRequest(request) {
   const { data, error } = await supabase
-    .from("Requests")
+    .from("requests")
     .insert([request])
     .select()
     .single();
@@ -33,17 +39,20 @@ export async function newRequest(request) {
 
 export async function updateRequest(requestUpdate, id) {
   const { error } = await supabase
-    .from("Requests")
+    .from("requests")
     .update(requestUpdate)
     .eq("id", id)
     .select();
 
-  if (error) console.log(error);
+  if (error) {
+    console.log(error);
+    throw new Error("could not update request");
+  }
 }
 
 export async function deleteRequest(requestDelete) {
   const { error } = await supabase
-    .from("Requests")
+    .from("requests")
     .delete()
     .eq("id", requestDelete);
 
@@ -55,10 +64,10 @@ export async function deleteRequest(requestDelete) {
 
 export function realTimeData(eventRealTime, payloadRealTimeDataFunc) {
   const requestsListener = supabase
-    .channel("Requests")
+    .channel("requests")
     .on(
       "postgres_changes",
-      { event: `${eventRealTime}`, schema: "public", table: "Requests" },
+      { event: `${eventRealTime}`, schema: "public", table: "requests" },
       payloadRealTimeDataFunc
     )
     .subscribe();

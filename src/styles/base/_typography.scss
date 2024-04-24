@@ -26,9 +26,7 @@ a {
 .chose-login,
 .login {
   &__title {
-    font-size: 2.6rem;
-
-    text-transform: uppercase;
+    font-size: 2.1rem;
     letter-spacing: 2.5px;
   }
 }
@@ -45,6 +43,7 @@ a {
 .btn-primary {
   color: #fff;
   font-weight: 700;
+  font-size: small;
 }
 
 .singUp-title,
@@ -158,9 +157,6 @@ a {
   &__date {
     &--start,
     &--end {
-      font-weight: 500;
-
-      margin-right: 0.8rem;
       display: block;
     }
   }
