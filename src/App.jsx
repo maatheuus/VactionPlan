@@ -7,7 +7,7 @@ import ModalProvider from "./context/modal-context";
 import HomePage from "./pages/HomePage";
 import LoginApprove from "./pages/LoginApprove";
 import LoginEmployee from "./pages/LoginEmployee";
-// import SingUp from "./pages/SingUp";
+import NewUser from "./pages/NewUser";
 import ScreenApprove from "./pages/ScreenApprove";
 import Request from "./pages/Request";
 import NewRequest from "./pages/NewRequest";
@@ -26,8 +26,11 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "loginApprove", element: <LoginApprove /> },
       { path: "loginEmployee", element: <LoginEmployee /> },
-      // { path: "singUp", element: <SingUp /> },
-      { path: "approve", element: <ScreenApprove /> },
+      {
+        path: "approve",
+        element: <ScreenApprove />,
+        children: [{ path: "register", element: <NewUser /> }],
+      },
       { path: "requests", element: <Request /> },
       { path: "newRequest", element: <NewRequest /> },
     ],
@@ -45,7 +48,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
       <AuthProvider>
         <ModalProvider>
           <RouterProvider router={router} />

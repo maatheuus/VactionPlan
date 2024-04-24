@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { newRequest } from "../apiTable";
+import { newRequest } from "../services/apiTable";
 import toast from "react-hot-toast";
 
 export function useCreateRequest() {

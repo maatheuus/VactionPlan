@@ -29,3 +29,15 @@
   border: none;
   cursor: pointer;
 }
+
+.buttons-settings {
+  position: absolute;
+  right: 6rem;
+  // bottom: -1.5rem;
+  display: flex;
+  // justify-content: flex-end;
+
+  & .buttons-header {
+    display: inherit;
+  }
+}

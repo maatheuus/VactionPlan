@@ -1,39 +1,16 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useRequests } from "../hooks/useRequests";
-import { FaArrowCircleLeft, FaFilePdf } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
-import { AuthContext } from "../context/authUser-context";
-
-import generatePdfUsers from "../generatePdf";
 import ListButtons from "./ListButtons";
-import Button from "./Button";
 import Menu from "./Menu";
 
 function Header() {
-  const [isLogout, setIsLogout] = useState(false);
-  const { requests } = useRequests();
-
-  const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
-
   const { pathname } = useLocation();
   const url = pathname.replace("/", "");
-
-  function handleLogout() {
-    setIsLogout(true);
-  }
-
-  useEffect(() => {
-    if (isLogout) {
-      logout();
-      navigate("/");
-    }
-  }, [navigate, logout, isLogout]);
 
   return (
     <header className="header">
       <Menu />
+
       <div className="content-header">
         <div className="content-header__logo"></div>
         {url === "approve" && (
@@ -47,8 +24,18 @@ function Header() {
           </div>
         )}
 
-        <div className="buttons-header">
-          {url === "approve" && (
+        {/* <div className="buttons-header"> */}
+        {/* {url === "approve" && (
+          <Button to="settings" style={{ cursor: "pointer" }}>
+            <HiOutlineCog6Tooth
+              style={{
+                width: "6rem",
+                height: "3rem",
+              }}
+            />
+          </Button>
+        )} */}
+        {/* {url === "approve" && (
             <div className="content-header__button">
               <Button
                 className="content-header__button--pdf"
@@ -66,8 +53,9 @@ function Header() {
               <FaArrowCircleLeft className="arrow" />
               <span>Logout</span>
             </Button>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
+        {/* {url !== "approve/register" && <Outlet />} */}
       </div>
     </header>
   );

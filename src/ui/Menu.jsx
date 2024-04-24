@@ -9,7 +9,8 @@ import { FaArrowCircleLeft, FaAlignRight, FaFilePdf } from "react-icons/fa";
 
 import ListButtons from "./ListButtons";
 import Button from "./Button";
-import generatePdfUsers from "../generatePdf";
+import generatePdfUsers from "../services/generatePdf";
+import { HiOutlineCog6Tooth } from "react-icons/hi2";
 
 function Menu() {
   const [isLogout, setIsLogout] = useState(false);
@@ -49,25 +50,16 @@ function Menu() {
             </div>
 
             <div className="buttons-menu">
-              {url !== "employee" && (
-                <div className="content-header__button">
-                  <Button
-                    className="content-header__button--pdf"
-                    onClick={() => generatePdfUsers(requests)}
-                  >
-                    <FaFilePdf className="pdf" />
-                  </Button>
-                </div>
-              )}
-              <div className="content-header__button">
-                <Button
-                  className="content-header__button--back"
-                  onClick={handleLogout}
-                >
-                  <FaArrowCircleLeft className="arrow" />
-                  <span>Logout</span>
+              {url === "approve" && (
+                <Button to="settings" style={{ cursor: "pointer" }}>
+                  <HiOutlineCog6Tooth
+                    style={{
+                      width: "6rem",
+                      height: "3rem",
+                    }}
+                  />
                 </Button>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -77,3 +69,15 @@ function Menu() {
 }
 
 export default Menu;
+
+{
+  /* <div className="content-header__button">
+  <Button
+    className="content-header__button--back"
+    onClick={handleLogout}
+  >
+    <FaArrowCircleLeft className="arrow" />
+    <span>Logout</span>
+  </Button>
+</div> */
+}

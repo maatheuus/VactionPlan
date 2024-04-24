@@ -1,15 +1,19 @@
 import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+import SpinnerMini from "../ui/SpinnerMini";
+
 import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
 import Login from "../ui/Login";
 import Button from "../ui/Button";
 import { useNavigateToPage } from "../hooks/useNavigateToPage";
 import { useMoveBack } from "../hooks/useMoveBack";
+// import { useAuth } from "../hooks/useAuth";
 
 function LoginApprove() {
   const { isAuthenticated, login } = useContext(AuthContext);
+  // const { isAuthenticated, login } = useAuth();
 
   const {
     register,
@@ -29,7 +33,8 @@ function LoginApprove() {
   }, [setData, setToLocation, isAuthenticated]);
 
   const onSubmit = (data) => {
-    login(data.email, data.password);
+    const { email, password } = data;
+    login(email, password);
   };
 
   return (
@@ -102,7 +107,7 @@ function LoginApprove() {
         </div>
         <div className="form-login__button">
           <Button type="submit" className="form-submit btn-primary">
-            Login
+            {isAuthenticated ? <SpinnerMini /> : "Login"}
           </Button>
         </div>
       </form>

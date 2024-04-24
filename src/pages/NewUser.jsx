@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowCircleLeft } from "react-icons/fa";
 import { AuthContext } from "../context/authUser-context";
 
 import Button from "../ui/Button";
-import Login from "../ui/Login";
 
-function SingUp() {
+function NewUser() {
   const { isAuthenticated, singUp } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -24,20 +23,19 @@ function SingUp() {
   const whatPassword = watch("password");
 
   const onSubmit = (data) => {
-    singUp(data.email, data.password);
+    const { email, password } = data;
+    singUp(email, password);
   };
 
   return (
-    <Login>
+    <div className="container-newUser">
       <Button onClick={() => navigate(-1)}>
-        <FaArrowLeft className="arrow-left" />
+        <FaArrowCircleLeft className="arrow-left" />
       </Button>
-      <h1 className="singUp-title">Sing Up</h1>
-
-      <form className="form-login__singUp login">
-        <div className="form-login__input">
+      <form className="form-newUser">
+        <div>
           <div className="form-group">
-            <label className="form-login__input--name">Email address</label>
+            <label className="form-newUser--label">Email address</label>
             <input
               type="email"
               {...register("email", {
@@ -54,7 +52,7 @@ function SingUp() {
             <p className="error-inputs">{errors?.email?.message}</p>
           </div>
           <div className="form-group">
-            <label className="form-login__input--password">Password</label>
+            <label className="form-newUser--label">Password</label>
             <input
               type="password"
               {...register("password", {
@@ -71,9 +69,7 @@ function SingUp() {
             <p className="error-inputs">{errors?.password?.message}</p>
           </div>
           <div className="form-group">
-            <label className="form-login__input--password">
-              Confirm Password
-            </label>
+            <label className="form-newUser--label">Confirm Password</label>
             <input
               type="password"
               {...register("confirm_password", {
@@ -88,17 +84,17 @@ function SingUp() {
           </div>
         </div>
 
-        <div className="form-login__button">
+        <div className="form-button">
           <Button
             className="form-submit btn-primary"
             onClick={() => handleSubmit(onSubmit)()}
           >
-            Sing Up
+            Register
           </Button>
         </div>
       </form>
-    </Login>
+    </div>
   );
 }
 
-export default SingUp;
+export default NewUser;

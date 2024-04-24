@@ -2,8 +2,38 @@
 @use "../abstract/keyframes.scss";
 
 #approve {
-  height: 100vh;
+  height: 100%;
   width: 100%;
+
+  .settings {
+    // background-color: rgba(0, 0, 0, 0.143);
+    border-radius: 10px;
+    width: 27rem;
+    height: 4rem;
+    padding: 0.2rem 1.3rem;
+
+    position: absolute;
+    right: 2rem;
+    bottom: 4rem;
+
+    display: flex;
+    align-items: center;
+
+    transition: all 0.2s ease-in;
+
+    &-btn {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      background-color: transparent;
+      border: none;
+    }
+
+    &-icon {
+      width: 6rem;
+      height: 4rem;
+    }
+  }
 }
 .screen-approve {
   height: 100%;
