@@ -1,18 +1,20 @@
-import { useContext } from "react";
+import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 
 import Button from "./Button";
-import ModalApprove from "./ModalApprove";
-import ModalRequest from "./ModalRequest";
-import { ModalContext } from "../context/modal-context";
+import ModalApprove from "../features/approve/ModalApprove";
+import ModalRequest from "../features/requests/ModalRequest";
 
-function Card({ title, curRequest, onClick }) {
-  const { hiddenModal, isHidden, viewSelected, page } =
-    useContext(ModalContext);
+import { useLocation } from "react-router-dom";
 
-  const viewApprove = viewSelected === curRequest.id && page === "approve";
-  const viewRequest = viewSelected === curRequest.id && page === "request";
-  const modalIsHidden = "hidden";
+function Card({ title, curRequest }) {
+  const { pathname } = useLocation();
+  const url = pathname.replace("/", "");
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const close = () => setIsOpen(false);
+  const open = () => setIsOpen(true);
 
   return (
     <div className="card">
@@ -47,7 +49,7 @@ function Card({ title, curRequest, onClick }) {
 
         <div className="card__information-bottom  maven-pro">
           <div className="card__information-bottom--view">
-            <Button className="button-all" onClick={onClick}>
+            <Button className="button-all" onClick={open}>
               <FaEye className="card__information-bottom--icon" />
             </Button>
           </div>
@@ -58,20 +60,18 @@ function Card({ title, curRequest, onClick }) {
         </div>
       </div>
 
-      {viewApprove && (
+      {isOpen && url === "approve" && (
         <ModalApprove
           key={curRequest.id}
-          isHidden={isHidden ? modalIsHidden : ""}
           curModal={curRequest}
-          onClick={() => hiddenModal("hidden")}
+          closeModal={close}
         />
       )}
-      {viewRequest && (
+      {isOpen && url === "request" && (
         <ModalRequest
           key={curRequest.id}
-          isHidden={isHidden ? modalIsHidden : ""}
           curModal={curRequest}
-          onClick={() => hiddenModal("hidden")}
+          closeModal={close}
         />
       )}
     </div>

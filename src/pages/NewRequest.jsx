@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMoveBack } from "../hooks/useMoveBack";
-import { useCreateRequest } from "../hooks/useCreateRequest";
+import { useCreateRequest } from "../features/requests/useCreateRequest";
 
 import { FaArrowCircleLeft } from "react-icons/fa";
 
@@ -10,11 +10,14 @@ import { handleErrorsMessages } from "../services/toastApi";
 import Button from "../ui/Button";
 
 import image from "../assets/images/relaxation-bro.png";
+import { motion } from "framer-motion";
+import { useAnimatePages } from "../hooks/useAnimatePages";
 
 function NewRequest() {
   const navigate = useNavigate();
   const { setToBak } = useMoveBack();
   const { isCreating, createRequest } = useCreateRequest();
+  const { variants, initial, animate, exit } = useAnimatePages();
 
   const {
     register,
@@ -58,7 +61,6 @@ function NewRequest() {
       navigate("/requests");
     }
   };
-
   return (
     <>
       <section id="employee">
@@ -66,7 +68,13 @@ function NewRequest() {
           <FaArrowCircleLeft className="arrow-left" />
         </Button>
 
-        <div className="screen-employee">
+        <motion.div
+          className="screen-employee"
+          variants={variants}
+          initial={initial}
+          animate={animate}
+          exit={exit}
+        >
           <h1 className="screen-employee__title lalezar-regular">
             Requests for vacations
           </h1>
@@ -165,7 +173,7 @@ function NewRequest() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </>
   );

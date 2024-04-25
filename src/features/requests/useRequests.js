@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getRequests } from "../services/apiTable";
+import { getRequests } from "../../services/apiTable";
 
 export function useRequests() {
   const { isLoading, data: requests } = useQuery({

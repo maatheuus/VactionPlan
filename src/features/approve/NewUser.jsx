@@ -2,9 +2,11 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleLeft } from "react-icons/fa";
-import { AuthContext } from "../context/authUser-context";
+import { AuthContext } from "../../context/authUser-context";
+import { motion } from "framer-motion";
 
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
+import { useAnimatePages } from "../../hooks/useAnimatePages";
 
 function NewUser() {
   const { isAuthenticated, singUp } = useContext(AuthContext);
@@ -26,9 +28,16 @@ function NewUser() {
     const { email, password } = data;
     singUp(email, password);
   };
+  const { variants, initial, animate, exit } = useAnimatePages();
 
   return (
-    <div className="container-newUser">
+    <motion.div
+      className="container-newUser"
+      variants={variants}
+      initial={initial}
+      animate={animate}
+      exit={exit}
+    >
       <Button onClick={() => navigate(-1)}>
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
@@ -93,7 +102,7 @@ function NewUser() {
           </Button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
 

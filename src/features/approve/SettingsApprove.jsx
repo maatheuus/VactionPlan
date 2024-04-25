@@ -1,11 +1,11 @@
-import { FaArrowCircleLeft, FaFilePdf, FaUserPlus } from "react-icons/fa";
-import generatePdfUsers from "../services/generatePdf";
-
-import { AuthContext } from "../context/authUser-context";
-import { useContext, useEffect, useState } from "react";
-import { useRequests } from "../hooks/useRequests";
 import { useNavigate } from "react-router-dom";
-import Button from "../ui/Button";
+import { FaArrowCircleLeft, FaFilePdf, FaUserPlus } from "react-icons/fa";
+import generatePdfUsers from "../../services/generatePdf";
+
+import { AuthContext } from "../../context/authUser-context";
+import { useContext, useEffect, useState } from "react";
+import { useRequests } from "../requests/useRequests";
+import Button from "../../ui/Button";
 
 function SettingsApprove() {
   const [isLogout, setIsLogout] = useState(false);

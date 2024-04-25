@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { updateRequest as updateRequestApi } from "../services/apiTable";
+import { updateRequest as updateRequestApi } from "../../services/apiTable";
 
 export function useUpdateRequest() {
   const queryClient = useQueryClient();

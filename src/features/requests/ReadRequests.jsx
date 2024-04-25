@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { ModalContext } from "../context/modal-context";
+import { ModalContext } from "../../context/modal-context";
 // import { getRequests, realTimeData } from "../apiTable";
 // import { FilterContext } from "../context/filterRequests-context";
 
-import Card from "./Card";
-import { useRequests } from "../hooks/useRequests";
-import Spinner from "./Spinner";
+import Card from "../../ui/Card";
+import { useRequests } from "./useRequests";
+import Spinner from "../../ui/Spinner";
 
 export default function ReadRequests({ currentPage }) {
   const { clickView } = useContext(ModalContext);
