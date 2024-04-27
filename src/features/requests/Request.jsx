@@ -1,10 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { FaArrowCircleLeft, FaPlus } from "react-icons/fa";
 
-import Button from "../../ui/Button";
 import ReadRequests from "./ReadRequests";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
 import { motion } from "framer-motion";
+import ButtonIcon from "../../ui/ButtonIcon";
+
+const styleIcon = {
+  position: "absolute",
+  left: "2.5rem",
+  top: "2.5rem",
+  width: "3rem",
+  height: "3rem",
+};
 
 function Request() {
   const navigate = useNavigate();
@@ -12,9 +20,10 @@ function Request() {
 
   return (
     <section className="request">
-      <Button onClick={() => navigate("/")}>
-        <FaArrowCircleLeft className="arrow-left" />
-      </Button>
+      <ButtonIcon
+        onClick={() => navigate("/")}
+        icon={<FaArrowCircleLeft style={styleIcon} />}
+      />
       <motion.div
         variants={variants}
         initial={initial}
@@ -28,9 +37,9 @@ function Request() {
         </div>
       </motion.div>
       <div className="request__button">
-        <Button to="/newRequest" className="request__button--new">
+        <ButtonIcon to="/newRequest">
           <FaPlus />
-        </Button>
+        </ButtonIcon>
       </div>
     </section>
   );

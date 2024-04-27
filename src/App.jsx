@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 import AuthProvider from "./context/authUser-context";
@@ -13,9 +13,11 @@ import LoginEmployee from "./pages/LoginEmployee";
 import NewUser from "./features/approve/NewUser";
 import ScreenApprove from "./features/approve/ScreenApprove";
 import Request from "./features/requests/Request";
-import NewRequest from "./pages/NewRequest";
+import NewRequestsPage from "./pages/NewRequestPage";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
+import Approve from "./pages/Approve";
+import Employee from "./pages/Employee";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +30,11 @@ const router = createBrowserRouter([
       { path: "loginEmployee", element: <LoginEmployee /> },
       {
         path: "approve",
-        element: <ScreenApprove />,
+        element: <Approve />,
         children: [{ path: "register", element: <NewUser /> }],
       },
-      { path: "requests", element: <Request /> },
-      { path: "newRequest", element: <NewRequest /> },
+      { path: "requests", element: <Employee /> },
+      { path: "newRequest", element: <NewRequestsPage /> },
     ],
   },
 ]);

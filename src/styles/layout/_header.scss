@@ -7,10 +7,11 @@
 
 .content-header {
   height: 100%;
+  width: 98%;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: end;
+  justify-content: flex-end;
 
   .buttons-header {
     display: flex;
@@ -33,29 +34,26 @@
     }
 
     &--back {
-      background-color: black;
+      background-color: var(--color-black-primary);
 
       & .arrow {
         margin: 0 0.4rem;
-        fill: white;
+        fill: var(--color-white-primary);
 
         width: 1.5rem;
         height: 1.5rem;
       }
     }
 
-    &--pdf {
-      background-color: rgb(255, 0, 0);
-    }
     & .pdf {
       margin: 0 0.4rem;
-      fill: white;
+      fill: var(--color-white-primary);
 
       width: 2rem;
       height: 2rem;
     }
     & span {
-      color: white;
+      color: var(--color-white-primary);
     }
   }
 
@@ -69,27 +67,24 @@
 
 .nav {
   &__list {
-    list-style: none;
     display: flex;
+    list-style: none;
+    height: 4rem;
+    border-radius: 5px;
+    background-color: var(--color-off-white);
 
     &-button {
-      margin-right: 1rem;
+      display: flex;
+      align-items: center;
 
       & button {
         width: 10rem;
         height: 2.5rem;
-
-        background-color: transparent;
-
-        border: 1px solid black;
-        border-radius: 45px;
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease 0s;
         cursor: pointer;
-
-        &:hover {
-          transform: translateY(-2px);
-        }
+      }
+      &:hover {
+        border-radius: 5px;
+        border: 1px solid var(--color-bege-004);
       }
     }
   }

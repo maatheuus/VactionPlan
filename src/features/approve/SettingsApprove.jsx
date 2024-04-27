@@ -1,22 +1,18 @@
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowCircleLeft, FaFilePdf, FaUserPlus } from "react-icons/fa";
-import generatePdfUsers from "../../services/generatePdf";
 
 import { AuthContext } from "../../context/authUser-context";
-import { useContext, useEffect, useState } from "react";
 import { useRequests } from "../requests/useRequests";
 import Button from "../../ui/Button";
+import ButtonIcon from "../../ui/ButtonIcon";
+import generatePdfUsers from "../../services/generatePdf";
 
 function SettingsApprove() {
   const [isLogout, setIsLogout] = useState(false);
   const { requests } = useRequests();
-
-  const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
-
-  function handleLogout() {
-    setIsLogout(true);
-  }
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLogout) {
@@ -29,7 +25,7 @@ function SettingsApprove() {
     <div className="buttons-settings">
       <div className="buttons-header">
         <div className="content-header__button">
-          <Button to="register" style={{ cursor: "pointer" }}>
+          <Button to="register">
             <FaUserPlus
               style={{
                 width: "3.5rem",
@@ -41,23 +37,20 @@ function SettingsApprove() {
         </div>
 
         <div className="content-header__button">
-          <Button
-            className="content-header__button--pdf"
+          <ButtonIcon
             onClick={() => generatePdfUsers(requests)}
             style={{ backgroundColor: "black" }}
-          >
-            <FaFilePdf className="pdf" />
-          </Button>
+            icon={<FaFilePdf style={{ fill: "white" }} />}
+          />
         </div>
 
         <div className="content-header__button">
-          <Button
-            className="content-header__button--back"
-            onClick={handleLogout}
-          >
-            <FaArrowCircleLeft className="arrow" />
-            <span>Logout</span>
-          </Button>
+          <ButtonIcon
+            onClick={() => setIsLogout(true)}
+            style={{ backgroundColor: "black" }}
+            icon={<FaArrowCircleLeft style={{ fill: "white" }} />}
+            label="Logout"
+          />
         </div>
       </div>
     </div>

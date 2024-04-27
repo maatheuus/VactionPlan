@@ -1,19 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useMoveBack } from "../hooks/useMoveBack";
-import { useCreateRequest } from "../features/requests/useCreateRequest";
+import { useMoveBack } from "../../hooks/useMoveBack";
+import { useCreateRequest } from "../requests/useCreateRequest";
 
 import { FaArrowCircleLeft } from "react-icons/fa";
 
-import { handleErrorsMessages } from "../services/toastApi";
+import { handleErrorsMessages } from "../../services/toastApi";
 
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
-import image from "../assets/images/relaxation-bro.png";
+import image from "../../assets/images/relaxation-bro.png";
 import { motion } from "framer-motion";
-import { useAnimatePages } from "../hooks/useAnimatePages";
+import { useAnimatePages } from "../../hooks/useAnimatePages";
 
-function NewRequest() {
+function NewRequests() {
   const navigate = useNavigate();
   const { setToBak } = useMoveBack();
   const { isCreating, createRequest } = useCreateRequest();
@@ -86,7 +86,7 @@ function NewRequest() {
           <div className="screen-employee__inputs input">
             <div className="screen-employee__inputs--col1">
               <div className="form-group lalezar-regular">
-                <label htmlFor="name-newRequest">User name</label>
+                <label htmlFor="name-s">User name</label>
                 <input
                   id="name-newRequest"
                   type="text"
@@ -179,4 +179,4 @@ function NewRequest() {
   );
 }
 
-export default NewRequest;
+export default NewRequests;

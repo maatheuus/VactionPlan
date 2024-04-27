@@ -2,22 +2,18 @@
 @use "../abstract/keyframes.scss";
 
 .modal {
-  background-color: rgba(255, 255, 255, 0.1);
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10000;
+
   width: 100%;
   height: 100vh;
   backdrop-filter: blur(4px);
-  z-index: 1000;
-  transition: all 0.5s;
-
-  &__date {
-    &--text {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+  &__date p {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   &__content {
@@ -25,17 +21,16 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--color-white-primary);
 
+    padding: 3.2rem 3.2rem;
+    background-color: var(--color-off-white);
     box-shadow: 0px 0px 13px -3px var(--color-black-primary);
-    padding: 4.2rem 4rem;
-    transition: all 0.5s;
 
     &-information {
       padding: 2rem 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.4rem;
+      gap: 1rem;
     }
 
     @include res.screen(phone) {
@@ -49,7 +44,7 @@
 }
 
 .modal {
-  &__content-buttons {
+  &__content-button {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
@@ -59,58 +54,36 @@
       height: 4rem;
       border: none;
       border-radius: 5px;
-
       cursor: pointer;
+
       &:not(:last-of-type) {
         margin-right: 3rem;
       }
     }
 
-    &--aprove,
-    &--deny {
-      & svg {
-        opacity: 0.6;
-      }
-      &:hover {
-        & svg {
-          opacity: 1;
-        }
-      }
-    }
-
     &--aprove {
-      background: rgb(0, 149, 0);
-      order: 0;
+      background-color: var(--color-green-dark);
 
       &:hover {
-        background: rgb(4, 180, 4);
+        background-color: var(--color-green-light);
       }
     }
     &--deny {
-      background: #a81a1a;
+      background: var(--color-red-dark);
 
       &:hover {
-        background: #c32222;
+        background: var(--color-red-light);
       }
     }
 
-    @include res.screen(phone) {
-      justify-content: center;
-    }
-  }
-
-  &__content-button {
     &--close {
       position: absolute;
       right: 2rem;
       top: 1rem;
-
       border: none;
-      background-color: transparent;
-
       cursor: pointer;
+
       & svg {
-        fill: black;
         width: 3.5rem;
         height: 3.5rem;
       }
@@ -132,14 +105,15 @@
 }
 
 .approve {
-  background-color: rgb(0, 128, 0);
+  background-color: var(--color-green-dark);
   animation: flashing 2s infinite;
 }
 .denied {
-  background-color: rgb(255, 0, 0);
+  background-color: var(--color-red-light);
+
   animation: flashing 2s infinite;
 }
 .pendent {
-  background-color: rgb(255, 166, 0);
+  background-color: var(--color-yellow-dark);
   animation: flashing 2s infinite;
 }

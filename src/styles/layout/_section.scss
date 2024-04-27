@@ -4,12 +4,11 @@
 #approve {
   height: 100%;
   width: 100%;
-  position: relative;
   padding-bottom: 3rem;
 
   .settings {
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--color-off-white);
 
     position: absolute;
     right: 2rem;
@@ -31,6 +30,10 @@
       width: 5rem;
       height: 5rem;
     }
+  }
+
+  @include res.screen(phone) {
+    position: relative;
   }
 }
 .screen-approve {
@@ -91,7 +94,7 @@
     padding: 1.2rem 2em;
     margin-top: 2rem;
 
-    background-color: #000;
+    background-color: var(--color-black-primary);
     border: none;
     border-radius: 1.2rem;
     cursor: pointer;
@@ -104,34 +107,24 @@
 }
 
 .request {
-  height: 100%;
+  height: 100vh;
+  padding: 3.4rem 0;
 
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 1.5rem;
-
-  &__cards {
+  &__button {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
+
+    & a {
+      margin: 3rem 0;
+      & svg {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
   }
 
-  &__button > &__button--new {
-    display: block;
-    padding: 0.6rem;
-    margin-top: 3rem;
-
-    background-color: var(--color-black-primary);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-
-    & svg {
-      width: 3rem;
-      height: 3rem;
-    }
+  @include res.screen(phone) {
+    height: auto;
   }
 }
 
@@ -139,6 +132,6 @@
   margin: 4.8rem auto;
   width: 6rem;
   height: 5rem;
-  fill: rgb(0, 0, 0);
+  fill: var(--color-black-primary);
   animation: rotate 1.5s infinite linear;
 }

@@ -2,11 +2,13 @@ import { Outlet } from "react-router-dom";
 
 function AppLayout() {
   return (
-    <>
-      <main>
-        <Outlet />
+    <div className="app-layout">
+      <main className="main">
+        <div className="container-layout">
+          <Outlet />
+        </div>
       </main>
-    </>
+    </div>
   );
 }
 

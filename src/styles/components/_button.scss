@@ -1,3 +1,27 @@
+.button-icon {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 0.8rem;
+  background-color: transparent;
+  cursor: pointer;
+
+  & svg {
+    width: 2rem;
+    height: 2rem;
+    fill: currentColor;
+  }
+  & span {
+    padding: 0 0.5rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: red;
+  }
+}
+
 .btn-primary {
   & {
     &:not(:last-of-type) {

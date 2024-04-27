@@ -86,7 +86,6 @@ a {
   &__title {
     font-size: 2rem;
     font-weight: 700;
-
     text-align: center;
   }
 
@@ -100,32 +99,19 @@ a {
   }
 
   &__location,
-  &__username {
-    &--description {
-      font-weight: 500;
-      text-transform: uppercase;
-    }
-  }
-
+  &__username,
   &__date {
-    &-start,
-    &-end {
-      &--description {
-        font-weight: 500;
-        margin-left: 0.5rem;
-        color: #0000007f;
-      }
+    & span {
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 0.3rem;
     }
   }
 
   &__information-bottom {
-    &--status,
-    &--view {
+    &--status {
       font-size: 1.6rem;
       font-weight: 700;
-    }
-    &--text {
-      margin-left: 0.6rem;
     }
   }
 }
@@ -142,22 +128,15 @@ a {
   &__location,
   &__date,
   &__observation {
-    &--text {
+    & p {
       font-size: 2rem;
       font-weight: 700;
-      line-height: 3.5rem;
+      line-height: 3rem;
       padding: 0.4rem;
     }
 
-    &--span {
-      font-weight: 300;
-    }
-  }
-
-  &__date {
-    &--start,
-    &--end {
-      display: block;
+    & span {
+      font-weight: 500;
     }
   }
 

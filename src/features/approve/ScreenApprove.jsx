@@ -10,6 +10,7 @@ import Header from "../../ui/Header";
 import Button from "../../ui/Button";
 import SettingsApprove from "./SettingsApprove";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 const variants = {
   open: {
@@ -27,6 +28,7 @@ const variants = {
 function ScreenApprove() {
   const [isShowSettings, setIsShowSettings] = useState(false);
   // const { showCardStatus } = useContext(FilterContext);
+  const ref = useOutsideClick(setIsShowSettings);
   const { variants: variantsPage, initial, animate, exit } = useAnimatePages();
 
   const { pathname } = useLocation();
@@ -62,6 +64,7 @@ function ScreenApprove() {
 
             <motion.div
               className="settings"
+              ref={ref}
               variants={variants}
               initial="closed"
               animate={isShowSettings ? "open" : "closed"}

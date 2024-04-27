@@ -12,20 +12,18 @@ function Menu() {
   const hidden = "hidden";
 
   return (
-    <>
-      <menu className="menu">
-        <Button className="button-all" onClick={() => hiddenMenu("hidden")}>
-          <FaAlignRight className=" menu__hamburguer" />
-        </Button>
-        <div className={`menu__content ${menuIsHidden ? hidden : ""}`}>
-          <div className="menu__list">
-            <div className="menu__items">
-              <ListButtons />
-            </div>
+    <menu className="menu">
+      <Button className="button-all" onClick={() => hiddenMenu("hidden")}>
+        <FaAlignRight className=" menu__hamburguer" />
+      </Button>
+      <div className={`menu__content ${menuIsHidden ? hidden : ""}`}>
+        <div className="menu__list">
+          <div className="menu__items">
+            <ListButtons />
           </div>
         </div>
-      </menu>
-    </>
+      </div>
+    </menu>
   );
 }
 

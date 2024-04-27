@@ -6,7 +6,7 @@ import { FaRegTrashAlt, FaRegEdit, FaCalendarAlt } from "react-icons/fa";
 import Modal from "../../ui/Modal";
 import ButtonIcon from "../../ui/ButtonIcon";
 
-function ModalRequest({ curModal, closeModal }) {
+function EditModalRequest({ curModal, closeModal }) {
   const { userName, location, startDate, endDate, observation, id } = curModal;
 
   const { isDeleting, deleteRequest } = useDeleteRequest();
@@ -133,4 +133,4 @@ function ModalRequest({ curModal, closeModal }) {
   );
 }
 
-export default ModalRequest;
+export default EditModalRequest;
