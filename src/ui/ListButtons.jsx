@@ -1,16 +1,20 @@
-import { useContext } from "react";
-import { FilterContext } from "../context/filterRequests-context";
+import { useSearchParams } from "react-router-dom";
 import Button from "./Button";
 
-function ListButtons({ classNameUl, classNameLi }) {
-  const { displayedCardStatus } = useContext(FilterContext);
+function ListButtons({ classNameUl, classNameLi, isMenu }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleClick(value) {
+    searchParams.set("filtered", value);
+    setSearchParams(searchParams);
+  }
 
   return (
     <ul className={classNameUl}>
       <li className={classNameLi}>
         <Button
-          className="nav__list-button--all oxygen-regular button-all"
-          onClick={() => displayedCardStatus("all")}
+          className={`${isMenu ? "menu" : "nav"}__list-button--all button-all`}
+          onClick={() => handleClick("all")}
         >
           <span className="status denied"></span>
           <span className="status approve"></span>
@@ -20,8 +24,10 @@ function ListButtons({ classNameUl, classNameLi }) {
       </li>
       <li className={classNameLi}>
         <Button
-          className="nav__list-button--approved oxygen-regular button-all"
-          onClick={() => displayedCardStatus("approve")}
+          className={`${
+            isMenu ? "menu" : "nav"
+          }__list-button--approved button-all`}
+          onClick={() => handleClick("approve")}
         >
           <span className="status approve"></span>
           Approved
@@ -29,8 +35,10 @@ function ListButtons({ classNameUl, classNameLi }) {
       </li>
       <li className={classNameLi}>
         <Button
-          className="nav__list-button--denied oxygen-regular button-all"
-          onClick={() => displayedCardStatus("denied")}
+          className={`${
+            isMenu ? "menu" : "nav"
+          }__list-button--denied button-all`}
+          onClick={() => handleClick("denied")}
         >
           <span className="status denied"></span>
           Denied
@@ -38,8 +46,10 @@ function ListButtons({ classNameUl, classNameLi }) {
       </li>
       <li className={classNameLi}>
         <Button
-          className="nav__list-button--pending oxygen-regular button-all"
-          onClick={() => displayedCardStatus("pending")}
+          className={`${
+            isMenu ? "menu" : "nav"
+          }__list-button--pending button-all`}
+          onClick={() => handleClick("pendent")}
         >
           <span className="status pendent"></span>
           Pending

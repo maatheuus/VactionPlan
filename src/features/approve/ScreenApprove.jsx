@@ -32,7 +32,7 @@ function ScreenApprove() {
   const { variants: variantsPage, initial, animate, exit } = useAnimatePages();
 
   const { pathname } = useLocation();
-  const url = pathname.replace("/approve/", "");
+  const url = pathname.replace("/approver/", "");
 
   function showSettings() {
     setIsShowSettings(!isShowSettings);
@@ -43,39 +43,37 @@ function ScreenApprove() {
       <Header />
 
       {url !== "register" && (
-        <>
-          <section id="approve">
-            <motion.div
-              variants={variantsPage}
-              initial={initial}
-              animate={animate}
-              exit={exit}
-              className="screen-approve"
-            >
-              <div className="screen-approve__button oxygen-regular">
-                {/* <span className="status denied"></span>
+        <section id="approve">
+          <motion.div
+            variants={variantsPage}
+            initial={initial}
+            animate={animate}
+            exit={exit}
+            className="screen-approve"
+          >
+            <div className="screen-approve__button oxygen-regular">
+              {/* <span className="status denied"></span>
                 <span className="status approve"></span>
                 <span className="status pendent"></span>
                 {showCardStatus} */}
-                <h1>All requests for you</h1>
-              </div>
-              <ReadRequests currentPage="approve" />
-            </motion.div>
+              <h1>All requests for you</h1>
+            </div>
+            <ReadRequests currentPage="approver" />
+          </motion.div>
 
-            <motion.div
-              className="settings"
-              ref={ref}
-              variants={variants}
-              initial="closed"
-              animate={isShowSettings ? "open" : "closed"}
-            >
-              <Button onClick={showSettings} className="settings-btn">
-                <HiOutlineCog6Tooth className="settings-icon" />
-              </Button>
-              {isShowSettings && <SettingsApprove />}
-            </motion.div>
-          </section>
-        </>
+          <motion.div
+            className="settings"
+            ref={ref}
+            variants={variants}
+            initial="closed"
+            animate={isShowSettings ? "open" : "closed"}
+          >
+            <Button onClick={showSettings} className="settings-btn">
+              <HiOutlineCog6Tooth className="settings-icon" />
+            </Button>
+            {isShowSettings && <SettingsApprove />}
+          </motion.div>
+        </section>
       )}
       <Outlet />
     </>

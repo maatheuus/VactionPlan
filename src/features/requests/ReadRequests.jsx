@@ -1,14 +1,36 @@
 import { useContext } from "react";
-import { ModalContext } from "../../context/modal-context";
+import { useSearchParams } from "react-router-dom";
 
-import Card from "../../ui/Card";
+import { ModalContext } from "../../context/modal-context";
 import { useRequests } from "./useRequests";
+import Card from "../../ui/Card";
 import Spinner from "../../ui/Spinner";
 
 export default function ReadRequests({ currentPage }) {
+  const { isLoading, requests } = useRequests();
+  const [searchParams] = useSearchParams();
+
   const { clickView } = useContext(ModalContext);
 
-  const { isLoading, requests } = useRequests();
+  const filteredValue = searchParams.get("filtered") || "all";
+  let filteredRequests;
+
+  if (filteredValue === "all") filteredRequests = requests;
+
+  if (filteredValue === "approve")
+    filteredRequests = requests.filter(
+      (request) => request.statusRequest === "approve"
+    );
+
+  if (filteredValue === "denied")
+    filteredRequests = requests.filter(
+      (request) => request.statusRequest === "denied"
+    );
+
+  if (filteredValue === "pendent")
+    filteredRequests = requests.filter(
+      (request) => request.statusRequest === "pendent"
+    );
 
   if (isLoading) return <Spinner />;
 
@@ -17,7 +39,7 @@ export default function ReadRequests({ currentPage }) {
       {requests.length === 0 && (
         <p className="no-requests">No request yet...</p>
       )}
-      {requests.map((value) => {
+      {filteredRequests.map((value) => {
         if (value.userName === undefined) return;
         return (
           <Card

@@ -4,7 +4,7 @@ import { ModalContext } from "../context/modal-context";
 import { FaAlignRight } from "react-icons/fa";
 
 import ListButtons from "./ListButtons";
-import Button from "./Button";
+import ButtonIcon from "./ButtonIcon";
 
 function Menu() {
   const { hiddenMenu, menuIsHidden } = useContext(ModalContext);
@@ -13,15 +13,18 @@ function Menu() {
 
   return (
     <menu className="menu">
-      <Button className="button-all" onClick={() => hiddenMenu("hidden")}>
-        <FaAlignRight className=" menu__hamburguer" />
-      </Button>
+      <ButtonIcon
+        className="button-all"
+        icon={<FaAlignRight className=" menu__hamburguer" />}
+        onClick={() => hiddenMenu("hidden")}
+      />
+
       <div className={`menu__content ${menuIsHidden ? hidden : ""}`}>
-        <div className="menu__list">
-          <div className="menu__items">
-            <ListButtons />
-          </div>
-        </div>
+        <ListButtons
+          classNameUl="menu__list"
+          classNameLi="menu__list-button"
+          isMenu
+        />
       </div>
     </menu>
   );

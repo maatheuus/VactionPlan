@@ -45,9 +45,7 @@ function ModalApprove({ curModal, closeModal }) {
             className="modal__content-button--aprove button-modal"
             onClick={() => {
               updateRequest({
-                newRequestData: {
-                  statusRequest: "approve",
-                },
+                newRequestData: { statusRequest: "approve" },
                 id,
               });
               closeModal();
@@ -59,11 +57,10 @@ function ModalApprove({ curModal, closeModal }) {
             className="modal__content-button--deny button-modal"
             onClick={() => {
               updateRequest({
-                newRequestData: {
-                  statusRequest: "denied",
-                },
+                newRequestData: { statusRequest: "denied" },
                 id,
               });
+
               closeModal();
             }}
           >

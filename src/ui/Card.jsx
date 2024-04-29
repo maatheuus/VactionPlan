@@ -49,7 +49,7 @@ function Card({ title, curRequest }) {
         </div>
       </div>
 
-      {isOpen && url === "approve" && (
+      {isOpen && url === "approver" && (
         <ModalApprove
           key={curRequest.id}
           curModal={curRequest}

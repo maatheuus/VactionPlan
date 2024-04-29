@@ -16,7 +16,7 @@ import { handleErrorsMessages } from "../../services/toastApi";
 import Button from "../../ui/Button";
 import SpinnerMini from "../../ui/SpinnerMini";
 
-import image from "../../assets/images/relaxation-bro.png";
+import image from "../../../public/images/relaxation-bro.png";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
 
 import {
@@ -56,126 +56,122 @@ function NewRequests() {
     }
   };
   return (
-    <>
-      <section id="employee">
-        <Button onClick={() => setTo(-1)}>
-          <FaCircleArrowLeft className="arrow-left" />
-        </Button>
+    <section id="employee">
+      <Button onClick={() => setTo(-1)}>
+        <FaCircleArrowLeft className="arrow-left" />
+      </Button>
 
-        <motion.div
-          className="screen-employee"
-          variants={variants}
-          initial={initial}
-          animate={animate}
-          exit={exit}
-        >
-          <h1 className="screen-employee__title">Requests for vacations</h1>
+      <motion.div
+        className="screen-employee"
+        variants={variants}
+        initial={initial}
+        animate={animate}
+        exit={exit}
+      >
+        <h1 className="screen-employee__title">Requests for vacations</h1>
 
-          <div className="background-image">
-            <img src={image} alt="woman in the pool" />
-          </div>
+        <div className="background-image">
+          <img src={image} alt="woman in the pool" />
+        </div>
 
-          <form className="form">
-            <div className="form__inputs">
-              <div className="form__inputs--col1">
-                <div className="form-group">
-                  <FaRegUser className="form__icon" />
-                  <input
-                    placeholder="Your name"
-                    className="form__input"
-                    type="text"
-                    {...register("userName", {
-                      required: {
-                        value: true,
-                        message: "Provide you name.",
-                      },
-                      validate: (value) =>
-                        value.trim() === "" ? "Provide a valid name." : null,
-                    })}
-                  />
-                  <p className="error-inputs">{errors?.userName?.message}</p>
-                </div>
-
-                <div className="form-group">
-                  <FaLocationDot className="form__icon" />
-                  <input
-                    placeholder="Location"
-                    className="form__input"
-                    type="text"
-                    {...register("location", {
-                      required: {
-                        value: true,
-                        message: "Provide your location.",
-                      },
-                      validate: (value) =>
-                        value.trim() === ""
-                          ? "Provide a valid location."
-                          : null,
-                    })}
-                  />
-                  <p className="error-inputs">{errors?.location?.message}</p>
-                </div>
-
-                <div className="form-group">
-                  <textarea
-                    className="form__input textarea"
-                    rows="4"
-                    placeholder="Observations"
-                    type="text"
-                    {...register("observation")}
-                  />
-                </div>
+        <form className="form">
+          <div className="form__inputs">
+            <div className="form__inputs--col1">
+              <div className="form-group">
+                <FaRegUser className="form__icon" />
+                <input
+                  placeholder="Your name"
+                  className="form__input"
+                  type="text"
+                  {...register("userName", {
+                    required: {
+                      value: true,
+                      message: "Provide you name.",
+                    },
+                    validate: (value) =>
+                      value.trim() === "" ? "Provide a valid name." : null,
+                  })}
+                />
+                <p className="error-inputs">{errors?.userName?.message}</p>
               </div>
 
-              <div className="form__inputs--col2">
-                <div className="form-group">
-                  <FaHourglassStart className="form__icon" />
+              <div className="form-group">
+                <FaLocationDot className="form__icon" />
+                <input
+                  placeholder="Location"
+                  className="form__input"
+                  type="text"
+                  {...register("location", {
+                    required: {
+                      value: true,
+                      message: "Provide your location.",
+                    },
+                    validate: (value) =>
+                      value.trim() === "" ? "Provide a valid location." : null,
+                  })}
+                />
+                <p className="error-inputs">{errors?.location?.message}</p>
+              </div>
 
-                  <input
-                    className="form__input"
-                    type="date"
-                    {...register("startDate", {
-                      valueAsDate: true,
-                      required: {
-                        value: true,
-                        message: "Provide the start date.",
-                      },
-                    })}
-                  />
-                  <p className="error-inputs">{errors?.startDate?.message}</p>
-                </div>
-
-                <div className="form-group">
-                  <FaHourglassEnd className="form__icon" />
-                  <input
-                    className="form__input"
-                    type="date"
-                    {...register("endDate", {
-                      valueAsDate: true,
-                      required: {
-                        value: true,
-                        message: "Provide the end date.",
-                      },
-                    })}
-                  />
-                  <p className="error-inputs">{errors?.endDate?.message}</p>
-                </div>
-
-                <div className="form__button">
-                  <Button
-                    onClick={() => handleSubmit(onSubmit)()}
-                    disabled={isCreating}
-                    className="btn-send"
-                  >
-                    {isCreating ? <SpinnerMini /> : "Send request"}
-                  </Button>
-                </div>
+              <div className="form-group">
+                <textarea
+                  className="form__input textarea"
+                  rows="4"
+                  placeholder="Observations"
+                  type="text"
+                  {...register("observation")}
+                />
               </div>
             </div>
-          </form>
-        </motion.div>
-      </section>
-    </>
+
+            <div className="form__inputs--col2">
+              <div className="form-group">
+                <FaHourglassStart className="form__icon" />
+
+                <input
+                  className="form__input"
+                  type="date"
+                  {...register("startDate", {
+                    valueAsDate: true,
+                    required: {
+                      value: true,
+                      message: "Provide the start date.",
+                    },
+                  })}
+                />
+                <p className="error-inputs">{errors?.startDate?.message}</p>
+              </div>
+
+              <div className="form-group">
+                <FaHourglassEnd className="form__icon" />
+                <input
+                  className="form__input"
+                  type="date"
+                  {...register("endDate", {
+                    valueAsDate: true,
+                    required: {
+                      value: true,
+                      message: "Provide the end date.",
+                    },
+                  })}
+                />
+                <p className="error-inputs">{errors?.endDate?.message}</p>
+              </div>
+
+              <div className="form__button">
+                <Button
+                  onClick={() => handleSubmit(onSubmit)()}
+                  disabled={isCreating}
+                  className="btn-send"
+                >
+                  {isCreating ? <SpinnerMini /> : "Send request"}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </motion.div>
+    </section>
   );
 }
 

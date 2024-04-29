@@ -1,35 +1,48 @@
 import { useForm } from "react-hook-form";
 import { useDeleteRequest } from "./useDeleteRequest";
 import { useUpdateRequest } from "./useUpdateRequest";
-import { FaRegTrashAlt, FaRegEdit, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaRegTrashAlt,
+  FaRegEdit,
+  FaHourglassStart,
+  FaHourglassEnd,
+} from "react-icons/fa";
 
 import Modal from "../../ui/Modal";
 import ButtonIcon from "../../ui/ButtonIcon";
+import {
+  checkDistance,
+  formattingDistance,
+} from "../../services/formattingDate";
+import { handleErrorsMessages } from "../../services/toastApi";
 
 function ModalRequest({ curModal, closeModal }) {
-  const { userName, location, startDate, endDate, observation, id } = curModal;
-
   const { isDeleting, deleteRequest } = useDeleteRequest();
   const { isUpdate, updateRequest } = useUpdateRequest();
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      userName,
-      location,
-      startDate,
-      endDate,
-      observation,
-      id,
+      ...curModal,
     },
   });
 
   const onSubmit = (data) => {
-    updateRequest({
-      newRequestData: data,
-      id: data.id,
-    });
+    const formatDate = formattingDistance(data.startDate, data.endDate);
+    const checkDate = checkDistance(data.startDate, data.endDate);
 
-    if (!isUpdate) closeModal();
+    if (formatDate > 30) {
+      handleErrorsMessages(
+        "The date need to be lass then 30 days or equal 30 days"
+      );
+    } else if (checkDate) {
+      handleErrorsMessages("The date needs greater than the selected date");
+    } else {
+      updateRequest(data, data.id);
+    }
   };
 
   return (
@@ -37,39 +50,57 @@ function ModalRequest({ curModal, closeModal }) {
       close={closeModal}
       name={
         <>
-          UserName: <label className="modal__input"></label>
-          <input
-            type="text"
-            disabled={isUpdate}
-            {...register("userName", {
-              value: userName,
-            })}
-          />
+          Name:
+          <span className="modal__input input">
+            <input
+              type="text"
+              disabled={isUpdate}
+              {...register("userName", {
+                required: {
+                  value: true,
+                  message: "Provide you name.",
+                },
+                validate: (value) =>
+                  value.trim() === "" ? "Provide a valid name." : null,
+              })}
+            />
+          </span>
+          <p className="error-inputs">{errors?.userName?.message}</p>
         </>
       }
       location={
         <>
           Location:{" "}
-          <span className="modal__input">
+          <span className="modal__input input">
             <input
-              disabled={isUpdate}
               type="text"
+              disabled={isUpdate}
               {...register("location", {
-                value: location,
+                required: {
+                  value: true,
+                  message: "Provide your location.",
+                },
+                validate: (value) =>
+                  value.trim() === "" ? "Provide a valid location." : null,
               })}
             />
           </span>
+          <p className="error-inputs">{errors?.location?.message}</p>
         </>
       }
       dateStart={
         <>
-          <FaCalendarAlt /> start:
-          <span className="modal__input">
+          <FaHourglassStart />
+          <span className="modal__input input">
             <input
-              disabled={isUpdate}
               type="date"
+              disabled={isUpdate}
               {...register("startDate", {
-                value: startDate,
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "Provide the start date.",
+                },
               })}
             />
           </span>
@@ -77,13 +108,17 @@ function ModalRequest({ curModal, closeModal }) {
       }
       dateEnd={
         <>
-          <FaCalendarAlt /> end:
-          <span className="modal__input">
+          <FaHourglassEnd />
+          <span className="modal__input input">
             <input
-              disabled={isUpdate}
               type="date"
+              disabled={isUpdate}
               {...register("endDate", {
-                value: endDate,
+                valueAsDate: true,
+                required: {
+                  value: true,
+                  message: "Provide the end date.",
+                },
               })}
             />
           </span>
@@ -92,13 +127,11 @@ function ModalRequest({ curModal, closeModal }) {
       observations={
         <>
           Observation:{" "}
-          <span className="modal__input">
+          <span className="modal__input input">
             <input
-              disabled={isUpdate}
               type="text"
-              {...register("observation", {
-                value: observation,
-              })}
+              disabled={isUpdate}
+              {...register("observation")}
             />
           </span>
         </>
@@ -110,20 +143,14 @@ function ModalRequest({ curModal, closeModal }) {
             className="modal__content-button--aprove button-modal"
             type="submit"
             disabled={isUpdate}
-            onClick={() => {
-              closeModal();
-              handleSubmit(onSubmit)();
-            }}
+            onClick={() => handleSubmit(onSubmit)()}
           />
 
           <ButtonIcon
             icon={<FaRegTrashAlt />}
             className="modal__content-button--deny button-modal"
             disabled={isDeleting}
-            onClick={() => {
-              closeModal();
-              deleteRequest(curModal.id);
-            }}
+            onClick={() => deleteRequest(curModal)}
           />
         </>
       }

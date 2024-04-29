@@ -10,7 +10,7 @@ export default function Button({ to, children, ...props }) {
   }
 
   return (
-    <button type="button" {...props} style={{ cursor: "pointer" }}>
+    <button type="button" {...props}>
       {children}
     </button>
   );

@@ -13,7 +13,7 @@ function Modal(props) {
       <div className="modal__content" ref={ref}>
         <ButtonIcon
           className="modal__content-button--close"
-          onClick={close}
+          onClick={() => close()}
           icon={<FaRegWindowClose />}
         />
         <h2 className="modal__title maven-pro">Vacations</h2>

@@ -15,16 +15,5 @@ export function useOutsideClick(close) {
     return () => document.removeEventListener("click", handleClick, true);
   }, [close]);
 
-  useEffect(() => {
-    function noScroll() {
-      if (ref.current) {
-        document.body.style.overflow = "hidden";
-      }
-    }
-    noScroll();
-
-    return () => (document.body.style.overflow = "visible");
-  }, [ref]);
-
   return ref;
 }

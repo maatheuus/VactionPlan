@@ -1,18 +1,19 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 import AuthProvider from "./context/authUser-context";
 import ModalProvider from "./context/modal-context";
-// import FilterProvider from "./context/filterRequests-context";
 
 import HomePage from "./pages/HomePage";
-import LoginApprove from "./pages/LoginApprove";
-import LoginEmployee from "./pages/LoginEmployee";
+import LoginApprove from "./features/approve/LoginApprove";
+import LoginEmployee from "./features/requests/LoginEmployee";
 import NewUser from "./features/approve/NewUser";
-import ScreenApprove from "./features/approve/ScreenApprove";
-import Request from "./features/requests/Request";
 import NewRequestsPage from "./pages/NewRequestPage";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
@@ -25,11 +26,18 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <PageNotFound />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: "loginApprove", element: <LoginApprove /> },
-      { path: "loginEmployee", element: <LoginEmployee /> },
+      { index: true, element: <Navigate replace to="login" /> },
       {
-        path: "approve",
+        path: "login",
+        element: <HomePage />,
+        children: [
+          { path: "approver", element: <LoginApprove /> },
+          { path: "employee", element: <LoginEmployee /> },
+        ],
+      },
+
+      {
+        path: "approver",
         element: <Approve />,
         children: [{ path: "register", element: <NewUser /> }],
       },

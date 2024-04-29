@@ -2,11 +2,11 @@ import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
 
-import { AuthContext } from "../context/authUser-context";
-import Button from "../ui/Button";
-import Login from "../ui/Login";
-import { useNavigateToPage } from "../hooks/useNavigateToPage";
-import { useMoveTo } from "../hooks/useMoveTo";
+import { AuthContext } from "../../context/authUser-context";
+import Button from "../../ui/Button";
+import Login from "../../pages/Login";
+import { useNavigateToPage } from "../../hooks/useNavigateToPage";
+import { useMoveTo } from "../../hooks/useMoveTo";
 
 function LoginEmployee() {
   const { isAuthenticated, login } = useContext(AuthContext);
@@ -47,16 +47,10 @@ function LoginEmployee() {
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <div className="form-group">
-            <label
-              htmlFor="email-employee"
-              className="form-login__input--name lalezar-regular"
-            >
-              Email
-            </label>
             <input
-              id="email-employee"
+              placeholder="Email"
               type="email"
-              className={errors?.password?.message ? "error-input" : ""}
+              className={errors?.password?.message && "error-input"}
               {...register("email", {
                 required: {
                   value: true,
@@ -68,16 +62,10 @@ function LoginEmployee() {
           </div>
 
           <div className="form-group">
-            <label
-              htmlFor="password-employee"
-              className="form-login__input--password lalezar-regular"
-            >
-              Password
-            </label>
             <input
-              id="password-employee"
+              placeholder="Password"
               type="password"
-              className={errors?.password?.message ? "error-input" : ""}
+              className={errors?.password?.message && "error-input"}
               {...register("password", {
                 required: {
                   value: true,

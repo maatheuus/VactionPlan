@@ -6,7 +6,7 @@ export function useDeleteRequest() {
   const queryClient = useQueryClient();
 
   const { isLoading: isDeleting, mutate: deleteRequest } = useMutation({
-    mutationFn: deleteRequestApi,
+    mutationFn: ({ id }) => deleteRequestApi(id),
     onSuccess: () => {
       toast.success("Request deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["requests"] });

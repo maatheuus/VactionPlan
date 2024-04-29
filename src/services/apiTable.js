@@ -43,6 +43,7 @@ export async function updateRequest(requestUpdate, id) {
     .update(requestUpdate)
     .eq("id", id)
     .select();
+  console.log(requestUpdate);
 
   if (error) {
     console.log(error);

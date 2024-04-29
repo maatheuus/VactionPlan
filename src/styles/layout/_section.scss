@@ -2,9 +2,8 @@
 @use "../abstract/keyframes.scss";
 
 #approve {
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  padding-bottom: 3rem;
 
   .settings {
     border-radius: 10px;
@@ -33,7 +32,8 @@
   }
 
   @include res.screen(phone) {
-    position: relative;
+    // position: relative;
+    // height: auto;
   }
 }
 .screen-approve {
@@ -50,13 +50,13 @@
 #employee {
   width: 100%;
   // height: 91.9vh;
-  height: 100%;
+  // height: 100%;
 }
 
 .screen-employee {
   height: 100%;
 
-  display: flex;
+  // display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
