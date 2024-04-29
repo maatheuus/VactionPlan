@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export function useMoveBack() {
-  const [toBack, setToBak] = useState();
+export function useMoveTo() {
+  const [to, setTo] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (toBack) navigate(-1);
-  }, [toBack, navigate]);
+    if (to) navigate(to);
+  }, [to, navigate]);
 
-  return { setToBak };
+  return { setTo };
 }

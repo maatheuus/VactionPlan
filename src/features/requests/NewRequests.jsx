@@ -1,71 +1,65 @@
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useMoveBack } from "../../hooks/useMoveBack";
+import { useMoveTo } from "../../hooks/useMoveTo";
 import { useCreateRequest } from "../requests/useCreateRequest";
+import { motion } from "framer-motion";
 
-import { FaArrowCircleLeft } from "react-icons/fa";
+import {
+  FaCircleArrowLeft,
+  FaLocationDot,
+  FaRegUser,
+  FaHourglassStart,
+  FaHourglassEnd,
+} from "react-icons/fa6";
 
 import { handleErrorsMessages } from "../../services/toastApi";
 
 import Button from "../../ui/Button";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 import image from "../../assets/images/relaxation-bro.png";
-import { motion } from "framer-motion";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
 
+import {
+  formattingDistance,
+  checkDistance,
+} from "../../services/formattingDate";
+
 function NewRequests() {
-  const navigate = useNavigate();
-  const { setToBak } = useMoveBack();
+  const { setTo } = useMoveTo();
   const { isCreating, createRequest } = useCreateRequest();
   const { variants, initial, animate, exit } = useAnimatePages();
 
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    // subtracting the months
-    const getMonth =
-      new Date(getValues("endDate")).getMonth() -
-      new Date(getValues("startDate")).getMonth();
+    const formatDate = formattingDistance(data.startDate, data.endDate);
+    const checkDate = checkDistance(data.startDate, data.endDate);
 
-    // subtracting the days
-    const getDate =
-      new Date(getValues("endDate")).getDate() -
-      new Date(getValues("startDate")).getDate();
-
-    if ((-getDate < 0 && getMonth >= 1) || getMonth > 1)
+    // if the end date is greater the 30 days, error
+    if (formatDate > 30)
       handleErrorsMessages(
         "The date need to be lass then 30 days or equal 30 days"
       );
-    // if the day is a negative number or the month , error
-    else if (
-      (-getDate > 0 && getMonth === 0) ||
-      (-getDate >= 0 && getMonth < 0) ||
-      (-getDate < 0 && getMonth < 0)
-    )
+
+    // if the  end date is before the start date, error
+    if (checkDate)
       handleErrorsMessages("The date needs greater than the selected date");
-    // if the year was different, error
-    else if (
-      new Date(getValues("startDate")).getFullYear() !==
-      new Date(getValues("endDate")).getFullYear()
-    ) {
-      handleErrorsMessages("The date must be in the same year");
-    }
 
     createRequest(data);
+
     if (!isCreating) {
-      navigate("/requests");
+      setTo("/requests");
     }
   };
   return (
     <>
       <section id="employee">
-        <Button onClick={() => setToBak(-1)}>
-          <FaArrowCircleLeft className="arrow-left" />
+        <Button onClick={() => setTo(-1)}>
+          <FaCircleArrowLeft className="arrow-left" />
         </Button>
 
         <motion.div
@@ -75,104 +69,110 @@ function NewRequests() {
           animate={animate}
           exit={exit}
         >
-          <h1 className="screen-employee__title lalezar-regular">
-            Requests for vacations
-          </h1>
+          <h1 className="screen-employee__title">Requests for vacations</h1>
 
           <div className="background-image">
-            <img src={image} alt="" />
+            <img src={image} alt="woman in the pool" />
           </div>
 
-          <div className="screen-employee__inputs input">
-            <div className="screen-employee__inputs--col1">
-              <div className="form-group lalezar-regular">
-                <label htmlFor="name-s">User name</label>
-                <input
-                  id="name-newRequest"
-                  type="text"
-                  {...register("userName", {
-                    required: {
-                      value: true,
-                      message: "Provide you name.",
-                    },
-                    validate: (value) =>
-                      value.trim() === "" ? "Provide a valid name." : null,
-                  })}
-                />
-                <p className="error-inputs">{errors?.userName?.message}</p>
+          <form className="form">
+            <div className="form__inputs">
+              <div className="form__inputs--col1">
+                <div className="form-group">
+                  <FaRegUser className="form__icon" />
+                  <input
+                    placeholder="Your name"
+                    className="form__input"
+                    type="text"
+                    {...register("userName", {
+                      required: {
+                        value: true,
+                        message: "Provide you name.",
+                      },
+                      validate: (value) =>
+                        value.trim() === "" ? "Provide a valid name." : null,
+                    })}
+                  />
+                  <p className="error-inputs">{errors?.userName?.message}</p>
+                </div>
+
+                <div className="form-group">
+                  <FaLocationDot className="form__icon" />
+                  <input
+                    placeholder="Location"
+                    className="form__input"
+                    type="text"
+                    {...register("location", {
+                      required: {
+                        value: true,
+                        message: "Provide your location.",
+                      },
+                      validate: (value) =>
+                        value.trim() === ""
+                          ? "Provide a valid location."
+                          : null,
+                    })}
+                  />
+                  <p className="error-inputs">{errors?.location?.message}</p>
+                </div>
+
+                <div className="form-group">
+                  <textarea
+                    className="form__input textarea"
+                    rows="4"
+                    placeholder="Observations"
+                    type="text"
+                    {...register("observation")}
+                  />
+                </div>
               </div>
 
-              <div className="form-group lalezar-regular">
-                <label htmlFor="location-newRequest">Location</label>
-                <input
-                  id="location-newRequest"
-                  type="text"
-                  {...register("location", {
-                    required: {
-                      value: true,
-                      message: "Provide your location.",
-                    },
-                    validate: (value) =>
-                      value.trim() === "" ? "Provide a valid location." : null,
-                  })}
-                />
-                <p className="error-inputs">{errors?.location?.message}</p>
-              </div>
+              <div className="form__inputs--col2">
+                <div className="form-group">
+                  <FaHourglassStart className="form__icon" />
 
-              <div className="form-group lalezar-regular">
-                <label htmlFor="observation-newRequest">Observation</label>
-                <textarea
-                  id="observation-newRequest"
-                  type="text"
-                  {...register("observation")}
-                />
+                  <input
+                    className="form__input"
+                    type="date"
+                    {...register("startDate", {
+                      valueAsDate: true,
+                      required: {
+                        value: true,
+                        message: "Provide the start date.",
+                      },
+                    })}
+                  />
+                  <p className="error-inputs">{errors?.startDate?.message}</p>
+                </div>
+
+                <div className="form-group">
+                  <FaHourglassEnd className="form__icon" />
+                  <input
+                    className="form__input"
+                    type="date"
+                    {...register("endDate", {
+                      valueAsDate: true,
+                      required: {
+                        value: true,
+                        message: "Provide the end date.",
+                      },
+                    })}
+                  />
+                  <p className="error-inputs">{errors?.endDate?.message}</p>
+                </div>
+
+                <div className="form__button">
+                  <Button
+                    onClick={() => handleSubmit(onSubmit)()}
+                    disabled={isCreating}
+                    className="btn-send"
+                  >
+                    {isCreating ? <SpinnerMini /> : "Send request"}
+                  </Button>
+                </div>
               </div>
             </div>
-
-            <div className="screen-employee__inputs--col2">
-              <div className="form-group lalezar-regular">
-                <label htmlFor="dateStart-newRequest">Date start</label>
-                <input
-                  id="dateStart-newRequest"
-                  type="date"
-                  {...register("startDate", {
-                    valueAsDate: true,
-                    required: {
-                      value: true,
-                      message: "Provide the start date.",
-                    },
-                  })}
-                />
-                <p className="error-inputs">{errors?.startDate?.message}</p>
-              </div>
-
-              <div className="form-group lalezar-regular">
-                <label htmlFor="dateEnd-newRequest">Date end</label>
-                <input
-                  id="dateEnd-newRequest"
-                  type="date"
-                  {...register("endDate", {
-                    valueAsDate: true,
-                    required: {
-                      value: true,
-                      message: "Provide the end date.",
-                    },
-                  })}
-                />
-                <p className="error-inputs">{errors?.endDate?.message}</p>
-              </div>
-
-              <div className="screen-employee__button">
-                <Button
-                  onClick={() => handleSubmit(onSubmit)()}
-                  disabled={isCreating}
-                  className="screen-employee__button--send lalezar-regular"
-                >
-                  Send request
-                </Button>
-              </div>
-            </div>
-          </div>
+          </form>
         </motion.div>
       </section>
     </>

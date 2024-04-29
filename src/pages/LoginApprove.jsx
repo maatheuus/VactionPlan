@@ -8,7 +8,7 @@ import { AuthContext } from "../context/authUser-context";
 import Login from "../ui/Login";
 import Button from "../ui/Button";
 import { useNavigateToPage } from "../hooks/useNavigateToPage";
-import { useMoveBack } from "../hooks/useMoveBack";
+import { useMoveTo } from "../hooks/useMoveTo";
 // import { useAuth } from "../hooks/useAuth";
 
 function LoginApprove() {
@@ -22,7 +22,8 @@ function LoginApprove() {
   } = useForm();
 
   const { setData, setToLocation } = useNavigateToPage();
-  const { setToBak } = useMoveBack();
+
+  const { setTo } = useMoveTo();
 
   const emailApprove = "boss@example.com";
   const passwordApprove = "boss1234";
@@ -39,7 +40,7 @@ function LoginApprove() {
 
   return (
     <Login>
-      <Button onClick={() => setToBak(-1)}>
+      <Button onClick={() => setTo("..")}>
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
 

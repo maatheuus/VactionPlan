@@ -35,12 +35,12 @@ function Request() {
         <div className="request__cards">
           <ReadRequests currentPage="request" />
         </div>
+        <div className="request__button">
+          <ButtonIcon to="/newRequest">
+            <FaPlus />
+          </ButtonIcon>
+        </div>
       </motion.div>
-      <div className="request__button">
-        <ButtonIcon to="/newRequest">
-          <FaPlus />
-        </ButtonIcon>
-      </div>
     </section>
   );
 }

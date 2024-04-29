@@ -37,22 +37,20 @@ function ModalRequest({ curModal, closeModal }) {
       close={closeModal}
       name={
         <>
-          UserName:{" "}
-          <span className="input">
-            <input
-              disabled={isUpdate}
-              type="text"
-              {...register("userName", {
-                value: userName,
-              })}
-            />
-          </span>
+          UserName: <label className="modal__input"></label>
+          <input
+            type="text"
+            disabled={isUpdate}
+            {...register("userName", {
+              value: userName,
+            })}
+          />
         </>
       }
       location={
         <>
           Location:{" "}
-          <span className="input">
+          <span className="modal__input">
             <input
               disabled={isUpdate}
               type="text"
@@ -66,7 +64,7 @@ function ModalRequest({ curModal, closeModal }) {
       dateStart={
         <>
           <FaCalendarAlt /> start:
-          <span className="input">
+          <span className="modal__input">
             <input
               disabled={isUpdate}
               type="date"
@@ -80,7 +78,7 @@ function ModalRequest({ curModal, closeModal }) {
       dateEnd={
         <>
           <FaCalendarAlt /> end:
-          <span className="input">
+          <span className="modal__input">
             <input
               disabled={isUpdate}
               type="date"
@@ -94,7 +92,7 @@ function ModalRequest({ curModal, closeModal }) {
       observations={
         <>
           Observation:{" "}
-          <span className="input">
+          <span className="modal__input">
             <input
               disabled={isUpdate}
               type="text"

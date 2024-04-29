@@ -6,12 +6,12 @@ import { AuthContext } from "../context/authUser-context";
 import Button from "../ui/Button";
 import Login from "../ui/Login";
 import { useNavigateToPage } from "../hooks/useNavigateToPage";
-import { useMoveBack } from "../hooks/useMoveBack";
+import { useMoveTo } from "../hooks/useMoveTo";
 
 function LoginEmployee() {
   const { isAuthenticated, login } = useContext(AuthContext);
   const { setData, setToLocation } = useNavigateToPage();
-  const { setToBak } = useMoveBack();
+  const { setTo } = useMoveTo();
 
   const {
     register,
@@ -30,7 +30,7 @@ function LoginEmployee() {
 
   return (
     <Login>
-      <Button onClick={() => setToBak()}>
+      <Button onClick={() => setTo("..")}>
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
 

@@ -1,43 +1,25 @@
 .container-newUser {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
 }
 
 .form-newUser {
-  width: 40rem;
-  height: 40rem;
-  padding: 1rem 3rem;
+  width: auto;
+  height: auto;
+  padding: 4rem 0rem;
 
-  display: inherit;
+  display: flex;
   flex-direction: column;
-  align-items: inherit;
-
-  .form-group {
-    gap: 1rem;
-  }
-  &--label {
-    font-size: 2.1rem;
-  }
-
-  &--label + input {
-    width: 30rem;
-    height: 3rem;
-    border-radius: 5px;
-    border: 1px solid var(--color-black-primary);
-    box-shadow: 0px 1px 6px -2px var(--color-black-primary);
-
-    padding-left: 1.5rem;
-
-    &:focus {
-      outline: none;
-    }
-  }
+  align-items: center;
+  row-gap: 2rem;
 
   & .form-submit {
     border-radius: 10px;
-    background-color: var(--color-black-primary);
+    background-color: #100f0f90;
     padding: 1.5rem 2rem;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: #100f0f;
+    }
   }
 }

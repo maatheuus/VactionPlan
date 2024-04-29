@@ -49,7 +49,8 @@
 
 #employee {
   width: 100%;
-  height: 91.9vh;
+  // height: 91.9vh;
+  height: 100%;
 }
 
 .screen-employee {
@@ -59,7 +60,7 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 4rem;
 
   & .background-image {
     position: absolute;
@@ -72,47 +73,94 @@
     }
   }
 
-  &__inputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.4rem;
+  & .form {
+    width: 100%;
+    justify-content: space-around;
 
-    padding: 3rem;
-
-    &--col2 {
+    & .form__inputs {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 56rem;
+      justify-content: space-around;
+      gap: 2.7rem;
+
+      &--col1,
+      &--col2 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.4rem;
+        & .form-group {
+          position: relative;
+
+          & > svg {
+            top: 1rem;
+          }
+        }
+
+        @include res.screen(phone) {
+          justify-content: center;
+          flex-direction: column;
+        }
+      }
+
+      &--col1 {
+        & textarea {
+          resize: block;
+          padding-top: 1rem;
+          padding-left: 2rem;
+          width: 26rem;
+        }
+      }
+
+      @include res.screen(phone) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .form__input,
+        .textarea {
+          width: 21rem;
+        }
+      }
     }
 
+    &__button {
+      margin: 0 auto;
+      & .btn-send {
+        color: var(--color-off-white);
+        background-color: #100f0f90;
+        border: none;
+        border-radius: 10px;
+        padding: 1.5rem 3.5rem;
+        transition: all 0.5s ease;
+        &:hover {
+          background-color: #100f0f;
+        }
+      }
+    }
     @include res.screen(phone) {
+      // flex-direction: row;
       justify-content: center;
+      gap: 0;
     }
-  }
-
-  &__button > &__button--send {
-    padding: 1.2rem 2em;
-    margin-top: 2rem;
-
-    background-color: var(--color-black-primary);
-    border: none;
-    border-radius: 1.2rem;
-    cursor: pointer;
   }
 
   @include res.screen(phone) {
-    flex-direction: row;
-    justify-content: center;
+    margin-bottom: 5rem;
   }
 }
 
 .request {
-  height: 100vh;
+  // height: 100vh;
   padding: 3.4rem 0;
 
-  &__button {
+  &__content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__button {
+    display: block;
+    margin: 0 auto;
 
     & a {
       margin: 3rem 0;
