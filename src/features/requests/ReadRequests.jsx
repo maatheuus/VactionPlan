@@ -40,7 +40,6 @@ export default function ReadRequests({ currentPage }) {
         <p className="no-requests">No request yet...</p>
       )}
       {filteredRequests.map((value) => {
-        if (value.userName === undefined) return;
         return (
           <Card
             key={value.id}

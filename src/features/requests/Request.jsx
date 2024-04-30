@@ -19,28 +19,31 @@ function Request() {
   const { variants, initial, animate, exit } = useAnimatePages();
 
   return (
-    <section className="request">
-      <ButtonIcon
-        onClick={() => navigate("/")}
-        icon={<FaArrowCircleLeft style={styleIcon} />}
-      />
-      <motion.div
-        variants={variants}
-        initial={initial}
-        animate={animate}
-        exit={exit}
-        className="request__content"
-      >
-        <h1 className="request__title lalezar-regular ">Requests</h1>
-        <div className="request__cards">
+    <section id="requests">
+      <h1 className="request__title lalezar-regular ">Requests</h1>
+
+      <div className="container-requests">
+        <ButtonIcon
+          onClick={() => navigate("/")}
+          className="button-all"
+          icon={<FaArrowCircleLeft style={styleIcon} />}
+        />
+        <motion.div
+          variants={variants}
+          initial={initial}
+          animate={animate}
+          exit={exit}
+          className="container-requests__content"
+        >
           <ReadRequests currentPage="request" />
-        </div>
-        <div className="request__button">
-          <ButtonIcon to="/newRequest">
-            <FaPlus />
-          </ButtonIcon>
-        </div>
-      </motion.div>
+
+          <div className="container-requests__button">
+            <ButtonIcon to="/newRequest">
+              <FaPlus />
+            </ButtonIcon>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

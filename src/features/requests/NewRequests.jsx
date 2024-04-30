@@ -16,7 +16,7 @@ import { handleErrorsMessages } from "../../services/toastApi";
 import Button from "../../ui/Button";
 import SpinnerMini from "../../ui/SpinnerMini";
 
-import image from "../../../public/images/relaxation-bro.png";
+// import image from "../../../public/images/relaxation-bro.png";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
 
 import {
@@ -57,7 +57,7 @@ function NewRequests() {
   };
   return (
     <section id="employee">
-      <Button onClick={() => setTo(-1)}>
+      <Button onClick={() => setTo(-1)} className="button-all">
         <FaCircleArrowLeft className="arrow-left" />
       </Button>
 
@@ -69,10 +69,10 @@ function NewRequests() {
         exit={exit}
       >
         <h1 className="screen-employee__title">Requests for vacations</h1>
-
+        {/* 
         <div className="background-image">
           <img src={image} alt="woman in the pool" />
-        </div>
+        </div> */}
 
         <form className="form">
           <div className="form__inputs">

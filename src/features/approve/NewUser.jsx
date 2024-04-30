@@ -38,7 +38,7 @@ function NewUser() {
       animate={animate}
       exit={exit}
     >
-      <Button onClick={() => navigate(-1)}>
+      <Button onClick={() => navigate(-1)} className="button-all">
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
       <form className="form">

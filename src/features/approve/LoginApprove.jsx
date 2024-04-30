@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 import SpinnerMini from "../../ui/SpinnerMini";
 
-import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
+import { FaArrowCircleLeft } from "react-icons/fa";
 import { AuthContext } from "../../context/authUser-context";
 import Login from "../../pages/Login";
 import Button from "../../ui/Button";
@@ -44,14 +44,6 @@ function LoginApprove() {
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
 
-      <div className="logo-login">
-        <FaRegUserCircle
-          style={{
-            width: "6rem",
-            height: "6rem",
-          }}
-        />
-      </div>
       <form className="form-login login" onSubmit={handleSubmit(onSubmit)}>
         <h1 className=" login__title">Login</h1>
         <div className="form-group">

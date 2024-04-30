@@ -51,27 +51,25 @@ function ScreenApprove() {
             exit={exit}
             className="screen-approve"
           >
-            <div className="screen-approve__button oxygen-regular">
-              {/* <span className="status denied"></span>
-                <span className="status approve"></span>
-                <span className="status pendent"></span>
-                {showCardStatus} */}
-              <h1>All requests for you</h1>
+            <div className="screen-approve__button ">
+              <h1 className="oxygen-regular">All requests</h1>
             </div>
-            <ReadRequests currentPage="approver" />
-          </motion.div>
 
-          <motion.div
-            className="settings"
-            ref={ref}
-            variants={variants}
-            initial="closed"
-            animate={isShowSettings ? "open" : "closed"}
-          >
-            <Button onClick={showSettings} className="settings-btn">
-              <HiOutlineCog6Tooth className="settings-icon" />
-            </Button>
-            {isShowSettings && <SettingsApprove />}
+            <ReadRequests currentPage="approver" />
+
+            {/* Button to the settings */}
+            <motion.div
+              className="settings"
+              ref={ref}
+              variants={variants}
+              initial="closed"
+              animate={isShowSettings ? "open" : "closed"}
+            >
+              <Button onClick={showSettings} className="settings-btn">
+                <HiOutlineCog6Tooth className="settings-icon" />
+              </Button>
+              {isShowSettings && <SettingsApprove />}
+            </motion.div>
           </motion.div>
         </section>
       )}
@@ -81,3 +79,9 @@ function ScreenApprove() {
 }
 
 export default ScreenApprove;
+/**
+ *               {/* <span className="status denied"></span>
+                <span className="status approve"></span>
+                <span className="status pendent"></span>
+                {showCardStatus} 
+ */

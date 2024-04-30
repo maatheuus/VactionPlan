@@ -2,27 +2,23 @@
 
 .app-layout {
   height: 100vh;
-  background-color: var(--color-bege-001);
-  padding-bottom: 4rem;
-  @include res.screen(tab) {
-    height: auto;
-  }
-}
 
-.main {
-  height: 100%;
-  @include res.screen(phone) {
-    height: auto;
-  }
-}
-
-.container-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 3.2rem;
-  height: 100vh;
-
-  @include res.screen(phone) {
+  // @include res.screen(tab) {
+  //   height: auto;
+  // }
+  & .main {
+    background-color: var(--color-bege-001);
     height: 100%;
+    display: flex;
+    @include res.screen(phone) {
+      // height: 100%;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
   }
 }

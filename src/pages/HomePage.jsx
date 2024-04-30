@@ -1,4 +1,4 @@
-import { FaRegUser, FaRegUserCircle } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 import { Outlet, useLocation } from "react-router-dom";
 
 import Login from "./Login";
@@ -11,9 +11,6 @@ function HomePage() {
     <>
       {url === "login" && (
         <Login>
-          <div className="logo-login">
-            <FaRegUserCircle />
-          </div>
           <h1 className="chose-login__title oxygen-regular">You are the</h1>
           <div className="chose-login login">
             <div>

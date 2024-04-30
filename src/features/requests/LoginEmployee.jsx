@@ -1,12 +1,13 @@
 import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { FaArrowCircleLeft, FaRegUserCircle } from "react-icons/fa";
+import { FaArrowCircleLeft } from "react-icons/fa";
 
 import { AuthContext } from "../../context/authUser-context";
 import Button from "../../ui/Button";
 import Login from "../../pages/Login";
 import { useNavigateToPage } from "../../hooks/useNavigateToPage";
 import { useMoveTo } from "../../hooks/useMoveTo";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginEmployee() {
   const { isAuthenticated, login } = useContext(AuthContext);
@@ -25,7 +26,8 @@ function LoginEmployee() {
   }, [setData, setToLocation, isAuthenticated]);
 
   const onSubmit = (data) => {
-    login(data.email, data.password);
+    const { email, password } = data;
+    login(email, password);
   };
 
   return (
@@ -34,16 +36,7 @@ function LoginEmployee() {
         <FaArrowCircleLeft className="arrow-left" />
       </Button>
 
-      <div className="logo-login">
-        <FaRegUserCircle
-          style={{
-            width: "6rem",
-            height: "6rem",
-          }}
-        />
-      </div>
-
-      <form className="form-login login">
+      <form className="form-login login" onSubmit={handleSubmit(onSubmit)}>
         <h1 className=" login__title">Login</h1>
         <div className="form-login__input">
           <div className="form-group">
@@ -77,16 +70,10 @@ function LoginEmployee() {
           </div>
         </div>
 
-        <div className="form-login__button ">
-          <Button
-            className="form-submit btn-primary"
-            onClick={() => handleSubmit(onSubmit)()}
-          >
-            Login
+        <div className="form-login__button">
+          <Button type="submit" className="form-submit btn-primary">
+            {isAuthenticated ? <SpinnerMini /> : "Login"}
           </Button>
-          {/* <Link to="/singUp">
-            <Button className="form-submit btn-primary">Sing Up</Button>
-          </Link> */}
         </div>
       </form>
     </Login>

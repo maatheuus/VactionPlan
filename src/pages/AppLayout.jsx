@@ -4,7 +4,7 @@ function AppLayout() {
   return (
     <div className="app-layout">
       <main className="main">
-        <div className="container-layout">
+        <div className="app-layout__container">
           <Outlet />
         </div>
       </main>
