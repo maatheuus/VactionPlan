@@ -1,19 +1,16 @@
-import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import SpinnerMini from "../../ui/SpinnerMini";
 
 import { FaArrowCircleLeft } from "react-icons/fa";
-import { AuthContext } from "../../context/authUser-context";
 import Login from "../../pages/Login";
 import Button from "../../ui/Button";
-import { useNavigateToPage } from "../../hooks/useNavigateToPage";
+// import { useNavigateToPage } from "../../hooks/useNavigateToPage";
 import { useMoveTo } from "../../hooks/useMoveTo";
-// import { useAuth } from "../hooks/useAuth";
+import { useLogin } from "./useLogin";
 
 function LoginApprove() {
-  const { isAuthenticated, login } = useContext(AuthContext);
-  // const { isAuthenticated, login } = useAuth();
+  const { isLoading, login } = useLogin("approver");
 
   const {
     register,
@@ -21,21 +18,17 @@ function LoginApprove() {
     formState: { errors },
   } = useForm();
 
-  const { setData, setToLocation } = useNavigateToPage();
+  // const { setData, setToLocation } = useNavigateToPage();
 
   const { setTo } = useMoveTo();
 
   const emailApprove = "boss@example.com";
   const passwordApprove = "boss1234";
 
-  useEffect(() => {
-    setData(isAuthenticated);
-    setToLocation("/approver", { replace: true });
-  }, [setData, setToLocation, isAuthenticated]);
-
   const onSubmit = (data) => {
     const { email, password } = data;
-    login(email, password);
+
+    login({ email, password });
   };
 
   return (
@@ -85,7 +78,7 @@ function LoginApprove() {
         </div>
         <div className="form-login__button">
           <Button type="submit" className="form-submit btn-primary">
-            {isAuthenticated ? <SpinnerMini /> : "Login"}
+            {isLoading ? <SpinnerMini /> : "Log in"}
           </Button>
         </div>
       </form>

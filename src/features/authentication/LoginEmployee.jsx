@@ -1,18 +1,17 @@
-import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowCircleLeft } from "react-icons/fa";
 
-import { AuthContext } from "../../context/authUser-context";
 import Button from "../../ui/Button";
 import Login from "../../pages/Login";
-import { useNavigateToPage } from "../../hooks/useNavigateToPage";
+// import { useNavigateToPage } from "../../hooks/useNavigateToPage";
 import { useMoveTo } from "../../hooks/useMoveTo";
 import SpinnerMini from "../../ui/SpinnerMini";
+import { useLogin } from "./useLogin";
 
 function LoginEmployee() {
-  const { isAuthenticated, login } = useContext(AuthContext);
-  const { setData, setToLocation } = useNavigateToPage();
+  // const { setData, setToLocation } = useNavigateToPage();
   const { setTo } = useMoveTo();
+  const { isLoading, login } = useLogin("requests");
 
   const {
     register,
@@ -20,14 +19,9 @@ function LoginEmployee() {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    setData(isAuthenticated);
-    setToLocation("/requests", { replace: true });
-  }, [setData, setToLocation, isAuthenticated]);
-
   const onSubmit = (data) => {
     const { email, password } = data;
-    login(email, password);
+    login({ email, password });
   };
 
   return (
@@ -72,7 +66,7 @@ function LoginEmployee() {
 
         <div className="form-login__button">
           <Button type="submit" className="form-submit btn-primary">
-            {isAuthenticated ? <SpinnerMini /> : "Login"}
+            {isLoading ? <SpinnerMini /> : "Log in"}
           </Button>
         </div>
       </form>

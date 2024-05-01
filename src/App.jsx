@@ -4,15 +4,15 @@ import {
   Navigate,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
-import AuthProvider from "./context/authUser-context";
+import ProtectedRoute from "./ui/ProtectedRoute";
 import ModalProvider from "./context/modal-context";
 
 import HomePage from "./pages/HomePage";
-import LoginApprove from "./features/approve/LoginApprove";
-import LoginEmployee from "./features/requests/LoginEmployee";
+import LoginApprove from "./features/authentication/LoginApprove";
+import LoginEmployee from "./features/authentication/LoginEmployee";
 import NewUser from "./features/approve/NewUser";
 import NewRequestsPage from "./pages/NewRequestPage";
 import PageNotFound from "./pages/PageNotFound";
@@ -23,18 +23,14 @@ import Employee from "./pages/Employee";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <PageNotFound />,
     children: [
-      { index: true, element: <Navigate replace to="login" /> },
-      {
-        path: "login",
-        element: <HomePage />,
-        children: [
-          { path: "approver", element: <LoginApprove /> },
-          { path: "employee", element: <LoginEmployee /> },
-        ],
-      },
+      // { index: true, element: <Navigate replace to="/" /> },
 
       {
         path: "approver",
@@ -43,6 +39,14 @@ const router = createBrowserRouter([
       },
       { path: "requests", element: <Employee /> },
       { path: "newRequest", element: <NewRequestsPage /> },
+    ],
+  },
+  {
+    path: "login",
+    element: <HomePage />,
+    children: [
+      { path: "approver", element: <LoginApprove /> },
+      { path: "employee", element: <LoginEmployee /> },
     ],
   },
 ]);
@@ -58,33 +62,31 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <ReactQueryDevtools /> */}
-      <AuthProvider>
-        <ModalProvider>
-          <RouterProvider router={router} />
-          <Toaster
-            position="top-right"
-            gutter={12}
-            containerStyle={{ margin: "8px" }}
-            toastOptions={{
-              success: {
-                duration: 3000,
-              },
-              error: {
-                duration: 5000,
-              },
-              style: {
-                fontSize: "16px",
-                maxWidth: "500px",
-                padding: "16px 24px",
-                backgroundColor: "var(--color-white-primary)",
-                color: "var(--color-black-primary)",
-                zIndex: "5000",
-              },
-            }}
-          />
-        </ModalProvider>
-      </AuthProvider>
+      <ReactQueryDevtools />
+      <ModalProvider>
+        <RouterProvider router={router} />
+        <Toaster
+          position="top-right"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "var(--color-white-primary)",
+              color: "var(--color-black-primary)",
+              zIndex: "5000",
+            },
+          }}
+        />
+      </ModalProvider>
     </QueryClientProvider>
   );
 }
