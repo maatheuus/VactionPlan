@@ -1,34 +1,32 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { FaArrowCircleLeft, FaLock, FaEnvelope } from "react-icons/fa";
-import { AuthContext } from "../../context/authUser-context";
+import { FaLock, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-import Button from "../../ui/Button";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
+import { useSignUp } from "../authentication/useSignUp";
+import Button from "../../ui/Button";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function NewUser() {
-  const { isAuthenticated, singUp } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated) navigate("/requests", { replace: true });
-  }, [isAuthenticated, navigate]);
+  const { isLoading, signUp } = useSignUp();
+  const { variants, initial, animate, exit } = useAnimatePages();
 
   const {
     register,
-    handleSubmit,
-    watch,
     formState: { errors },
+    handleSubmit,
+    getValues,
+    reset,
   } = useForm();
-  const whatPassword = watch("password");
 
-  const onSubmit = (data) => {
-    const { email, password } = data;
-    singUp(email, password);
-  };
-  const { variants, initial, animate, exit } = useAnimatePages();
+  function onSubmit({ email, password }) {
+    signUp(
+      { email, password },
+      {
+        onSettled: () => reset(),
+      }
+    );
+  }
 
   return (
     <motion.div
@@ -38,24 +36,19 @@ function NewUser() {
       animate={animate}
       exit={exit}
     >
-      <Button onClick={() => navigate(-1)} className="button-all">
-        <FaArrowCircleLeft className="arrow-left" />
-      </Button>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <FaEnvelope className="form__icon" />
           <input
             type="email"
             placeholder="Email Address"
+            disabled={isLoading}
             className="form__input"
             {...register("email", {
-              required: {
-                value: true,
-                message: "Please enter a valid email address",
-              },
-              validate: (email) => {
-                if (!email.includes("@") || !email.includes(".com"))
-                  return "Missing @ or .com in the email address";
+              required: "This field is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Please provide a valid email address",
               },
             })}
           />
@@ -66,15 +59,13 @@ function NewUser() {
           <input
             type="password"
             placeholder="Password"
+            disabled={isLoading}
             className="form__input"
             {...register("password", {
-              required: {
-                value: true,
-                message: "Please enter a valid password",
-              },
+              required: "This field is required",
               minLength: {
                 value: 6,
-                message: "Please enter a password with at least 6 characters",
+                message: "Password must be at least 6 characters",
               },
             })}
           />
@@ -85,25 +76,25 @@ function NewUser() {
           <input
             type="password"
             placeholder="Confirm Password"
+            disabled={isLoading}
             className="form__input"
-            {...register("confirm_password", {
-              required: true,
-              validate: (password) => {
-                if (password !== whatPassword)
-                  return "The password does not match";
-              },
+            {...register("passwordConfirm", {
+              required: "This field is required",
+              validate: (value) =>
+                value === getValues().password || "Passwords need to match",
             })}
           />
-          <p className="error-inputs">{errors?.confirm_password?.message}</p>
+          <p className="error-inputs">{errors?.passwordConfirm?.message}</p>
         </div>
 
         <div className="form-button">
-          <Button
-            className="form-submit btn-primary"
-            onClick={() => handleSubmit(onSubmit)()}
-          >
-            Register
-          </Button>
+          {isLoading ? (
+            <SpinnerMini />
+          ) : (
+            <Button className="form-submit btn-primary" type="submit">
+              Create new user
+            </Button>
+          )}
         </div>
       </form>
     </motion.div>

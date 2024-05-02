@@ -1,26 +1,9 @@
 import supabase from "./supabase";
 
-export async function getRequests(eqFilter = false, filterRequests) {
+export async function getRequests() {
   const { data, error } = await supabase.from("requests").select("*");
 
-  // if (eqFilter) {
-  //   const { data, error } = await supabase
-  //     .from("requests")
-  //     .select("*")
-  //     .eq("statusRequest", `${filterRequests}`);
-
-  //   if (error) {
-  //     console.log(error);
-  //     throw new Error("could not read request");
-  //   }
-
-  //   return data;
-  // }
-
-  if (error) {
-    console.log(error);
-    throw new Error("could not read request");
-  }
+  if (error) throw new Error("could not read request");
 
   return data;
 }
@@ -32,7 +15,7 @@ export async function newRequest(request) {
     .select()
     .single();
 
-  if (error) console.log(error);
+  if (error) throw new Error(error.message);
 
   return data;
 }
@@ -43,12 +26,8 @@ export async function updateRequest(requestUpdate, id) {
     .update(requestUpdate)
     .eq("id", id)
     .select();
-  console.log(requestUpdate);
 
-  if (error) {
-    console.log(error);
-    throw new Error("could not update request");
-  }
+  if (error) throw new Error("could not update request");
 }
 
 export async function deleteRequest(requestDelete) {
@@ -57,23 +36,5 @@ export async function deleteRequest(requestDelete) {
     .delete()
     .eq("id", requestDelete);
 
-  if (error) {
-    console.log(error);
-    throw new Error("Could not delete request");
-  }
+  if (error) throw new Error("Could not delete request");
 }
-
-export function realTimeData(eventRealTime, payloadRealTimeDataFunc) {
-  const requestsListener = supabase
-    .channel("requests")
-    .on(
-      "postgres_changes",
-      { event: `${eventRealTime}`, schema: "public", table: "requests" },
-      payloadRealTimeDataFunc
-    )
-    .subscribe();
-
-  // return requestsListener;
-  return () => requestsListener.unsubscribe();
-}
-//

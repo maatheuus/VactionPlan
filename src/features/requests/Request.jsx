@@ -1,33 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { FaArrowCircleLeft, FaPlus } from "react-icons/fa";
-
-import ReadRequests from "./ReadRequests";
-import { useAnimatePages } from "../../hooks/useAnimatePages";
 import { motion } from "framer-motion";
-import ButtonIcon from "../../ui/ButtonIcon";
+import { FaPlus } from "react-icons/fa";
+import { useAnimatePages } from "../../hooks/useAnimatePages";
 
-const styleIcon = {
-  position: "absolute",
-  left: "2.5rem",
-  top: "2.5rem",
-  width: "3rem",
-  height: "3rem",
-};
+import ButtonIcon from "../../ui/ButtonIcon";
+import ReadRequests from "./ReadRequests";
+import Logout from "../authentication/Logout";
 
 function Request() {
-  const navigate = useNavigate();
   const { variants, initial, animate, exit } = useAnimatePages();
-
   return (
     <section id="requests">
       <h1 className="request__title lalezar-regular ">Requests</h1>
 
       <div className="container-requests">
-        <ButtonIcon
-          onClick={() => navigate("/")}
-          className="button-all"
-          icon={<FaArrowCircleLeft style={styleIcon} />}
-        />
+        <Logout />
         <motion.div
           variants={variants}
           initial={initial}

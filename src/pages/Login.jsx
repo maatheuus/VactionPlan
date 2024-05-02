@@ -21,6 +21,7 @@ function Login({ children }) {
             }}
           />
         </div>
+
         {children}
       </motion.div>
     </section>

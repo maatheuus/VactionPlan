@@ -36,8 +36,8 @@ export default function ReadRequests({ currentPage }) {
 
   return (
     <div className="content-cards">
-      {requests.length === 0 && (
-        <p className="no-requests">No request yet...</p>
+      {filteredRequests.length === 0 && (
+        <p className="no-requests">You don&apos;t have request yet...</p>
       )}
       {filteredRequests.map((value) => {
         return (

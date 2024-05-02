@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
-// import { FilterContext } from "../context/filterRequests-context";
 import { HiOutlineCog6Tooth } from "react-icons/hi2";
 import { motion } from "framer-motion";
 
@@ -14,7 +13,7 @@ import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 const variants = {
   open: {
-    width: "28rem",
+    width: "18rem",
     height: "4rem",
     padding: ".5rem 1rem",
   },
@@ -27,7 +26,7 @@ const variants = {
 
 function ScreenApprove() {
   const [isShowSettings, setIsShowSettings] = useState(false);
-  // const { showCardStatus } = useContext(FilterContext);
+
   const ref = useOutsideClick(setIsShowSettings);
   const { variants: variantsPage, initial, animate, exit } = useAnimatePages();
 

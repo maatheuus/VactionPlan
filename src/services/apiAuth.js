@@ -1,15 +1,39 @@
 import supabase from "./supabase";
 
+export async function signUp(email, password) {
+  const { data: savedSessionData } = await supabase.auth.getSession();
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  // If there was a previously authenticated user, restore their session
+  if (savedSessionData) {
+    // Restore the session in local storage
+    localStorage.setItem("supabase.auth.token", savedSessionData);
+
+    // Refresh the Supabase client's authentication state
+    await supabase.auth.setSession(savedSessionData.session);
+  }
+
+  if (error) {
+    if (error.message.includes("unique")) {
+      throw new Error("User with this email already exists");
+    }
+    throw new Error(error.message);
+  }
+
+  return data;
+}
+
 export async function login(email, password) {
   const { error, data } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
-  if (error) {
-    console.log(error.message);
-    throw new Error("Could not login");
-  }
+  if (error) throw new Error(error.message);
 
   return data;
 }
@@ -24,4 +48,9 @@ export async function getCurrentUser() {
   if (error) throw new Error(error.message);
 
   return data?.user;
+}
+
+export async function logout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw new Error(error.message);
 }

@@ -30,8 +30,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <PageNotFound />,
     children: [
-      // { index: true, element: <Navigate replace to="/" /> },
-
+      { index: true, element: <Navigate replace to="/login" /> },
       {
         path: "approver",
         element: <Approve />,

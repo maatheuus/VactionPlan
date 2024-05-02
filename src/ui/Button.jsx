@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Button({ to, children, ...props }) {
+export default function Button({ type = "button", to, children, ...props }) {
   if (to) {
     return (
       <Link to={to} {...props}>
@@ -10,7 +10,7 @@ export default function Button({ to, children, ...props }) {
   }
 
   return (
-    <button type="button" {...props}>
+    <button type={type} {...props} style={{ cursor: "pointer" }}>
       {children}
     </button>
   );

@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 
 import ListButtons from "./ListButtons";
 import Menu from "./Menu";
+import Logout from "../features/authentication/Logout";
 
 function Header() {
   const { pathname } = useLocation();
@@ -10,6 +11,7 @@ function Header() {
   return (
     <header className="header">
       <div className="content-header">
+        <Logout />
         {url === "approver" && (
           <>
             <Menu />

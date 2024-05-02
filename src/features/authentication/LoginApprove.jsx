@@ -5,11 +5,13 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import Login from "../../pages/Login";
 import Button from "../../ui/Button";
-// import { useNavigateToPage } from "../../hooks/useNavigateToPage";
 import { useMoveTo } from "../../hooks/useMoveTo";
 import { useLogin } from "./useLogin";
 
 function LoginApprove() {
+  const emailApprove = "boss@example.com";
+  const passwordApprove = "boss1234";
+
   const { isLoading, login } = useLogin("approver");
 
   const {
@@ -18,12 +20,7 @@ function LoginApprove() {
     formState: { errors },
   } = useForm();
 
-  // const { setData, setToLocation } = useNavigateToPage();
-
   const { setTo } = useMoveTo();
-
-  const emailApprove = "boss@example.com";
-  const passwordApprove = "boss1234";
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -44,6 +41,7 @@ function LoginApprove() {
             type="email"
             placeholder="Email"
             className={errors?.email?.message && "error-input"}
+            defaultValue={emailApprove}
             {...register("email", {
               required: {
                 value: true,
@@ -62,6 +60,7 @@ function LoginApprove() {
           <input
             type="password"
             placeholder="Password"
+            defaultValue={passwordApprove}
             className={errors?.password?.message && "error-input"}
             {...register("password", {
               required: {

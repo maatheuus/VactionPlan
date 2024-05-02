@@ -1,17 +1,15 @@
 import { useForm } from "react-hook-form";
 import { FaArrowCircleLeft } from "react-icons/fa";
 
-import Button from "../../ui/Button";
+import { useLogin } from "./useLogin";
 import Login from "../../pages/Login";
-// import { useNavigateToPage } from "../../hooks/useNavigateToPage";
 import { useMoveTo } from "../../hooks/useMoveTo";
 import SpinnerMini from "../../ui/SpinnerMini";
-import { useLogin } from "./useLogin";
+import Button from "../../ui/Button";
 
 function LoginEmployee() {
-  // const { setData, setToLocation } = useNavigateToPage();
-  const { setTo } = useMoveTo();
   const { isLoading, login } = useLogin("requests");
+  const { setTo } = useMoveTo();
 
   const {
     register,
