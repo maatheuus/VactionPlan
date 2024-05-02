@@ -32,7 +32,7 @@ just copy and paste in your browser or hold the ctrl key for windows or command 
 ## How to use:
 
 Once you have finished installing and configuring the environment, you will be directed to this screen:
-<img src='./src/assets/imgProject/homePage.png'/>
+<img src='./src/assets/imgProject/homePageImage.png'/>
 
 You can choose to enter as an approver or employee.
 
@@ -44,7 +44,7 @@ To enter as an approver, you must provide the email and password already defined
 - password: boss1234
 
 Manager, you will be able to deny or approve your employees' vacations by clicking on the view button on the card and clicking on the buttons that will appear in the current modal:
-<img src='./src/assets/imgProject/approveImg.png' />
+<img src='./src/assets/imgProject/modalImage.png' />
 
 ### Employee
 
@@ -52,7 +52,7 @@ Now to join as an employee, you can create an account and register for free and 
 
 As soon as you register, you can make a new vacation request, in the image below, which the manager can deny or approve.
 
-<img src='./src/assets/imgProject/newRequest.png'/>
+<img src='./src/assets/imgProject/newRequestImage.png'/>
 Once the request is made, you will be directed to the main employees page and wait for the approver's response
 
 ## 🔨Tools
