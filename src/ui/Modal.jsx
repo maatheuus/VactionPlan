@@ -7,8 +7,8 @@ import {
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import ButtonIcon from "../ui/ButtonIcon";
 
-function Modal({ buttons, error, curModal, close }) {
-  const { userName, location, startDate, endDate, observation } = curModal;
+function Modal({ buttons, error, close, ...props }) {
+  const { userName, location, startDate, endDate, observation } = props;
 
   const ref = useOutsideClick(close);
 

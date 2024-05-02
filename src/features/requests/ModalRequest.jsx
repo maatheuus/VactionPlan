@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 
 import { useDeleteRequest } from "./useDeleteRequest";
 import ButtonIcon from "../../ui/ButtonIcon";
 import Modal from "../../ui/Modal";
 
 import EditFormRequest from "./EditFormRequest";
+import SpinnerMini from "../../ui/SpinnerMini";
+import Button from "../../ui/Button";
 function ModalRequest({ curModal, closeModal }) {
   const [isEdit, setIsEdit] = useState(false);
   const { isDeleting, deleteRequest } = useDeleteRequest();
@@ -15,7 +17,6 @@ function ModalRequest({ curModal, closeModal }) {
   return !isEdit ? (
     <Modal
       close={closeModal}
-      curModal={curModal}
       userName={userName}
       location={location}
       startDate={startDate}
@@ -30,12 +31,13 @@ function ModalRequest({ curModal, closeModal }) {
             onClick={() => setIsEdit(!isEdit)}
           />
 
-          <ButtonIcon
-            icon={<FaRegTrashAlt />}
+          <Button
             className="modal__content-button--deny button-modal"
             disabled={isDeleting}
             onClick={() => deleteRequest(curModal)}
-          />
+          >
+            {isDeleting ? <SpinnerMini /> : "Delete"}
+          </Button>
         </>
       }
     />

@@ -13,6 +13,10 @@
     &__button {
       padding: 1.5rem;
     }
+
+    @include res.screen(phone) {
+      position: none;
+    }
   }
 
   .settings {
@@ -84,13 +88,17 @@
       &--col1,
       &--col2 {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
         gap: 2.4rem;
+
         & .form-group {
           position: relative;
+          display: flex;
+          flex-direction: column;
 
           & > svg {
-            top: 1rem;
+            top: 0.7rem;
           }
         }
 

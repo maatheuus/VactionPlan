@@ -4,7 +4,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 import ProtectedRoute from "./ui/ProtectedRoute";
@@ -61,7 +60,6 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
       <ModalProvider>
         <RouterProvider router={router} />
         <Toaster

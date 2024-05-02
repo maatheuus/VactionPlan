@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useDeleteRequest } from "./useDeleteRequest";
 import { useUpdateRequest } from "./useUpdateRequest";
-import { FaRegTrashAlt } from "react-icons/fa";
 
 import Modal from "../../ui/Modal";
-import ButtonIcon from "../../ui/ButtonIcon";
 import Button from "../../ui/Button";
 import {
   checkDistance,
@@ -123,12 +121,13 @@ function EditFormRequest({ curModal, closeModal }) {
             {isUpdate ? <SpinnerMini /> : "Confirm"}
           </Button>
 
-          <ButtonIcon
-            icon={isDeleting ? <SpinnerMini /> : <FaRegTrashAlt />}
+          <Button
             className="modal__content-button--deny button-modal"
             disabled={isDeleting}
             onClick={() => deleteRequest(curModal)}
-          />
+          >
+            {isDeleting ? <SpinnerMini /> : "Delete"}
+          </Button>
         </>
       }
     />

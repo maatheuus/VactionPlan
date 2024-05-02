@@ -44,15 +44,14 @@ function NewRequests() {
       handleErrorsMessages(
         "The date need to be lass then 30 days or equal 30 days"
       );
-
     // if the  end date is before the start date, error
-    if (checkDate)
+    else if (checkDate)
       handleErrorsMessages("The date needs greater than the selected date");
-
-    createRequest(data);
-
-    if (!isCreating) {
-      setTo("/requests");
+    else {
+      createRequest(data);
+      if (!isCreating) {
+        setTo("/requests");
+      }
     }
   };
   return (

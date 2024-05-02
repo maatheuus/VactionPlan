@@ -7,19 +7,14 @@ import Modal from "../../ui/Modal";
 import ButtonIcon from "../../ui/ButtonIcon";
 
 function EditModalRequest({ curModal, closeModal }) {
-  const { userName, location, startDate, endDate, observation, id } = curModal;
+  const { userName, location, startDate, endDate, observation } = curModal;
 
   const { isDeleting, deleteRequest } = useDeleteRequest();
   const { isUpdate, updateRequest } = useUpdateRequest();
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      userName,
-      location,
-      startDate,
-      endDate,
-      observation,
-      id,
+      ...curModal,
     },
   });
 
@@ -35,7 +30,7 @@ function EditModalRequest({ curModal, closeModal }) {
   return (
     <Modal
       close={closeModal}
-      name={
+      userName={
         <>
           UserName:{" "}
           <span className="input">
@@ -63,7 +58,7 @@ function EditModalRequest({ curModal, closeModal }) {
           </span>
         </>
       }
-      dateStart={
+      startDate={
         <>
           <FaCalendarAlt /> start:
           <span className="input">
@@ -77,7 +72,7 @@ function EditModalRequest({ curModal, closeModal }) {
           </span>
         </>
       }
-      dateEnd={
+      endDate={
         <>
           <FaCalendarAlt /> end:
           <span className="input">
@@ -91,7 +86,7 @@ function EditModalRequest({ curModal, closeModal }) {
           </span>
         </>
       }
-      observations={
+      observation={
         <>
           Observation:{" "}
           <span className="input">
