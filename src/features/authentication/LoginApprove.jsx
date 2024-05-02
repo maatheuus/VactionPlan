@@ -41,7 +41,6 @@ function LoginApprove() {
             type="email"
             placeholder="Email"
             className={errors?.email?.message && "error-input"}
-            defaultValue={emailApprove}
             {...register("email", {
               required: {
                 value: true,
@@ -60,7 +59,6 @@ function LoginApprove() {
           <input
             type="password"
             placeholder="Password"
-            defaultValue={passwordApprove}
             className={errors?.password?.message && "error-input"}
             {...register("password", {
               required: {
