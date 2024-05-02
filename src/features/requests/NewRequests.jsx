@@ -16,7 +16,6 @@ import { handleErrorsMessages } from "../../services/toastApi";
 import Button from "../../ui/Button";
 import SpinnerMini from "../../ui/SpinnerMini";
 
-// import image from "../../../public/images/relaxation-bro.png";
 import { useAnimatePages } from "../../hooks/useAnimatePages";
 
 import {
@@ -68,10 +67,6 @@ function NewRequests() {
         exit={exit}
       >
         <h1 className="screen-employee__title">Requests for vacations</h1>
-        {/* 
-        <div className="background-image">
-          <img src={image} alt="woman in the pool" />
-        </div> */}
 
         <form className="form">
           <div className="form__inputs">
