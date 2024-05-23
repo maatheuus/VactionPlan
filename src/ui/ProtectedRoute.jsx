@@ -1,17 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-
 import { useUser } from "../features/authentication/useUser";
-import Spinner from "./Spinner";
-
-const FullPage = styled.div`
-  height: 100vh;
-  background-color: var(--color-bege-003);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { Loader } from "lucide-react";
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
@@ -25,11 +15,10 @@ function ProtectedRoute({ children }) {
 
   if (isLoading)
     return (
-      <FullPage>
-        <Spinner />
-      </FullPage>
+      <div className="h-screen bg-zinc-100 flex items-center justify-center">
+        <Loader className="animate-spin w-12 h-12 block" />
+      </div>
     );
-
   if (isAuthenticated) return children;
 }
 
