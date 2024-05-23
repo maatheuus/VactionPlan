@@ -1,15 +1,14 @@
 import { useForm } from "react-hook-form";
-import { FaArrowCircleLeft } from "react-icons/fa";
-
 import { useLogin } from "./useLogin";
+import { ArrowLeftToLine, Loader } from "lucide-react";
+
 import Login from "../../pages/Login";
-import { useMoveTo } from "../../hooks/useMoveTo";
-import SpinnerMini from "../../ui/SpinnerMini";
+import FormLogin from "./FormLogin";
 import Button from "../../ui/Button";
+import ButtonIcon from "../../ui/ButtonIcon";
 
 function LoginEmployee() {
-  const { isLoading, login } = useLogin("requests");
-  const { setTo } = useMoveTo();
+  const { isLoading, login } = useLogin("/requests/employers");
 
   const {
     register,
@@ -24,48 +23,22 @@ function LoginEmployee() {
 
   return (
     <Login>
-      <Button onClick={() => setTo("..")}>
-        <FaArrowCircleLeft className="arrow-left" />
-      </Button>
+      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <FormLogin register={register} errors={errors} />
 
-      <form className="form-login login" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className=" login__title">Login</h1>
-        <div className="form-login__input">
-          <div className="form-group">
-            <input
-              placeholder="Email"
-              type="email"
-              className={errors?.password?.message && "error-input"}
-              {...register("email", {
-                required: {
-                  value: true,
-                  message: "Please, enter your email.",
-                },
-              })}
-            />
-            <p className="error-inputs">{errors?.email?.message}</p>
-          </div>
-
-          <div className="form-group">
-            <input
-              placeholder="Password"
-              type="password"
-              className={errors?.password?.message && "error-input"}
-              {...register("password", {
-                required: {
-                  value: true,
-                  message: "Please, enter your password.",
-                },
-              })}
-            />
-            <p className="error-inputs">{errors?.password?.message}</p>
-          </div>
-        </div>
-
-        <div className="form-login__button">
-          <Button type="submit" className="form-submit btn-primary">
-            {isLoading ? <SpinnerMini /> : "Log in"}
+        <div className="flex flex-col gap-7 xs:flex-row">
+          <Button variation="primary" disabled={isLoading}>
+            {isLoading ? <Loader className="animate-spin" /> : "Log in"}
           </Button>
+          <ButtonIcon
+            type="primary"
+            to=".."
+            disabled={isLoading}
+            className="order-1"
+          >
+            <ArrowLeftToLine />
+            <span>Go back</span>
+          </ButtonIcon>
         </div>
       </form>
     </Login>
