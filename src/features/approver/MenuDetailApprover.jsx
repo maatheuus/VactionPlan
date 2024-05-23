@@ -30,6 +30,7 @@ function MenuDetailApprover({ requestId }) {
           className={`grid grid-cols-2 justify-items-center py-2 text-stone-950 hover:bg-stone-900 hover:text-stone-100 ${
             statusRequest === "approve" && "cursor-not-allowed"
           }`}
+          disabled={statusRequest === "approve"}
           onClick={() =>
             updateRequest({
               newRequestData: { statusRequest: "approve" },
@@ -46,6 +47,7 @@ function MenuDetailApprover({ requestId }) {
           className={`grid grid-cols-2 justify-items-center py-2 text-stone-950 hover:bg-stone-900 hover:text-stone-100 ${
             statusRequest === "denied" && "cursor-not-allowed"
           }`}
+          disabled={statusRequest === "denied"}
           onClick={() =>
             updateRequest({
               newRequestData: { statusRequest: "denied" },
