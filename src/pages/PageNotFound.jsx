@@ -1,34 +1,27 @@
-import styled from "styled-components";
-
-import errorImage from "../assets/svg/404-error-page.svg";
 import Button from "../ui/Button";
-import { FaArrowCircleLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
-const StyledImage = styled.img`
-  max-width: 45%;
-  min-width: 45rem;
-  display: flex;
-  margin: auto;
-`;
-const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-`;
-
-function PageNotFound() {
-  const navigate = useNavigate();
-
+export default function PageNotFound() {
   return (
-    <Container>
-      <Button onClick={() => navigate("/")}>
-        <FaArrowCircleLeft className="arrow-left" />
-      </Button>
-      <StyledImage src={errorImage} alt="gif page not found" />
-    </Container>
+    <>
+      <div className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+        <div className="text-center">
+          <p className="text-2xl font-semibold text-neutral-900">404</p>
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Page not found
+          </h1>
+          <p className="mt-6 text-base leading-7 text-gray-600">
+            Sorry, we couldn’t find the page you’re looking for.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <Button
+              to=".."
+              className="rounded-md bg-stone-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-stone-950"
+            >
+              Go back home
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
-
-export default PageNotFound;
