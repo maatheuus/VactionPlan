@@ -1,82 +1,48 @@
 import { useForm } from "react-hook-form";
-
-import SpinnerMini from "../../ui/SpinnerMini";
-
-import { FaArrowCircleLeft } from "react-icons/fa";
+import { ArrowLeftToLine, Loader } from "lucide-react";
+import { useLogin } from "./useLogin";
+import FormLogin from "./FormLogin";
 import Login from "../../pages/Login";
 import Button from "../../ui/Button";
-import { useMoveTo } from "../../hooks/useMoveTo";
-import { useLogin } from "./useLogin";
+import ButtonIcon from "../../ui/ButtonIcon";
 
 function LoginApprove() {
-  const emailApprove = "boss@example.com";
-  const passwordApprove = "boss1234";
+  const { isLoading, login } = useLogin("/approver");
 
-  const { isLoading, login } = useLogin("approver");
+  // const email = "boss@example.com";
+  // const password = "boss1234";
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const { setTo } = useMoveTo();
-
   const onSubmit = (data) => {
     const { email, password } = data;
-
     login({ email, password });
   };
 
   return (
     <Login>
-      <Button onClick={() => setTo("..")}>
-        <FaArrowCircleLeft className="arrow-left" />
-      </Button>
-
-      <form className="form-login login" onSubmit={handleSubmit(onSubmit)}>
-        <h1 className=" login__title">Login</h1>
-        <div className="form-group">
-          <input
-            type="email"
-            placeholder="Email"
-            className={errors?.email?.message && "error-input"}
-            {...register("email", {
-              required: {
-                value: true,
-                message: "Please, enter your email.",
-              },
-              validate: (email) => {
-                if (email !== emailApprove)
-                  return "Provided email are incorrect";
-              },
-            })}
-          />
-          <p className="error-inputs">{errors?.email?.message}</p>
-        </div>
-
-        <div className="form-group">
-          <input
-            type="password"
-            placeholder="Password"
-            className={errors?.password?.message && "error-input"}
-            {...register("password", {
-              required: {
-                value: true,
-                message: "Please, enter your password.",
-              },
-              validate: (password) => {
-                if (password !== passwordApprove)
-                  return "Provided password are incorrect";
-              },
-            })}
-          />
-          <p className="error-inputs">{errors?.password?.message}</p>
-        </div>
-        <div className="form-login__button">
-          <Button type="submit" className="form-submit btn-primary">
-            {isLoading ? <SpinnerMini /> : "Log in"}
+      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <FormLogin register={register} errors={errors} />
+        <span className="mr-3 text-stone-500 text-sm">
+          Email: boss@example.com |{" "}
+        </span>
+        <span className="text-stone-500 text-sm">Senha: boss1234</span>
+        <div className="flex flex-col gap-7 xs:flex-row">
+          <Button variation="primary" disabled={isLoading}>
+            {isLoading ? <Loader className="animate-spin" /> : "Log in"}
           </Button>
+          <ButtonIcon
+            type="primary"
+            to=".."
+            disabled={isLoading}
+            className="order-1"
+          >
+            <ArrowLeftToLine />
+            <span>Go back</span>
+          </ButtonIcon>
         </div>
       </form>
     </Login>
