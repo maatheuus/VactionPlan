@@ -1,38 +1,27 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { FaCircleArrowLeft } from "react-icons/fa6";
-
-import ListButtons from "./ListButtons";
-import Menu from "./Menu";
-import Logout from "../features/authentication/Logout";
-import Button from "../ui/Button";
+import { useLocation } from "react-router-dom";
+import HeaderMenu from "./HeaderMenu";
+import UserAvatar from "./UserAvatar";
+import { AlignJustify } from "lucide-react";
+import ButtonIcon from "./ButtonIcon";
+import { MenuContext } from "../context/menu-context";
+import { useContext } from "react";
 
 function Header() {
+  const { showMenu } = useContext(MenuContext);
+
   const { pathname } = useLocation();
   const url = pathname.replace("/", "");
-  const navigate = useNavigate();
 
   return (
-    <header className="header">
-      <div className="content-header">
-        {url === "approver" ? (
-          <>
-            <Menu />
-            <Logout />
-
-            <div className="content-header__content-buttons">
-              <nav className="nav">
-                <ListButtons
-                  classNameUl="nav__list"
-                  classNameLi="nav__list-button"
-                />
-              </nav>
-            </div>
-          </>
-        ) : (
-          <Button onClick={() => navigate(-1)} className="button-all">
-            <FaCircleArrowLeft className="arrow-left" />
-          </Button>
-        )}
+    <header className="flex justify-between px-4 py-2 border-b-2 shadow-sm big:justify-end sm:px-10">
+      <div className="flex big:hidden items-center">
+        <ButtonIcon onClick={showMenu}>
+          <AlignJustify />
+        </ButtonIcon>
+      </div>
+      <div className="flex items-center gap-10">
+        <UserAvatar />
+        <HeaderMenu url={url} />
       </div>
     </header>
   );

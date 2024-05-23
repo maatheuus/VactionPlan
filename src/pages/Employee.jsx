@@ -1,7 +1,7 @@
-import Request from "../features/requests/Request";
+import Table from "../features/table/Table";
 
 function Employee() {
-  return <Request />;
+  return <Table />;
 }
 
 export default Employee;

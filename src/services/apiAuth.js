@@ -1,12 +1,18 @@
 import supabase from "./supabase";
 
-export async function signUp(email, password) {
+export async function signUp(email, password, fullName) {
   const { data: savedSessionData } = await supabase.auth.getSession();
 
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: {
+        fullName,
+      },
+    },
   });
+  console.log(data);
 
   // If there was a previously authenticated user, restore their session
   if (savedSessionData) {
