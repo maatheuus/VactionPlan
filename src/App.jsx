@@ -4,20 +4,27 @@ import {
   Navigate,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
-import ProtectedRoute from "./ui/ProtectedRoute";
-import ModalProvider from "./context/modal-context";
+import MenuProvider from "./context/menu-context";
 
 import HomePage from "./pages/HomePage";
+import AppLayout from "./pages/AppLayout";
+import PageNotFound from "./pages/PageNotFound";
+import Approver from "./pages/Approver";
+import Employee from "./pages/Employee";
+import NewRequestsPage from "./pages/NewRequestPage";
+
 import LoginApprove from "./features/authentication/LoginApprove";
 import LoginEmployee from "./features/authentication/LoginEmployee";
-import NewUser from "./features/approve/NewUser";
-import NewRequestsPage from "./pages/NewRequestPage";
-import PageNotFound from "./pages/PageNotFound";
-import AppLayout from "./pages/AppLayout";
-import Approve from "./pages/Approve";
-import Employee from "./pages/Employee";
+import NewUser from "./features/approver/NewUser";
+
+import Table from "./features/table/Table";
+import TableDetail from "./features/table/TableDetail";
+import TableDetailEmp from "./features/employer/TableDetailEmp";
+import SettingsApprove from "./features/approver/SettingsApprove";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -30,13 +37,14 @@ const router = createBrowserRouter([
     errorElement: <PageNotFound />,
     children: [
       { index: true, element: <Navigate replace to="/login" /> },
-      {
-        path: "approver",
-        element: <Approve />,
-        children: [{ path: "register", element: <NewUser /> }],
-      },
-      { path: "requests", element: <Employee /> },
-      { path: "newRequest", element: <NewRequestsPage /> },
+      { path: "approver", element: <Approver /> },
+      { path: "approver/register", element: <NewUser /> },
+      { path: "approver/requests", element: <Table /> },
+      { path: "approver/settings", element: <SettingsApprove /> },
+      { path: "approver/requests/:requestId", element: <TableDetail /> },
+      { path: "requests/employers", element: <Employee /> },
+      { path: "requests/employers/:requestId", element: <TableDetailEmp /> },
+      { path: "requests/newRequest", element: <NewRequestsPage /> },
     ],
   },
   {
@@ -48,7 +56,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -60,8 +67,10 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>
+      <MenuProvider>
         <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+
         <Toaster
           position="top-right"
           gutter={12}
@@ -71,19 +80,19 @@ function App() {
               duration: 3000,
             },
             error: {
-              duration: 5000,
+              duration: 6000,
             },
             style: {
-              fontSize: "16px",
+              fontSize: "18px",
               maxWidth: "500px",
               padding: "16px 24px",
-              backgroundColor: "var(--color-white-primary)",
-              color: "var(--color-black-primary)",
-              zIndex: "5000",
+              backgroundColor: "bg-zinc-100",
+              color: "text-stone-900",
+              zIndex: "9999",
             },
           }}
         />
-      </ModalProvider>
+      </MenuProvider>
     </QueryClientProvider>
   );
 }
