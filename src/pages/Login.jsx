@@ -1,31 +1,16 @@
-import { motion } from "framer-motion";
-import { useAnimatePages } from "../hooks/useAnimatePages";
-import { FaRegUserCircle } from "react-icons/fa";
-
 function Login({ children }) {
-  const { variants, initial, animate, exit } = useAnimatePages();
   return (
-    <section id="login">
-      <motion.div
-        variants={variants}
-        initial={initial}
-        animate={animate}
-        exit={exit}
-        className="content-login"
-      >
-        <div className="logo-login">
-          <FaRegUserCircle
-            style={{
-              width: "6rem",
-              height: "6rem",
-            }}
-          />
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="shadow rounded-sm p-10">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Log in to your account
+          </h2>
         </div>
 
-        {children}
-      </motion.div>
-    </section>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">{children}</div>
+      </div>
+    </div>
   );
 }
-
 export default Login;
