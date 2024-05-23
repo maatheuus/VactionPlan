@@ -1,4 +1,3 @@
-import { FaRegUser } from "react-icons/fa";
 import { Outlet, useLocation } from "react-router-dom";
 
 import Login from "./Login";
@@ -8,44 +7,25 @@ function HomePage() {
   const { pathname } = useLocation();
   const url = pathname.replace("/", "");
   return (
-    <>
+    <div className="h-screen">
       {url === "login" && (
         <Login>
-          <h1 className="chose-login__title oxygen-regular">You are the</h1>
-          <div className="chose-login login">
-            <div>
-              <Button
-                to="approver"
-                className="chose-login__button--aprove btn-primary"
-              >
-                <FaRegUser
-                  style={{
-                    paddingRight: "1.5rem",
-                  }}
-                />
-                Approve
-              </Button>
-            </div>
-            <h2 className="chose-login__title oxygen-regular">or</h2>
+          <div>
+            <Button variation="primary" to="approver">
+              Approver
+            </Button>
+          </div>
 
-            <div>
-              <Button
-                to="employee"
-                className="chose-login__button--employee btn-primary"
-              >
-                <FaRegUser
-                  style={{
-                    paddingRight: "1.5rem",
-                  }}
-                />
-                Employee
-              </Button>
-            </div>
+          <div className="mt-6">
+            <Button variation="primary" to="employee">
+              Employer
+            </Button>
           </div>
         </Login>
       )}
+
       <Outlet />
-    </>
+    </div>
   );
 }
 
