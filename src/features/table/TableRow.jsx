@@ -1,7 +1,6 @@
 import { EllipsisVertical } from "lucide-react";
 import ButtonIcon from "../../ui/ButtonIcon";
 import UserAvatar from "../../ui/UserAvatar";
-import Table from "./Table";
 
 function TableRow({ userName, location, status }) {
   return (

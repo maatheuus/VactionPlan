@@ -1,11 +1,10 @@
-import { useLocation } from "react-router-dom";
 import UserAvatar from "../../ui/UserAvatar";
 import MenuDetailApprover from "../approver/MenuDetailApprover";
 import MenuDetailEmployer from "../employer/MenuDetailEmployer";
+import { useUrl } from "../../hooks/useUrl";
 
 function Requests({ requests }) {
-  const { pathname } = useLocation();
-  const url = pathname.replace("/", "");
+  const { approver } = useUrl();
 
   const statusToClassName = {
     approve: "text-green-100 bg-green-600",
@@ -32,13 +31,15 @@ function Requests({ requests }) {
           </div>
           <div className="pl-20 hidden md:block">
             <span
-              className={`${statusToClassName[request.statusRequest]} ml-3 uppercase text-sm font-semibold leading-6 rounded-xl py-1 px-2`}
+              className={`${
+                statusToClassName[request.statusRequest]
+              } ml-3 uppercase text-sm font-semibold leading-6 rounded-xl py-1 px-2`}
             >
               {request.statusRequest}
             </span>
           </div>
           <div className="absolute right-10">
-            {url.startsWith("approver") ? (
+            {approver ? (
               <MenuDetailApprover requestId={request.id} />
             ) : (
               <MenuDetailEmployer requestId={request.id} />

@@ -1,11 +1,13 @@
 import { User } from "lucide-react";
 import ButtonIcon from "./ButtonIcon";
 import Logout from "../features/authentication/Logout";
+import { useUrl } from "../hooks/useUrl";
 
-function HeaderMenu({ url }) {
+function HeaderMenu() {
+  const { approver } = useUrl();
   return (
     <ul className="flex items-center gap-3">
-      {url.startsWith("approver") && (
+      {approver && (
         <li>
           <ButtonIcon
             className="hover:text-black"
