@@ -1,17 +1,16 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../features/authentication/useUser";
 import { Loader } from "lucide-react";
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-  const { isLoading, isAuthenticated } = useUser();
 
-  useEffect(() => {
-    if (!isAuthenticated && !isLoading) {
-      navigate("/login");
-    }
-  }, [isLoading, isAuthenticated, navigate]);
+  const { isLoading, isAuthenticated, fetchStatus } = useUser();
+
+  // 2. If there is NO authenticated user, redirect to the /login page
+  if (!isLoading && !isAuthenticated && fetchStatus !== "fetching") {
+    navigate("/login");
+  }
 
   if (isLoading)
     return (
