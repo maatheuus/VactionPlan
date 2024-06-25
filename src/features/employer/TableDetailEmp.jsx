@@ -40,7 +40,6 @@ function TableDetailEmp() {
           </Button>
 
           <Button variation="primary" onClick={open}>
-            {/* {isUpdate ? <Loader className="animate-spin" /> : "Edit"} */}
             Edit
           </Button>
         </div>
