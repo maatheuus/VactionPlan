@@ -1,8 +1,8 @@
-# Holiday Plan
+# Vacations Plan
 
 ![Badge em Desenvolvimento](https://img.shields.io/badge/status-finish-green)
 
-**Holiday Plan** is a website that you can use to manage your company's vacation plan and provide information to employees about the status of their vacation requests.
+**Vacations Plan** is a website that you can use to manage your company's vacation plan and provide information to employees about the status of their vacation requests.
 
 ## How to install:
 
